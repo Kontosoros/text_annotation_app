@@ -1,0 +1,13 @@
+
+
+.large-textarea {
+  width: 65%; /* Set the width to 100% of its container */
+  height: 700px; /* Set the initial height to 300 pixels */
+  padding: 10px; /* Add some padding for spacing */
+  font-size: 16px; /* Set the font size */
+  border: 1px solid #585656; /* Add a border */
+  margin-left: 300px;
+  align-items: center;
+  resize: none;
+}
+

@@ -1,0 +1,39 @@
+.file-list {
+  display: flex;
+}
+.text-area-container {
+  flex: 1; /* Make the text area container fill the remaining space */
+  height: 100%; /* Set a fixed height for the container */
+  overflow-y: auto; /* Add a vertical scrollbar if the content exceeds the height */
+}
+.file-list-scroll {
+  height: 600px; /* Set a fixed height for the file list container */
+  overflow-y: auto; /* Add a vertical scrollbar if the content exceeds the height */
+}
+
+.file-content {
+  /* Optionally, add padding or other styles for the content area */
+  padding: 10px;
+}
+.file-name {
+  font-size: 25px; /* Set the desired font size for the file names */
+  font-weight: bold; /* You can also apply other styles */
+}
+.selected-file {
+  color: rgb(157, 70, 26); /* Change the color to the desired one */
+  font-weight: bold; /* You can also apply other styles */
+  font-size: 25px;
+}
+.clicked-file {
+  color: rgb(39, 114, 244); /* Change the color to the desired one */
+  font-weight: bold; /* You can also apply other styles */
+}
+.button-remove {
+  display: flex;
+  height: 50px;
+  width: 100px;
+
+  left:10px; 
+  bottom:200px;
+  position: absolute;
+}
