@@ -7,7 +7,37 @@ You can use the input element with the multiple attribute to enable multiple fil
 const LoadFiles = ({ onFilesUpload }) => {
   const handleFileChange = e => {
     const selectedFiles = e.target.files;
-    onFilesUpload(selectedFiles);
+
+    // Convert the FileList to an array for easier iteration
+    const filesArray = Array.from(selectedFiles);
+
+    const jsonDataArray = [];
+
+    const readAndParseFile = file => {
+      const reader = new FileReader();
+
+      reader.onload = event => {
+        const fileContent = event.target.result;
+
+        try {
+          const jsonData = JSON.parse(fileContent);
+          // Extract the desired key text from the JSON data
+          const keyText = jsonData.text; // Replace 'key' with the actual key name
+          jsonDataArray.push({ document_id: file.name, text: keyText });
+        } catch (error) {
+          console.error("Error parsing JSON:");
+        }
+
+        // Check if all files have been processed
+        if (jsonDataArray.length === filesArray.length) {
+          onFilesUpload(jsonDataArray);
+        }
+      };
+      // Read the file as text
+      reader.readAsText(file);
+    };
+    // Read and parse each selected file
+    filesArray.forEach(readAndParseFile);
   };
 
   return (

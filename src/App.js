@@ -2,20 +2,15 @@ import "./App.css";
 import React, { useState } from "react";
 import LoadFiles from "./FilesHandler/LoadFiles";
 import FileList from "./FilesHandler/FileList";
-
+import LabelForm from "./LabelsHandler/LabelForm";
 const App = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleFilesUpload = files => {
+    
     const fileDataPromises = Array.from(files).map(file => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = event => {
-          resolve({ name: file.name, content: event.target.result });
-        };
-        reader.readAsText(file);
-      });
+      return { name: file.document_id, content: file.text }
     });
 
     Promise.all(fileDataPromises)
@@ -41,11 +36,13 @@ const App = () => {
   return (
     <div className="app">
       <LoadFiles onFilesUpload={handleFilesUpload} />
+      
       <FileList files={uploadedFiles} 
         selectedFiles={selectedFiles}
         onFileSelect={handleFileSelect}
         onRemoveFiles={handleCloseSelectedFiles}/>
-        
+      
+      
     </div>
   );
 };

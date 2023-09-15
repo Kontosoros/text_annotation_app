@@ -11,3 +11,22 @@
   resize: none;
 }
 
+.custom-textarea {
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-height: 200px;
+  position: relative;
+  cursor: text;
+}
+.clickable-word {
+  cursor: pointer;
+  color: blue;
+}
+
+.clickable-word:hover {
+  text-decoration: underline;
+}
+
+.hidden-textarea {
+  display: none;
+}
