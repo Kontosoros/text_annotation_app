@@ -1,27 +1,28 @@
-import "./TextArea.css";
 import React, { useState } from "react";
-const TextArea = props => {
+
+const SelectedText = props => {
   const [text, setText] = useState("");
   const [selectedWord, setSelectedWord] = useState("");
   const [label, setLabel] = useState("");
-  const [selectedPosition, setSelectedPosition] = useState({ start: null, end: null });
-  
+  const [selectedPosition, setSelectedPosition] = useState({
+    start: null,
+    end: null,
+  });
   const handleTextChange = e => {
     setText(e.target.value);
   };
-
   const handleTextSelection = () => {
     const textarea = document.querySelector(".large-textarea");
-    
+
     const startPosition = textarea.selectionStart;
     const endPosition = textarea.selectionEnd;
     const selection = window.getSelection();
-    
+
     const selectedWord = selection.toString().trim();
-    console.log(selectedWord)
+    console.log(selectedWord);
     if (startPosition !== endPosition) {
       const selectedText = text.substring(startPosition, endPosition);
-      
+
       setSelectedWord(selectedWord);
       setSelectedPosition({ start: startPosition, end: endPosition });
     } else {
@@ -29,20 +30,20 @@ const TextArea = props => {
       setSelectedPosition({ start: null, end: null });
     }
   };
-  
   const handleLabelChange = e => {
     setLabel(e.target.value);
   };
-
   const handleAddLabel = () => {
     // You can handle label addition logic here, e.g., store it in state or display it
-    console.log(`Word: ${selectedWord}, Label: ${label}, POSITION START: ${selectedPosition.start}, POSITION END: ${selectedPosition.end}`);
+    console.log(
+      `Word: ${selectedWord}, Label: ${label}, POSITION START: ${selectedPosition.start}, POSITION END: ${selectedPosition.end}`
+    );
   };
   return (
     <div>
       <textarea
         className="large-textarea"
-        value={props.text}
+        value={props.selectedtext}
         onChange={handleTextChange}
         onMouseUp={handleTextSelection}
       />
@@ -61,5 +62,4 @@ const TextArea = props => {
     </div>
   );
 };
-
-export default TextArea;
+export default SelectedText;

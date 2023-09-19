@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TextArea from "../DisplayArea/TextArea";
+import TextArea from "../TextArea/TextArea";
 import "./FileList.css";
 const FileList = ({ files, selectedFiles, onFileSelect, onRemoveFiles }) => {
   const [selectedFile, setSelectedFile] = useState(null);
