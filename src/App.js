@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState } from "react";
 import LoadFiles from "./FilesHandler/LoadFiles";
 import FileList from "./FilesHandler/FileList";
-
+import AddLabels from "./Labels/AddLabels";
 const App = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -42,6 +42,7 @@ const App = () => {
         onFileSelect={handleFileSelect}
         onRemoveFiles={handleCloseSelectedFiles}
       />
+      <AddLabels></AddLabels>
     </div>
   );
 };
