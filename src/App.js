@@ -6,7 +6,10 @@ import AddLabels from "./Labels/AddLabels";
 const App = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
-
+  const [labeList, setLabelList] = useState([]);
+  const updateLabelList = newList => {
+    setLabelList(newList);
+  };
   const handleFilesUpload = files => {
     const fileDataPromises = Array.from(files).map(file => {
       return { name: file.document_id, content: file.text };
@@ -32,18 +35,21 @@ const App = () => {
     setUploadedFiles(updatedFiles);
     setSelectedFiles([]);
   };
+  
   return (
-    <div className="app">
-      <LoadFiles onFilesUpload={handleFilesUpload} />
-
-      <FileList
-        files={uploadedFiles}
-        selectedFiles={selectedFiles}
-        onFileSelect={handleFileSelect}
-        onRemoveFiles={handleCloseSelectedFiles}
-      />
-      <AddLabels></AddLabels>
-    </div>
+    <>
+      <div className="app">
+        <AddLabels onUpdateLabelList={updateLabelList} />
+        <LoadFiles onFilesUpload={handleFilesUpload} />
+        <FileList
+          files={uploadedFiles}
+          selectedFiles={selectedFiles}
+          onFileSelect={handleFileSelect}
+          onRemoveFiles={handleCloseSelectedFiles}
+          labels={labeList}
+        />
+      </div>
+    </>
   );
 };
 

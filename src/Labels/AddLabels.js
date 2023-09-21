@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./AddLabels.css";
 import ColorLabels from "./ColorLabels";
-export default function AddLabels() {
+import WindowLabels from "./WindowLabels";
+
+export default function AddLabels({onUpdateLabelList}) {
   const [label, setLabel] = useState("");
   const [labelList, setLabelList] = useState([]); // State to store the list of labels
   const [selectedColor, setSelectedColor] = useState("#000"); // State to store the selected color
@@ -29,6 +31,8 @@ export default function AddLabels() {
       setLabelList(updatedLabels);
       setSelectedLabelIndex(null); // Reset the selected label index
       setIsColorPickerOpen(false);
+      // Call the function to update labelList in the App component
+      onUpdateLabelList(updatedLabels);
     }
   };
   
@@ -59,6 +63,7 @@ export default function AddLabels() {
           onColorSelected={handleSetLabelColor}
           initialColor={labelList[selectedLabelIndex].color}
         />
+        
       )}
       
     </div>

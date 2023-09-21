@@ -1,0 +1,14 @@
+.label-selection-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+    height: 120px; /* Set a fixed height for the file list container */
+    overflow-y: auto;
+  }

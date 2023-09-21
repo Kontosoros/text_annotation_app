@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import WindowLabels from "../Labels/WindowLabels";
 
-const SelectedText = props => {
+const SelectedText = ({ selectedtext, labelsList }) => {
   const [text, setText] = useState("");
   const [selectedWord, setSelectedWord] = useState("");
   const [label, setLabel] = useState("");
@@ -8,20 +9,35 @@ const SelectedText = props => {
     start: null,
     end: null,
   });
+  const [isWindowLabelsOpen, setIsWindowLabelsOpen] = useState(false);
+
+  const handleColorAssigned = styledText => {
+    if (selectedPosition.start !== null && selectedPosition.end !== null) {
+      // Create a copy of the current text
+      let updatedText = selectedtext;
+      updatedText =
+        updatedText.substring(0, selectedPosition.start) +
+        styledText +
+        updatedText.substring(selectedPosition.end);
+      console.log("updatedText", updatedText);
+      setText(updatedText);
+      // Close the WindowLabels popup after assigning the color
+      setIsWindowLabelsOpen(false);
+    }
+  };
+
   const handleTextChange = e => {
     setText(e.target.value);
   };
   const handleTextSelection = () => {
     const textarea = document.querySelector(".large-textarea");
-
     const startPosition = textarea.selectionStart;
     const endPosition = textarea.selectionEnd;
     const selection = window.getSelection();
-
     const selectedWord = selection.toString().trim();
-    console.log(selectedWord);
+
     if (startPosition !== endPosition) {
-      const selectedText = text.substring(startPosition, endPosition);
+      
 
       setSelectedWord(selectedWord);
       setSelectedPosition({ start: startPosition, end: endPosition });
@@ -29,36 +45,32 @@ const SelectedText = props => {
       setSelectedWord("");
       setSelectedPosition({ start: null, end: null });
     }
+    // Open the WindowLabels popup when text is selected
+    setIsWindowLabelsOpen(true);
   };
-  const handleLabelChange = e => {
-    setLabel(e.target.value);
-  };
-  const handleAddLabel = () => {
-    // You can handle label addition logic here, e.g., store it in state or display it
-    console.log(
-      `Word: ${selectedWord}, Label: ${label}, POSITION START: ${selectedPosition.start}, POSITION END: ${selectedPosition.end}`
-    );
-  };
+
+  console.log(
+    `Word: ${selectedWord}, Label: ${label}, POSITION START: ${selectedPosition.start}, POSITION END: ${selectedPosition.end}`
+  );
+
   return (
     <div>
       <textarea
         className="large-textarea"
-        value={props.selectedtext}
+        value={selectedtext}
         onChange={handleTextChange}
-        onMouseUp={handleTextSelection}
+        onSelectCapture={handleTextSelection}
       />
-      <div className="labeling">
-        <input
-          type="text"
-          placeholder="Label"
-          value={label}
-          onChange={handleLabelChange}
+
+      {isWindowLabelsOpen && selectedWord && (
+        <WindowLabels
+          selectedtext={selectedWord}
+          textposition={selectedPosition}
+          labelsAnnotation={labelsList}
+          onColorAssigned={handleColorAssigned}
         />
-        <button onClick={handleAddLabel}>Add Label</button>
-      </div>
-      <div className="selected-word">
-        Selected Word: <strong>{selectedWord}</strong>
-      </div>
+      )}
+      <div dangerouslySetInnerHTML={{ __html: text }} />
     </div>
   );
 };
