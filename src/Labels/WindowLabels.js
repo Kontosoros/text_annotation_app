@@ -13,13 +13,12 @@ export default function WindowLabels(props) {
     setSelectedPosition(props.textposition);
   }, [props.selectedtext, props.textposition]);
 
-  const handleColorAssignment = () => {
+  const handleColorAssignment = ({ label }) => {
     if (selectedPosition.start !== null && selectedPosition.end !== null) {
-      console.log()
-
       // Apply styling to the selected word
-      const styledText = `<span style="color: red; ">${props.selectedtext}</span>`;
-
+      
+      const styledText = `<span style="color: ${label.color};">${props.selectedtext}</span>`;
+      console.log(styledText)
       // Call a callback function to update the styled text
       props.onColorAssigned(styledText);
       // Close the popup window after assigning the color
@@ -33,7 +32,7 @@ export default function WindowLabels(props) {
           <li key={index} style={{ color: label.color, cursor: "pointer" }}>
             <button
               onClick={() => {
-                handleColorAssignment();
+                handleColorAssignment({ label });
               }}
             >
               {label.text}
