@@ -16,11 +16,8 @@ export default function WindowLabels(props) {
   const handleColorAssignment = ({ label }) => {
     if (selectedPosition.start !== null && selectedPosition.end !== null) {
       // Apply styling to the selected word
-      
-      const styledText = `<span style="color: ${label.color};">${props.selectedtext}</span>`;
-      console.log(styledText)
       // Call a callback function to update the styled text
-      props.onColorAssigned(styledText);
+      props.onColorAssigned(label);
       // Close the popup window after assigning the color
     }
   };

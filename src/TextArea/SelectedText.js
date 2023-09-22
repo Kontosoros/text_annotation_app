@@ -8,47 +8,60 @@ const SelectedText = ({ selectedtext, labelsList }) => {
     end: null,
   });
   const [isWindowLabelsOpen, setIsWindowLabelsOpen] = useState(false);
-  const [markedSegments, setMarkedSegments] = useState([]);
-
+  const [highlightColor, setHighlightColor] = useState("white");
   const contentEditableRef = useRef(null);
 
-  const handleColorAssigned = (styledText) => {
-    if (selectedPosition.start !== null && selectedPosition.end !== null) {
-      const updatedMarkedSegments = [...markedSegments];
-      updatedMarkedSegments.push({
-        start: selectedPosition.start,
-        end: selectedPosition.end,
-        styledText: styledText,
-      });
-      
-      updatedMarkedSegments.sort((a, b) => a.start - b.start);
-
-      setMarkedSegments(updatedMarkedSegments);
-      setIsWindowLabelsOpen(false);
-    }
+  const handleColorAssigned = label => {
+    setHighlightColor(label.color); // Set the selected color
+    setIsWindowLabelsOpen(false)
   };
 
   const handleTextSelection = () => {
-    const selection = window.getSelection();
-    const selectedText = selection.toString().trim();
-    const range = selection.getRangeAt(0);
+    let selection = window.getSelection();
 
-    if (selectedText) {
-      const span = document.createElement("span");
-      span.style.backgroundColor = "grey"; // Set your desired highlight color
-      range.surroundContents(span);
-      selection.removeAllRanges();
-
-      setSelectedWord(selectedText);
-      setSelectedPosition({
-        start: span.parentNode.textContent.indexOf(selectedText),
-        end: span.parentNode.textContent.indexOf(selectedText) + selectedText.length,
-      });
-      setIsWindowLabelsOpen(true); // Open the popup window when a word is selected
-    } else {
+    if (!selection || selection.rangeCount === 0) {
+      // No valid selection
       setSelectedWord("");
       setSelectedPosition({ start: null, end: null });
       setIsWindowLabelsOpen(false);
+      return;
+    }
+
+    let selectedText = selection.toString();
+    let range = selection.getRangeAt(0);
+
+    if (selectedText) {
+      let startOffset = range.startOffset;
+      let endOffset = range.endOffset;
+      console.log(
+        "startOffset",
+        startOffset,
+        "endOffset",
+        endOffset,
+        "selectedText",
+        selectedText
+      );
+      // Check if the selection spans multiple nodes
+      if (startOffset !== endOffset) {
+        // Create a DocumentFragment to hold the selected content
+        let fragment = range.extractContents();
+        // Create a new span and apply the selected color
+        let span = document.createElement("span");
+        span.style.backgroundColor = `${highlightColor}`; // Set your desired highlight color
+        // Append the extracted content to the new span
+        span.appendChild(fragment);
+        // Insert the new span at the start of the selection
+        range.insertNode(span);
+        // Clear the selection
+        selection.removeAllRanges();
+        // Calculate the start and end positions of the highlighted text
+        let start = Array.from(span.parentNode.childNodes).indexOf(span);
+        let end = start + selectedText.length;
+        setSelectedWord(selectedText);
+        setSelectedPosition({ start, end });
+        setIsWindowLabelsOpen(true); // Open the popup window when text is selected
+      }
+    
     }
   };
 
