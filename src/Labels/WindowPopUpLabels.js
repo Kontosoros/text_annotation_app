@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./WindowLabels.css";
+import "./WindowPopUpLabels.css";
 
-export default function WindowLabels(props) {
+export default function WindowPopUpLabels(props) {
   const [selectedWord, setSelectedWord] = useState("");
   const [selectedPosition, setSelectedPosition] = useState({
     start: null,

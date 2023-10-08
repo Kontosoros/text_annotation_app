@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AddLabels.css";
 import ColorLabels from "./ColorLabels";
-import WindowLabels from "./WindowLabels";
+
 
 export default function SetLabels({onUpdateLabelList}) {
   const [label, setLabel] = useState("");

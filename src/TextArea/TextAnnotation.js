@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import WindowLabels from "../Labels/WindowLabels";
+import WindowPopUpLabels from "../Labels/WindowPopUpLabels";
 
 const TextAnnotation = ({ selectedtext, labelsList }) => {
   const [selectedWord, setSelectedWord] = useState("");
@@ -33,7 +33,14 @@ const TextAnnotation = ({ selectedtext, labelsList }) => {
       const content = contentEditableRef.current.textContent;
       const startOffset = content.indexOf(selectedText);
       const endOffset = startOffset + selectedText.length;
-      console.log("startOffset", startOffset, "endOffset", endOffset);
+      console.log(
+        "startOffset",
+        startOffset,
+        "endOffset",
+        endOffset,
+        "selected_text",
+        selectedText
+      );
       // Check if the selection spans multiple nodes
       if (startOffset !== endOffset) {
         // Create a DocumentFragment to hold the selected content
@@ -68,14 +75,15 @@ const TextAnnotation = ({ selectedtext, labelsList }) => {
         dangerouslySetInnerHTML={{ __html: selectedtext }}
       />
 
-      {isWindowLabelsOpen && selectedWord && (
-        <WindowLabels
-          selectedtext={selectedWord}
-          textposition={selectedPosition}
-          labelsAnnotation={labelsList}
-          onColorAssigned={handleColorAssigned}
-        />
-      )}
+      {isWindowLabelsOpen &&
+        selectedWord && ( // If i select a word a popup window will be openned to select a label for the word.
+          <WindowPopUpLabels
+            selectedtext={selectedWord}
+            textposition={selectedPosition}
+            labelsAnnotation={labelsList}
+            onColorAssigned={handleColorAssigned}
+          />
+        )}
     </div>
   );
 };
