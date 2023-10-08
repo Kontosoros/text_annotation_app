@@ -29,15 +29,17 @@ const SelectedText = ({ selectedtext, labelsList }) => {
     }
 
     const selectedText = selection.toString();
-    const range = selection.getRangeAt(0);
+    
 
     if (selectedText) {
-      const startOffset = range.startOffset;
-      const endOffset = range.endOffset;
+      const content = contentEditableRef.current.textContent;
+      const startOffset = content.indexOf(selectedText);
+      const endOffset = startOffset + selectedText.length;
       console.log("startOffset", startOffset, "endOffset", endOffset);
       // Check if the selection spans multiple nodes
       if (startOffset !== endOffset) {
         // Create a DocumentFragment to hold the selected content
+        const range = selection.getRangeAt(0);
         const fragment = range.extractContents();
         // Create a new span and apply the selected color
         const span = document.createElement("span");
@@ -53,7 +55,7 @@ const SelectedText = ({ selectedtext, labelsList }) => {
         const end = start + selectedText.length;
         setSelectedWord(selectedText);
         setSelectedPosition({ start, end });
-        setIsWindowLabelsOpen(true); // Open the popup window when text is selected
+        setIsWindowLabelsOpen(true); // Open the popup window when text is selected in order to select the label
       }
     }
   };
