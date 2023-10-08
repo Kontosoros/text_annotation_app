@@ -1,6 +1,6 @@
 import "./TextArea.css";
 import React from "react";
-import SelectedText from "./SelectedText";
+import TextAnnotation from "./TextAnnotation";
 
 
 const TextArea = props => {
@@ -8,9 +8,7 @@ const TextArea = props => {
   
   return (
     <>
-      
-      <SelectedText selectedtext={props.text} labelsList = {props.labelsList}/>
-      
+      <TextAnnotation selectedtext={props.text} labelsList = {props.labelsList}/>
     </>
   );
 };

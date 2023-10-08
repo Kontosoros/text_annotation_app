@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState } from "react";
 import LoadFiles from "./FilesHandler/LoadFiles";
 import FileList from "./FilesHandler/FileList";
-import AddLabels from "./Labels/AddLabels";
+import SetLabels from "./Labels/SetLabels";
 const App = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -39,7 +39,7 @@ const App = () => {
   return (
     <>
       <div className="app">
-        <AddLabels onUpdateLabelList={updateLabelList} />
+        <SetLabels onUpdateLabelList={updateLabelList} />
         <LoadFiles onFilesUpload={handleFilesUpload} />
         <FileList
           files={uploadedFiles}

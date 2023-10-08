@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import WindowLabels from "../Labels/WindowLabels";
 
-const SelectedText = ({ selectedtext, labelsList }) => {
+const TextAnnotation = ({ selectedtext, labelsList }) => {
   const [selectedWord, setSelectedWord] = useState("");
   const [selectedPosition, setSelectedPosition] = useState({
     start: null,
@@ -19,7 +19,6 @@ const SelectedText = ({ selectedtext, labelsList }) => {
 
   const handleTextSelection = () => {
     const selection = window.getSelection();
-
     if (!selection || selection.rangeCount === 0) {
       // No valid selection
       setSelectedWord("");
@@ -29,7 +28,6 @@ const SelectedText = ({ selectedtext, labelsList }) => {
     }
 
     const selectedText = selection.toString();
-    
 
     if (selectedText) {
       const content = contentEditableRef.current.textContent;
@@ -82,4 +80,4 @@ const SelectedText = ({ selectedtext, labelsList }) => {
   );
 };
 
-export default SelectedText;
+export default TextAnnotation;
