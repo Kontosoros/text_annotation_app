@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import WindowPopUpLabels from "../Labels/WindowPopUpLabels";
+import TextSelectionHandler from "./TextHandler/TextSelectionHandler";
 
-const TextAnnotation = ({ selectedtext, labelsList }) => {
+const TextAnnotation = ({ msgBody, labelsList }) => {
   const [selectedWord, setSelectedWord] = useState("");
   const [selectedPosition, setSelectedPosition] = useState({
     start: null,
@@ -67,18 +68,16 @@ const TextAnnotation = ({ selectedtext, labelsList }) => {
 
   return (
     <div>
-      <div
-        className="large-textarea"
-        ref={contentEditableRef}
-        contentEditable="true"
-        onMouseUp={handleTextSelection} // Use onMouseUp to handle text selection
-        dangerouslySetInnerHTML={{ __html: selectedtext }}
+      <TextSelectionHandler
+        msgBody={msgBody}
+        contentEditableRef={contentEditableRef}
+        handleTextSelection={handleTextSelection}
       />
 
       {isWindowLabelsOpen &&
         selectedWord && ( // If i select a word a popup window will be openned to select a label for the word.
           <WindowPopUpLabels
-            selectedtext={selectedWord}
+            msgBody={selectedWord}
             textposition={selectedPosition}
             labelsAnnotation={labelsList}
             onColorAssigned={handleColorAssigned}

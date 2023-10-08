@@ -8,7 +8,7 @@ const TextArea = props => {
   
   return (
     <>
-      <TextAnnotation selectedtext={props.text} labelsList = {props.labelsList}/>
+      <TextAnnotation msgBody={props.text} labelsList = {props.labelsList}/>
     </>
   );
 };

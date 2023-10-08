@@ -9,9 +9,9 @@ export default function WindowPopUpLabels(props) {
   });
 
   useEffect(() => {
-    setSelectedWord(props.selectedtext);
+    setSelectedWord(props.msgBody);
     setSelectedPosition(props.textposition);
-  }, [props.selectedtext, props.textposition]);
+  }, [props.msgBody, props.textposition]);
 
   const handleColorAssignment = ({ label }) => {
     if (selectedPosition.start !== null && selectedPosition.end !== null) {
