@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import WindowPopUpLabels from "../Labels/WindowPopUpLabels";
 import TextSelectionHandler from "./TextHandler/TextSelectionHandler";
 
@@ -11,11 +11,20 @@ const TextAnnotation = ({ msgBody, labelsList }) => {
   const [isWindowLabelsOpen, setIsWindowLabelsOpen] = useState(false);
   const [highlightColor, setHighlightColor] = useState("grey");
   const contentEditableRef = useRef(null);
+  const storedHighlights = useRef({}); // Store highlights in a ref
+
+  // Load stored highlights on component mount
+  useEffect(() => {
+    if (storedHighlights.current[msgBody]) {
+      contentEditableRef.current.innerHTML = storedHighlights.current[msgBody];
+    }
+  }, [msgBody]);
 
   const handleColorAssigned = color => {
-    // Set the selected color
+    // Set the selected color and save the highlights
     setHighlightColor(color.color);
     setIsWindowLabelsOpen(false);
+    storedHighlights.current[msgBody] = contentEditableRef.current.innerHTML;
   };
 
   const handleTextSelection = () => {
