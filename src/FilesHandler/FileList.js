@@ -33,7 +33,11 @@ const FileList = props => {
       <div className="text-area-container">
         {(selectedFile && (
           <div>
-            <TextArea text={selectedFile.content} labelsList={props.labels} />
+            <TextArea
+              filename={selectedFile.name} 
+              text={selectedFile.content}
+              labelsList={props.labels}
+            />
           </div>
         )) || <TextArea />}
       </div>

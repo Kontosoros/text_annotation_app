@@ -2,16 +2,22 @@ import React, { useState, useRef, useEffect } from "react";
 import WindowPopUpLabels from "../Labels/WindowPopUpLabels";
 import TextSelectionHandler from "./TextHandler/TextSelectionHandler";
 
-const TextAnnotation = ({ msgBody, labelsList }) => {
+const TextAnnotation = ({ filename, msgBody, labelsList, onGoldenDictionary }) => {
   const [selectedWord, setSelectedWord] = useState("");
   const [selectedPosition, setSelectedPosition] = useState({
     start: null,
     end: null,
   });
+  const [wordPosition, setWordPosition] = useState({
+    realstart: null,
+    realend: null,
+  });
   const [isWindowLabelsOpen, setIsWindowLabelsOpen] = useState(false);
-  const [highlightColor, setHighlightColor] = useState("grey");
   const contentEditableRef = useRef(null);
   const storedHighlights = useRef({}); // Store highlights in a ref
+  const entityName = useRef("");
+  const colorLabel = useRef("");
+  const [storedGolden, setStoredGolden] = useState([]);
 
   // Load stored highlights on component mount
   useEffect(() => {
@@ -20,11 +26,28 @@ const TextAnnotation = ({ msgBody, labelsList }) => {
     }
   }, [msgBody]);
 
+  // Initialize annotations when the file changes
+  useEffect(() => {
+    setStoredGolden([]);
+  }, [msgBody]);
+
   const handleColorAssigned = color => {
     // Set the selected color and save the highlights
-    setHighlightColor(color.color);
     setIsWindowLabelsOpen(false);
     storedHighlights.current[msgBody] = contentEditableRef.current.innerHTML;
+    colorLabel.current = color.color;
+    entityName.current = color.text;
+    const goldenDictionary = {
+      start:wordPosition.startOffset,
+      end:wordPosition.endOffset,
+      colorLabel:colorLabel.current,
+      entityName:entityName.current,
+      
+    };
+    
+    
+    onGoldenDictionary(goldenDictionary); // Notify the parent component
+    setWordPosition({ startOffset: null, endOffset: null });
   };
 
   const handleTextSelection = () => {
@@ -43,16 +66,11 @@ const TextAnnotation = ({ msgBody, labelsList }) => {
       const content = contentEditableRef.current.textContent;
       const startOffset = content.indexOf(selectedText);
       const endOffset = startOffset + selectedText.length;
-      console.log(
-        "startOffset",
-        startOffset,
-        "endOffset",
-        endOffset,
-        "selected_text",
-        selectedText
-      );
       // Check if the selection spans multiple nodes
       if (startOffset !== endOffset) {
+        // Create a dictionary to store the information
+        setWordPosition({ startOffset, endOffset })
+
         // Create a DocumentFragment to hold the selected content
         const range = selection.getRangeAt(0);
         const fragment = range.extractContents();
@@ -70,7 +88,9 @@ const TextAnnotation = ({ msgBody, labelsList }) => {
         const end = start + selectedText.length;
         setSelectedWord(selectedText);
         setSelectedPosition({ start, end });
+        
         setIsWindowLabelsOpen(true); // Open the popup window when text is selected in order to select the label
+        entityName.current = "";
       }
     }
   };
