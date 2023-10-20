@@ -15,21 +15,52 @@ export default function WindowPopUpLabels(props) {
 
   const handleColorAssignment = ({ label }) => {
     if (selectedPosition.start !== null && selectedPosition.end !== null) {
-      // Apply styling to the selected word
-      const span = document.createElement("span");
-      
-      span.style.backgroundColor = label.color; // Set the background color to the selected label's color
-      span.textContent = selectedWord;
       const content = document.querySelector(".large-textarea");
-      content.replaceChild(span, content.childNodes[selectedPosition.start]);
       
+      // Check if the selected text is already wrapped in a span with background color
+      if (
+        selectedPosition.start >= 0 &&
+        selectedPosition.start < content.childNodes.length &&
+        content.childNodes[selectedPosition.start].classList.contains("highlighted")
+      ) {
+        // Update the background color of the existing span
+        const span = content.childNodes[selectedPosition.start];
+        span.style.backgroundColor = label.color;
+      } else {
+        // Create a new span and apply the selected color
+        const selectedText = selectedWord;
+        
+        const span = document.createElement("span");
+        span.style.backgroundColor = label.color;
+        span.textContent = selectedText;
+        span.classList.add("highlighted");
+        // Replace the existing content with the new span
+        content.replaceChild(span, content.childNodes[selectedPosition.start]);
+      }
       // Call a callback function to update the styled text
       props.onColorAssigned(label);
-      
-      // Close the popup window after assigning the color
     }
   };
-
+  const deleteColorAssignment = ({ label }) => {
+    if (selectedPosition.start !== null && selectedPosition.end !== null) {
+      const content = document.querySelector(".large-textarea");
+      const selectedText = selectedWord;
+      // Get all span elements with the "highlighted" class
+      const highlightedSpans = content.querySelectorAll(".highlighted");
+      highlightedSpans.forEach((span) => {
+        if (span.textContent === selectedText) {
+          // Reset the background color of the span
+          span.style.backgroundColor = "";
+          // Replace the span with its text content
+          const textNode = document.createTextNode(span.textContent);
+          span.parentNode.replaceChild(textNode, span);
+        }
+      });
+    }
+  
+    // Call a callback function to update the styled text
+    props.onColorAssigned(label);
+  };
   return (
     <div className={`label-selection-popup`}>
       <ul>
@@ -42,10 +73,16 @@ export default function WindowPopUpLabels(props) {
             >
               {label.text}
             </button>
+            <button
+              onClick={() => {
+                deleteColorAssignment({ label });
+              }}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
     </div>
   );
 }
-
