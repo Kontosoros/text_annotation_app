@@ -19,7 +19,11 @@ const TextAnnotation = ({ filename, msgBody, labelsList, onGoldenDictionary }) =
   const colorLabel = useRef("");
   const [storedGolden, setStoredGolden] = useState([]);
   
+ 
 
+  const closeWindow = () => {
+    setIsWindowLabelsOpen(false);
+  }
 // Load stored highlights on component mount
   useEffect(() => {
     if (storedHighlights.current[msgBody]) {
@@ -33,7 +37,6 @@ const TextAnnotation = ({ filename, msgBody, labelsList, onGoldenDictionary }) =
   }, [msgBody]);
   
   const handleColorAssigned = color => {
-    
     // Set the selected color and save the highlights
     setIsWindowLabelsOpen(false);
     storedHighlights.current[msgBody] = contentEditableRef.current.innerHTML;
@@ -113,7 +116,7 @@ const TextAnnotation = ({ filename, msgBody, labelsList, onGoldenDictionary }) =
             textposition={selectedPosition}
             labelsAnnotation={labelsList}
             onColorAssigned={handleColorAssigned}
-            
+            closeWindow={closeWindow}
           />
         )}
     </div>
