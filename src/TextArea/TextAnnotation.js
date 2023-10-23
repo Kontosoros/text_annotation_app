@@ -10,7 +10,7 @@ const TextAnnotation = ({
 }) => {
   const [valueByMsg, setValueByMsg] = useState({});
   const [selectText, setSelectText] = useState(false);
-  const [isPopupVisible, setPopupVisibility] = useState(true);
+  const [isPopupVisible, setPopupVisibility] = useState(false);
   const [selectedLabelDict, setselectedLabel] = useState({ labelName: "", color: "" });
 
   const updateValueForMsg = (msg, newValue) => {
@@ -42,13 +42,13 @@ const TextAnnotation = ({
     setTimeout(registerMouseUp, 100);
   }, []);
 
-  const handleTextSelection = () => {
-    if (!selectedLabelDict.color) {
-      // If no color is selected, you can handle this case here, e.g., set a default color
-      setselectedLabel({ ...selectedLabelDict, color: "#008000" });
-    }
-    setSelectText(false);
-  };
+  // const handleTextSelection = () => {
+  //   if (!selectedLabelDict.color) {
+  //     // If no color is selected, you can handle this case here, e.g., set a default color
+  //     setselectedLabel({ ...selectedLabelDict, color: "" });
+  //   }
+  //   setSelectText(false);
+  // };
 
   const closePopup = () => {
     setPopupVisibility(false);
@@ -63,7 +63,7 @@ const TextAnnotation = ({
       { labelsList && isPopupVisible && (
         <WindowPopUpLabels
           labelsList={labelsList}
-          selectText={handleTextSelection}
+          
           closePopup={closePopup}
           setSelectedLabelDict={setSelectedLabelDictCallback}
         />

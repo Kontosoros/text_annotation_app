@@ -6,7 +6,7 @@ import ColorLabels from "./ColorLabels";
 export default function SetLabels({onUpdateLabelList}) {
   const [label, setLabel] = useState("");
   const [labelList, setLabelList] = useState([]); // State to store the list of labels
-  const [selectedColor, setSelectedColor] = useState("#000"); // State to store the selected color
+  const [selectedColor, setSelectedColor] = useState(""); // State to store the selected color
   const [selectedLabelIndex, setSelectedLabelIndex] = useState(null); // State to store the index of the selected label
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
 
