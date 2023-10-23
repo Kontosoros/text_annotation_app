@@ -5,9 +5,10 @@ export default function WindowPopUpLabels({
   labelsList,
   selectText,
   closePopup,
+  setSelectedLabelDict
 }) {
-  const handleColorAssignment = ({ labelDict }) => {
-    return labelDict;
+  const handleSelectedLabel = ({ labelDict }) => {
+    return setSelectedLabelDict(labelDict);
   };
 
   return (
@@ -17,7 +18,7 @@ export default function WindowPopUpLabels({
           <li key={index} style={{ color: labelDict.color, cursor: "pointer" }}>
             <button
               onClick={() => {
-                handleColorAssignment({ labelDict });
+                handleSelectedLabel({ labelDict });
                 closePopup(); // Call the function to close the popup
               }}
             >

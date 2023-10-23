@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextAnnotateBlend } from "react-text-annotate-blend";
 
-const TextSelectionHandler = ({ msgBody, value, updateValue }) => {
-  const [tag, setTag] = useState("tagA");
-  const COLORS = {
-    tagA: "rgb(179, 245, 66)",
-    tagB: "#42f5f5",
-    tagC: "#4b46cd",
-  };
-  
-  const handleChange = (values) => {
+const TextSelectionHandler = ({
+  msgBody,
+  value,
+  updateValue,
+  selectedLabelDict,
+}) => {
+  const [tag, setTag] = useState("");
+  const [color, setColor] = useState("#008000");
+
+  // Use useEffect to update state based on selectedLabelDict
+  useEffect(() => {
+    setTag(selectedLabelDict.labelName);
+    setColor(selectedLabelDict.color);
+  }, [selectedLabelDict]);
+
+  const handleChange = values => {
     updateValue(values);
   };
-
+  
   return (
     <div>
       <TextAnnotateBlend
@@ -22,10 +29,10 @@ const TextSelectionHandler = ({ msgBody, value, updateValue }) => {
         content={msgBody}
         onChange={handleChange}
         value={value}
-        getSpan={(span) => ({
+        getSpan={span => ({
           ...span,
           tag: tag,
-          color: COLORS[tag],
+          color: color,
         })}
       />
     </div>

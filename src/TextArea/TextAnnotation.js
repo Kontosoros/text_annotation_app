@@ -11,6 +11,10 @@ const TextAnnotation = ({
   const [valueByMsg, setValueByMsg] = useState({});
   const [selectText, setSelectText] = useState(false);
   const [isPopupVisible, setPopupVisibility] = useState(false);
+  const [selectedLabelDict, setselectedLabel] = useState({
+    labelName: "",
+    color: "#008000",
+  });
 
   const updateValueForMsg = (msg, newValue) => {
     setValueByMsg(prevValues => ({
@@ -24,7 +28,7 @@ const TextAnnotation = ({
     const selectedText = selection.toString().trim();
     if (selectedText) {
       setSelectText(true);
-      setPopupVisibility(true)
+      setPopupVisibility(true);
     }
   };
 
@@ -47,13 +51,19 @@ const TextAnnotation = ({
   const closePopup = () => {
     setPopupVisibility(false);
   };
+  // Callback function to set the selected label dictionary
+  const setSelectedLabelDictCallback = labelDict => {
+    setselectedLabel(labelDict);
+  };
+
   return (
     <div className="large-textarea">
       {selectText && isPopupVisible && (
         <WindowPopUpLabels
           labelsList={labelsList}
           selectText={selectText => handleTextSelection(selectText)}
-          closePopup = {closePopup}
+          closePopup={closePopup}
+          setSelectedLabelDict={setSelectedLabelDictCallback}
         />
       )}
       {msgBody && (
@@ -61,6 +71,7 @@ const TextAnnotation = ({
           msgBody={msgBody}
           value={valueByMsg[msgBody] || []} // Initialize value as an empty array
           updateValue={newValue => updateValueForMsg(msgBody, newValue)}
+          selectedLabelDict={selectedLabelDict}
         />
       )}
     </div>
