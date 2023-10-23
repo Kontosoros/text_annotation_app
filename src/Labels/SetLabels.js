@@ -15,7 +15,7 @@ export default function SetLabels({onUpdateLabelList}) {
   };
   const addLabel = () => {
     if (label.trim() !== "") {
-      setLabelList([...labelList, { text: label, color: selectedColor }]); // Add the label to the list
+      setLabelList([...labelList, { labelName: label, color: selectedColor }]); // Add the label to the list
       setLabel(""); // Clear the input field
     }
   };
@@ -54,7 +54,7 @@ export default function SetLabels({onUpdateLabelList}) {
               onClick={() => handleLabelCheckboxChange(index)}
             />
 
-            {item.text}
+            {item.labelName}
           </li>
         ))}
       </ul>

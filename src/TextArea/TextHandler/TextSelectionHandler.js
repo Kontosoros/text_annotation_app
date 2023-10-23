@@ -10,12 +10,11 @@ const TextSelectionHandler = ({ msgBody, value, updateValue }) => {
   };
   
   const handleChange = (values) => {
-    console.log("values",values)
     updateValue(values);
   };
 
   return (
-    <div className="large-textarea">
+    <div>
       <TextAnnotateBlend
         style={{
           fontSize: "1.2rem",
