@@ -10,14 +10,11 @@ const TextAnnotation = ({
 }) => {
   const [valueByMsg, setValueByMsg] = useState({});
   const [selectText, setSelectText] = useState(false);
-  const [isPopupVisible, setPopupVisibility] = useState(false);
-  const [selectedLabelDict, setselectedLabel] = useState({
-    labelName: "",
-    color: "#008000",
-  });
+  const [isPopupVisible, setPopupVisibility] = useState(true);
+  const [selectedLabelDict, setselectedLabel] = useState({ labelName: "", color: "" });
 
   const updateValueForMsg = (msg, newValue) => {
-    setValueByMsg(prevValues => ({
+    setValueByMsg((prevValues) => ({
       ...prevValues,
       [msg]: newValue,
     }));
@@ -34,7 +31,7 @@ const TextAnnotation = ({
 
   useEffect(() => {
     const registerMouseUp = () => {
-      const msgBodyElement = document.querySelector(".large-textarea"); // Adjust the selector to target your specific element
+      const msgBodyElement = document.querySelector(".large-textarea");
       if (msgBodyElement) {
         msgBodyElement.addEventListener("mouseup", handleMouseUp);
         return () => {
@@ -42,26 +39,31 @@ const TextAnnotation = ({
         };
       }
     };
-    // Use a timeout to make sure the element is available in the DOM
     setTimeout(registerMouseUp, 100);
   }, []);
-  const handleTextSelection = selectText => {
+
+  const handleTextSelection = () => {
+    if (!selectedLabelDict.color) {
+      // If no color is selected, you can handle this case here, e.g., set a default color
+      setselectedLabel({ ...selectedLabelDict, color: "#008000" });
+    }
     setSelectText(false);
   };
+
   const closePopup = () => {
     setPopupVisibility(false);
   };
-  // Callback function to set the selected label dictionary
-  const setSelectedLabelDictCallback = labelDict => {
+
+  const setSelectedLabelDictCallback = (labelDict) => {
     setselectedLabel(labelDict);
   };
 
   return (
     <div className="large-textarea">
-      {selectText && isPopupVisible && (
+      { labelsList && isPopupVisible && (
         <WindowPopUpLabels
           labelsList={labelsList}
-          selectText={selectText => handleTextSelection(selectText)}
+          selectText={handleTextSelection}
           closePopup={closePopup}
           setSelectedLabelDict={setSelectedLabelDictCallback}
         />
@@ -69,8 +71,8 @@ const TextAnnotation = ({
       {msgBody && (
         <TextSelectionHandler
           msgBody={msgBody}
-          value={valueByMsg[msgBody] || []} // Initialize value as an empty array
-          updateValue={newValue => updateValueForMsg(msgBody, newValue)}
+          value={valueByMsg[msgBody] || []}
+          updateValue={(newValue) => updateValueForMsg(msgBody, newValue)}
           selectedLabelDict={selectedLabelDict}
         />
       )}

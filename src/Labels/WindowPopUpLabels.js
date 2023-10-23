@@ -5,7 +5,9 @@ export default function WindowPopUpLabels({
   labelsList,
   selectText,
   closePopup,
-  setSelectedLabelDict
+  setSelectedLabelDict,
+  top, // Add a 'top' prop to set the top position
+  left, // Add a 'left' prop to set the left position
 }) {
   const handleSelectedLabel = ({ labelDict }) => {
     return setSelectedLabelDict(labelDict);
@@ -13,13 +15,17 @@ export default function WindowPopUpLabels({
 
   return (
     <div className={`label-selection-popup`}>
+      <button className="close-popup-button" onClick={() => closePopup()}>
+        X
+      </button>
       <ul>
         {labelsList.map((labelDict, index) => (
           <li key={index} style={{ color: labelDict.color, cursor: "pointer" }}>
             <button
+              style={{ backgroundColor: labelDict.color }}
               onClick={() => {
                 handleSelectedLabel({ labelDict });
-                closePopup(); // Call the function to close the popup
+                closePopup();
               }}
             >
               {labelDict.labelName}
