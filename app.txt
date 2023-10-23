@@ -1,0 +1,47 @@
+import { TextAnnotateBlend } from "react-text-annotate-blend"
+import React, { useState } from "react";
+import Selector from "./Selector";
+function App () {
+    const [value, setValue] = useState("");
+    const [tag, setTag] = useState("tagA");
+  
+    const handleChange = (value) => {
+      setValue(value);
+    };
+  
+    const COLORS = {
+      tagA: "rgb(179, 245, 66)",
+      tagB: "#42f5f5",
+      tagC: "#4b46cd",
+    };
+
+    return (
+      <>
+        <div>
+         <TextAnnotateBlend
+           style={{
+             fontSize: "1.2rem",
+           }}
+           content={"Remind you, direct from very close Owners for whom we are consistently acting and for whom just acted, we can secure for sale the following BWTS Fitted Panamax BC; Offer invited by COB, Korea 18th Oct. Trading Spot MV. PAN ELDORADO BULKER CARRIER BLT : 2004 / CSBC CORPORATION, KAOHSIUNG FLAG : KOREA CLASS : KR DWT : ABT 77,598 MT ON 14.122 M LOA : 224.36M / BEAM : 32.26 MS GRT/NRT : 41,209 / 26,039 7H/7H GRAIN CAPA : 92,151.90 CBM MAIN ENGINE : HITACHI - MAN B&W / 6S60MC(MARK6) SS DUE APR 2024 BWMS FITTED LDT ABT 10768 Itinerary : ETD Vancouver BC 14TH Oct (Loading), ETA China early Nov. (discharge Grain) Further details and guidance here. -------------------------------------------- (All details given in good faith, without guarantee.) Kind regards,"}
+           onChange={handleChange}
+           value={value}
+           getSpan={(span) => ({
+             ...span,
+             tag: tag,
+             color: COLORS[tag],
+           })}
+        />
+        </div>
+
+        <Selector value = {tag} handler={(e) => setTag(e.target.value)}/>
+        
+        <h3>Current Stored Value</h3>
+
+        <div>
+            <pre>{JSON.stringify(value, null, 2)}</pre>
+        </div>
+      </>
+    );
+};
+
+export default App;
