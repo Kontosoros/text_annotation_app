@@ -34,7 +34,14 @@ export default function SetLabels({ onUpdateLabelList }) {
       onUpdateLabelList(updatedLabels);
     }
   };
-
+  const handleRemoveLabel = index => {
+    console.log("button cliked", index);
+    const updatedLabelList = [...labelList];
+    // Use splice to remove the item at the specified index
+    updatedLabelList.splice(index, 1);
+    // Update the labelList state with the modified array
+    setLabelList(updatedLabelList);
+  };
   return (
     <div className="add-label">
       <input
@@ -53,6 +60,13 @@ export default function SetLabels({ onUpdateLabelList }) {
               onClick={() => handleLabelCheckboxChange(index)}
             >
               {item.labelName}
+            </button>
+            <button
+              className="button-cancel"
+              style={{ color: "white" }}
+              onClick={() => handleRemoveLabel(index)}
+            >
+              X
             </button>
           </li>
         ))}

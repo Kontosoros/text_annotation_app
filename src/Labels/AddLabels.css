@@ -14,7 +14,21 @@
   transition: background-color 0.3s, color 0.3s; /* Smooth color transition on hover */
 
 }
+.button-cancel {
+  background-color: #ff6b6b; /* Background color of the button */
+  color: #ec3030; /* Text color of the button */
+  padding: 4px 10px; /* Padding around the text (adjust as needed) */
+  border: none; /* Remove the button border */
+  border-radius: 15px; /* Rounded corners */
+  cursor: pointer; /* Show a pointer cursor on hover */
+  margin-left: 10px;
 
+  /* Optional: Add more styles to the button as needed */
+}
+
+.button-cancel:hover {
+  background-color: #be0606; /* Change button background color on hover */
+}
 .add-label input::placeholder {
   color: #7f7d7d; /* Change the placeholder text color to your preferred color */
   font-style: italic; /* You can use italic font-style or customize it as you like */

@@ -31,15 +31,21 @@ const FileList = props => {
         </ul>
       </div>
       <div className="text-area-container">
-        {(selectedFile && (
-          <div>
+        {selectedFile &&
+          (props.labels.length > 0 ? (
+            <div>
+              <TextArea
+                filename={selectedFile.name}
+                text={selectedFile.content}
+                labelsList={props.labels}
+              />
+            </div>
+          ) : (
             <TextArea
-              filename={selectedFile.name} 
+              filename={selectedFile.name}
               text={selectedFile.content}
-              labelsList={props.labels}
             />
-          </div>
-        )) || <TextArea />}
+          ))}
       </div>
       <button className="button-remove" onClick={props.onRemoveFiles}>
         Remove Selected Files

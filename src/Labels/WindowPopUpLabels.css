@@ -46,7 +46,17 @@
     padding: 8px 16px;
     cursor: pointer;
   }
+  .button-cancel {
+    background-color: #ff6b6b; /* Background color of the button */
+    color: #ec3030; /* Text color of the button */
+    padding: 4px 10px; /* Padding around the text (adjust as needed) */
+    border: none; /* Remove the button border */
+    border-radius: 15px; /* Rounded corners */
+    cursor: pointer; /* Show a pointer cursor on hover */
+    margin-left: 10px;
   
+    /* Optional: Add more styles to the button as needed */
+  }
   button:hover {
     background-color: #787c78; /* Change button color on hover */
   }
