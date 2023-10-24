@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import "./AddLabels.css";
 import ColorLabels from "./ColorLabels";
 
-
-export default function SetLabels({onUpdateLabelList}) {
+export default function SetLabels({ onUpdateLabelList }) {
   const [label, setLabel] = useState("");
   const [labelList, setLabelList] = useState([]); // State to store the list of labels
   const [selectedColor, setSelectedColor] = useState(""); // State to store the selected color
@@ -35,26 +34,26 @@ export default function SetLabels({onUpdateLabelList}) {
       onUpdateLabelList(updatedLabels);
     }
   };
-  
+
   return (
     <div className="add-label">
       <input
         onChange={handleLabel}
         value={label}
         type="text"
-        placeholder="Label"
+        placeholder="Labels..."
       ></input>
       <button onClick={addLabel}>Add Label</button>
-      <ul>
+      <ul className="label-list">
         {labelList.map((item, index) => (
-          <li key={index} style={{ color: item.color }}>
-            <input
-              type="checkbox"
-              checked={item.checked || false}
+          <li key={index}>
+            <button
+              className="label-button"
+              style={{ backgroundColor: item.color, color: "white" }}
               onClick={() => handleLabelCheckboxChange(index)}
-            />
-
-            {item.labelName}
+            >
+              {item.labelName}
+            </button>
           </li>
         ))}
       </ul>
@@ -63,9 +62,7 @@ export default function SetLabels({onUpdateLabelList}) {
           onColorSelected={handleSetLabelColor}
           initialColor={labelList[selectedLabelIndex].color}
         />
-        
       )}
-      
     </div>
   );
 }

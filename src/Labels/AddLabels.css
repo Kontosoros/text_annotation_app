@@ -1,7 +1,48 @@
-.add-label{
-    height: 50px;
-  width: 100px;
-  right:80px; 
-  top:100px;
+.add-label {
   position: absolute;
+  top: 100px;
+  right: 80px;
+  width: 100px;
+  height: 50px;
+  
+  color: #121010; /* Text color (change to your preferred color) */
+  text-align: center; /* Center text horizontally */
+  line-height: 50px; /* Center text vertically */
+  
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Show hand cursor on hover */
+  transition: background-color 0.3s, color 0.3s; /* Smooth color transition on hover */
+
+}
+
+.add-label input::placeholder {
+  color: #7f7d7d; /* Change the placeholder text color to your preferred color */
+  font-style: italic; /* You can use italic font-style or customize it as you like */
+  font-weight: 300; /* Adjust the font weight (lighter or bolder) */
+  font-size: 14px; /* Adjust the font size */
+  opacity: 0.6; /* Set the opacity to make it slightly transparent */
+  letter-spacing: 1px; /* Adjust letter spacing for style */
+  
+}
+
+.label-list {
+  list-style-type: none; /* Remove bullet points from the list */
+  padding: 0; /* Remove default padding */
+  
+}
+
+.label-list li {
+  margin: 5px 0; /* Add some vertical spacing between list items */
+  display: flex; /* Use flexbox to align checkbox and label horizontally */
+  align-items: center; /* Align items vertically in the center */
+}
+
+.label-list li input[type="checkbox"] {
+  margin-right: 8px; /* Add spacing between checkbox and label */
+}
+
+.label-list li label {
+  font-size: 16px; /* Adjust the font size for labels */
+  font-weight: bold; /* Make the label text bold */
+  
 }

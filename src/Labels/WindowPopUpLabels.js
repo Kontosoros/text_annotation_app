@@ -5,6 +5,7 @@ export default function WindowPopUpLabels({
   labelsList,
   closePopup,
   setSelectedLabelDict,
+  cursorPosition,
 }) {
   const [tremble, setTremble] = useState(false);
 
@@ -13,16 +14,24 @@ export default function WindowPopUpLabels({
   };
 
   useEffect(() => {
-    // Add event listeners for text selection when the popup is opened
     document.addEventListener("selectstart", disableTextSelection);
     document.addEventListener("contextmenu", disableContextMenu);
 
     return () => {
-      // Remove event listeners for text selection when the popup is closed
       document.removeEventListener("selectstart", disableTextSelection);
       document.removeEventListener("contextmenu", disableContextMenu);
     };
   }, []);
+
+  useEffect(() => {
+    // Update the pop-up's position when the cursorPosition changes
+    const popup = document.querySelector(".label-selection-popup");
+    if (popup && cursorPosition) {
+      const { x, y } = cursorPosition;
+      popup.style.top = `${y}px`;
+      popup.style.left = `${x}px`;
+    }
+  }, [cursorPosition]);
 
   const disableTextSelection = (e) => {
     e.preventDefault();
@@ -50,7 +59,7 @@ export default function WindowPopUpLabels({
               style={{ backgroundColor: labelDict.color }}
               onClick={() => {
                 handleSelectedLabel({ labelDict });
-                closePopupAndEnableTextSelection(); // Enable text selection when a label is selected
+                closePopupAndEnableTextSelection();
               }}
             >
               {labelDict.labelName}
