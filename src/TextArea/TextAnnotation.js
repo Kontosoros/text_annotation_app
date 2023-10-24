@@ -10,7 +10,7 @@ const TextAnnotation = ({
 }) => {
   const [valueByMsg, setValueByMsg] = useState({});
   const [selectText, setSelectText] = useState(false);
-  const [isPopupVisible, setPopupVisibility] = useState(false);
+  const [isPopupVisible, setPopupVisibility] = useState(true);
   const [selectedLabelDict, setselectedLabel] = useState({ labelName: "", color: "" });
 
   const updateValueForMsg = (msg, newValue) => {
