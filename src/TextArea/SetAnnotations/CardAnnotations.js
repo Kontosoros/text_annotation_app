@@ -2,33 +2,31 @@ import React from "react";
 import "./CardAnnotations.css";
 function CardAnnotations({ fileGoldenData }) {
   console.log(fileGoldenData);
-  return  (
+  return (
     <div className="result-card">
       <div className="result-content">
-        <div className="result-column">
-          <p className="result-description">Start Offsets</p>
-          {fileGoldenData.map((item, index) => (
-            <p key={index}>{item.start}</p>
-          ))}
+        <div className="result-row header">
+          <p className="result-column">Start Offsets</p>
+          <p className="result-column">End Offsets</p>
+          <p className="result-column">Text</p>
+          <p className="result-column">Label</p>
         </div>
-        <div className="result-column">
-          <p className="result-info">End Offsets</p>
-          {fileGoldenData.map((item, index) => (
-            <p key={index}>{item.end}</p>
-          ))}
-        </div>
-        <div className="result-column">
-          <p className="result-date">Text</p>
-          {fileGoldenData.map((item, index) => (
-            <p key={index}>{item.text}</p>
-          ))}
-        </div>
-        <div className="result-column">
-          <p className="result-date">Label</p>
-          {fileGoldenData.map((item, index) => (
-            <p key={index}>{item.tag}</p>
-          ))}
-        </div>
+        {fileGoldenData.map((item, index) => (
+          <button key={index} className="result-row">
+            <div className="result-column">
+              <p>{item.start}</p>
+            </div>
+            <div className="result-column">
+              <p>{item.end}</p>
+            </div>
+            <div className="result-column">
+              <p>{item.text}</p>
+            </div>
+            <div className="result-column">
+              <p>{item.tag}</p>
+            </div>
+          </button>
+        ))}
       </div>
     </div>
   );
