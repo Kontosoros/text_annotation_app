@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import WindowPopUpLabels from "../Labels/WindowPopUpLabels";
 import TextSelectionHandler from "./TextHandler/TextSelectionHandler";
 
@@ -6,7 +6,7 @@ const TextAnnotation = ({
   filename,
   msgBody,
   labelsList,
-  onGoldenDictionary,
+  handleAnnotationUpdate,
 }) => {
   const [valueByMsg, setValueByMsg] = useState({});
   const [selectText, setSelectText] = useState(false);
@@ -17,14 +17,14 @@ const TextAnnotation = ({
   });
   const [cursorPosition, setCursorPosition] = useState(null);
 
-  const updateValueForMsg = (msg, newValue) => {
-    setValueByMsg((prevValues) => ({
+  const updateValueForMsg = (filename, newValue) => {
+    setValueByMsg(prevValues => ({
       ...prevValues,
-      [msg]: newValue,
+      [filename]: newValue,
     }));
   };
 
-  const handleMouseUp = (e) => {
+  const handleMouseUp = e => {
     const selection = window.getSelection();
     const selectedText = selection.toString().trim();
     if (selectedText) {
@@ -49,13 +49,14 @@ const TextAnnotation = ({
     setPopupVisibility(false);
   };
 
-  const setSelectedLabelDictCallback = (labelDict) => {
+  const setSelectedLabelDictCallback = labelDict => {
     setselectedLabel(labelDict);
   };
-
+  // Call the parent's callback function to send the update
+  handleAnnotationUpdate(valueByMsg);
   return (
     <div className="large-textarea">
-      {labelsList && isPopupVisible  && (
+      {labelsList && isPopupVisible && (
         <WindowPopUpLabels
           labelsList={labelsList}
           closePopup={closePopup}
@@ -66,8 +67,8 @@ const TextAnnotation = ({
       {msgBody && (
         <TextSelectionHandler
           msgBody={msgBody}
-          value={valueByMsg[msgBody] || []}
-          updateValue={(newValue) => updateValueForMsg(msgBody, newValue)}
+          value={valueByMsg[filename] || []}
+          updateValue={newValue => updateValueForMsg(filename, newValue)}
           selectedLabelDict={selectedLabelDict}
         />
       )}

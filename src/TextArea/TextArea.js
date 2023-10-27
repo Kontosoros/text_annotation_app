@@ -1,20 +1,15 @@
 import "./TextArea.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TextAnnotation from "./TextAnnotation";
-
+import AnnotationsDisplayArea from "./SetAnnotations/AnnotationsDisplayArea";
 const TextArea = props => {
   // Maintain a dictionary of annotations for each file
-  const [annotations, setAnnotations] = useState({});
+  const [goldenAnnotations, setGoldenAnnotations] = useState({});
 
-  // Define a function to receive the annotation dictionary from the child
-  const handleGoldenDictionary = (filename, annotation) => {
-    // Update the annotations for the current file
-    setAnnotations(prevAnnotations => ({
-      ...prevAnnotations,
-      [filename]: [...(prevAnnotations[filename] || []), annotation],
-    }));
+  // Define a function to receive the annotation data from the child
+  const handleAnnotationUpdate = annotation => {
+    setGoldenAnnotations(annotation);
   };
-  console.log(annotations);
 
   return (
     <>
@@ -22,7 +17,11 @@ const TextArea = props => {
         filename={props.filename}
         msgBody={props.text}
         labelsList={props.labelsList}
-        onGoldenDictionary={(annotation) => handleGoldenDictionary(props.filename, annotation)}
+        handleAnnotationUpdate={handleAnnotationUpdate}
+      />
+      <AnnotationsDisplayArea
+        filename={props.filename}
+        goldenData={goldenAnnotations}
       />
     </>
   );

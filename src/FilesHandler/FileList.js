@@ -20,12 +20,12 @@ const FileList = props => {
               key={index}
               onClick={() => handleFileClick(file)}
             >
-              <input
-                type="checkbox"
+              <button
                 checked={props.selectedFiles.includes(file)}
                 onChange={() => props.onFileSelect(file)}
-              />
+              >
               {file.name}
+              </button>
             </li>
           ))}
         </ul>

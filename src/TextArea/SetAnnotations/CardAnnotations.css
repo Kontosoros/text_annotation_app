@@ -1,0 +1,58 @@
+.result-card {
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  width: 64%; /* Set the width to 100% of its container */
+  height: 150px; /* Set the initial height to 300 pixels */
+  margin: 0 auto;
+  padding: 20px;
+  margin-left: 300px;
+  align-items: center;
+  resize: none;
+  overflow-y: auto; /* Add a vertical scrollbar when content overflows */
+  max-height: 150px; /* Set the maximum height for the scrollable area */
+}
+
+.result-content {
+  display: flex;
+}
+
+.result-column {
+  flex: 1;
+  padding: 0 10px;
+  text-align: center;
+  background-color: #f5f5f5; /* Example background color */
+}
+
+.result-description,
+.result-info,
+.result-date {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.result-description {
+  background-color: #f5f5f5;
+}
+.scroll-container {
+  max-height: 200px; /* Set the desired height for the scrollable area */
+  overflow-y: auto; /* Add a vertical scrollbar when content overflows */
+  display: flex;
+  flex-direction: column;
+}
+/* Default row style */
+.result-row {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the selected row */
+.result-row.selected {
+  background-color: #a0a0a0; /* Change this to your desired background color */
+}
+
+/* Style for the hovered row */
+.result-row:hover {
+  background-color: #e0e0e0; /* Change this to your desired background color */
+}
