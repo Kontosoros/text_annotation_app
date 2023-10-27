@@ -4,14 +4,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   width: 64%; /* Set the width to 100% of its container */
-  height: 150px; /* Set the initial height to 150 pixels */
+  height: 200px; /* Set the initial height to 150 pixels */
   margin: 0 auto;
   padding: 20px;
   margin-left: 300px;
   align-items: center;
   resize: none;
   overflow-y: auto; /* Add a vertical scrollbar when content overflows */
-  max-height: 150px; /* Set the maximum height for the scrollable area */
+  max-height: 300px; /* Set the maximum height for the scrollable area */
 }
 
 .result-content {
@@ -21,15 +21,19 @@
 }
 
 .result-row {
-  font-size: 70%;
+  font-weight: bold;
+  font-size: 80%;
   display: flex;
   width: 100%;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #c1bebe;
   margin: 5px 0;
+  background-color: #f7f4f4;
+  color: black; /* Set the text color to black */
 }
 
 .result-column {
   flex: 1;
+
   padding: 10px;
   text-align: center;
   max-height: 60px; /* Set the maximum height for each column content */
@@ -37,11 +41,12 @@
 }
 
 .header {
+  font-size: 80%;
   font-weight: bold;
-  background-color: #f5f5f5;
+  background-color: #f4e5e5;
 }
 
 .button:hover {
-  background-color: #e0e0e0;
+  background-color: #f1eeee;
   cursor: pointer;
 }

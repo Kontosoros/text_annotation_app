@@ -1,0 +1,45 @@
+import { TextAnnotateBlend } from "react-text-annotate-blend"
+import React, { useState, useEffect } from "react";
+function App () {
+  //const [value, setValue] = useState("");
+ 
+
+  
+  
+ 
+  const value = [
+    {
+      start: 5,
+      end: 6,
+      tag: "tag",
+      color: "rgb(179, 245, 66)"
+    }]
+  return (
+    <>
+      <div>
+       <TextAnnotateBlend
+         style={{
+           fontSize: "1.2rem",
+         }}
+         content="mike go out"
+         //onChange={handleChange}
+        value={value}
+        //  getSpan={(span) => ({
+        //    ...span,
+          
+        //    color: "rgb(179, 245, 66)",
+        //  })}
+      />
+      </div>
+
+    
+      
+      <h3>Current Stored Value</h3>
+
+      <div>
+          <pre>{JSON.stringify(value, null, 2)}</pre>
+      </div>
+    </>
+  );
+};
+export default App;
