@@ -1,7 +1,6 @@
 import React from "react";
 import "./CardAnnotations.css";
 function CardAnnotations({ fileGoldenData }) {
-  console.log(fileGoldenData);
   return (
     <div className="result-card">
       <div className="result-content">
@@ -20,7 +19,7 @@ function CardAnnotations({ fileGoldenData }) {
               <p>{item.end}</p>
             </div>
             <div className="result-column">
-              <p>{item.text}</p>
+              <p>["{item.text}"]</p>
             </div>
             <div className="result-column">
               <p>{item.tag}</p>
