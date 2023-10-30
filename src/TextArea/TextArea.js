@@ -10,8 +10,7 @@ const TextArea = props => {
   const handleAnnotationUpdate = annotation => {
     setGoldenAnnotations(annotation);
   };
-  console.log("COLOR",props.labelsList)
-  console.log("DATA",goldenAnnotations)
+ 
   return (
     <>
       <TextAnnotation

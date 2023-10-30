@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import WindowPopUpLabels from "../Labels/WindowPopUpLabels";
 import TextSelectionHandler from "./TextHandler/TextSelectionHandler";
 
@@ -10,12 +10,14 @@ const TextAnnotation = ({
 }) => {
   const [valueByMsg, setValueByMsg] = useState({});
   const [selectText, setSelectText] = useState(false);
-  const [isPopupVisible, setPopupVisibility] = useState(true);
-  const [selectedLabelDict, setselectedLabel] = useState({
-    labelName: "",
-    color: "",
-  });
+  const [isPopupVisible, setPopupVisibility] = useState(false);
+  const [selectedLabelDict, setselectedLabel] = useState({});
   const [cursorPosition, setCursorPosition] = useState(null);
+  const [wordOffsets, setWordOffsets] = useState({
+    start: "",
+    end: "",
+    text: "",
+  });
 
   const updateValueForMsg = (filename, newValue) => {
     setValueByMsg(prevValues => ({
@@ -27,11 +29,25 @@ const TextAnnotation = ({
   const handleMouseUp = e => {
     const selection = window.getSelection();
     const selectedText = selection.toString().trim();
+
     if (selectedText) {
       const yOffset = 140; // Adjust this value to set the desired vertical offset
-      setSelectText(true);
-      setCursorPosition({ x: e.clientX, y: e.clientY + yOffset });
-      setPopupVisibility(true);
+      const msgBodyElement = document.querySelector(".large-textarea");
+      if (msgBodyElement) {
+        const msgBodyText = msgBodyElement.textContent;
+        console.log(msgBodyText);
+        const startIndex = msgBodyText.indexOf(selectedText);
+        const endIndex = startIndex + selectedText.length;
+        console.log(startIndex, endIndex);
+        setWordOffsets({
+          start: startIndex,
+          end: endIndex,
+          text: selectedText,
+        });
+        setSelectText(true);
+        setCursorPosition({ x: e.clientX, y: e.clientY + yOffset });
+        setPopupVisibility(true);
+      }
     }
   };
 
@@ -50,10 +66,29 @@ const TextAnnotation = ({
   };
 
   const setSelectedLabelDictCallback = labelDict => {
-    setselectedLabel(labelDict);
+    setselectedLabel({
+      start: wordOffsets.start,
+      end: wordOffsets.end,
+      tag: labelDict.labelName,
+      color: labelDict.color,
+    });
+    const newDictionary = {
+      start: wordOffsets.start,
+      end: wordOffsets.end,
+      //tag: labelDict.labelName,
+      color: labelDict.color,
+      text: wordOffsets.text,
+    };
+
+    // Update the state with the new dictionary
+    const updatedValue = [...(valueByMsg[filename] || []), newDictionary];
+    updateValueForMsg(filename, updatedValue);
+    setPopupVisibility(false);
   };
+
   // Call the parent's callback function to send the update
   handleAnnotationUpdate(valueByMsg);
+
   return (
     <div className="large-textarea">
       {labelsList && isPopupVisible && (
@@ -64,11 +99,11 @@ const TextAnnotation = ({
           cursorPosition={cursorPosition}
         />
       )}
-      {msgBody && (
+      {!isPopupVisible && (
         <TextSelectionHandler
           msgBody={msgBody}
           value={valueByMsg[filename] || []}
-          updateValue={newValue => updateValueForMsg(filename, newValue)}
+          updateValue={newValue => updateValueForMsg(filename, newValue)} // Pass the updateValueForMsg function
           selectedLabelDict={selectedLabelDict}
         />
       )}
