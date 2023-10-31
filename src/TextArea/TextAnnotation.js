@@ -28,25 +28,35 @@ const TextAnnotation = ({
 
   const handleMouseUp = e => {
     const selection = window.getSelection();
-    const selectedText = selection.toString().trim();
-
-    if (selectedText) {
-      const yOffset = 140; // Adjust this value to set the desired vertical offset
-      const msgBodyElement = document.querySelector(".large-textarea");
-      if (msgBodyElement) {
-        const msgBodyText = msgBodyElement.textContent;
-        console.log(msgBodyText);
-        const startIndex = msgBodyText.indexOf(selectedText);
-        const endIndex = startIndex + selectedText.length;
-        console.log(startIndex, endIndex);
-        setWordOffsets({
-          start: startIndex,
-          end: endIndex,
-          text: selectedText,
-        });
-        setSelectText(true);
-        setCursorPosition({ x: e.clientX, y: e.clientY + yOffset });
-        setPopupVisibility(true);
+  
+    if (selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+      const selectedText = range.toString().trim();
+      
+  
+      if (selectedText) {
+        const yOffset = 140; // Adjust this value to set the desired vertical offset
+        const msgBodyElement = document.querySelector(".large-textarea");
+  
+        if (msgBodyElement) {
+          const rangeClone = range.cloneRange();
+          console.log('rangeClone',rangeClone)
+          rangeClone.selectNodeContents(msgBodyElement);
+          rangeClone.setEnd(range.startContainer, range.startOffset);
+          
+          const startIndex = rangeClone.toString().length;
+          const endIndex = startIndex + selectedText.length;
+  
+          setWordOffsets({
+            start: startIndex,
+            end: endIndex,
+            text: selectedText,
+          });
+  
+          setSelectText(true);
+          setCursorPosition({ x: e.clientX, y: e.clientY + yOffset });
+          setPopupVisibility(true);
+        }
       }
     }
   };
@@ -79,7 +89,7 @@ const TextAnnotation = ({
       color: labelDict.color,
       text: wordOffsets.text,
     };
-
+    console.log("newDictionary", newDictionary);
     // Update the state with the new dictionary
     const updatedValue = [...(valueByMsg[filename] || []), newDictionary];
     updateValueForMsg(filename, updatedValue);
