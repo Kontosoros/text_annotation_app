@@ -1,7 +1,7 @@
 import React from "react";
 import { TextAnnotateBlend } from "react-text-annotate-blend";
 
-const TextSelectionHandler = ({ msgBody, value,  updateValue }) => {
+const TextHighlighter = ({ msgBody, value,  updateValue }) => {
   const handleChange = (values) => {
     updateValue(values);
   };
@@ -37,4 +37,4 @@ const TextSelectionHandler = ({ msgBody, value,  updateValue }) => {
 //   return uniqueDicts;
 // };
 
-export default TextSelectionHandler;
+export default TextHighlighter;

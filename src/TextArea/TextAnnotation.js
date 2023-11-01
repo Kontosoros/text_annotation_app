@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import WindowPopUpLabels from "../Labels/WindowPopUpLabels";
-import TextSelectionHandler from "./TextHandler/TextSelectionHandler";
+import TextHighlighter from "./TextHandler/TextHighlighter";
 
 const TextAnnotation = ({
   filename,
@@ -118,7 +118,7 @@ const TextAnnotation = ({
         />
       )}
       {!isPopupVisible && (
-        <TextSelectionHandler
+        <TextHighlighter
           msgBody={msgBody}
           value={annotationsByMsgDict[filename] || []}
           updateValue={newValue => updateMsgAnnotations(filename, newValue)} // Pass the updateValueForMsg function
