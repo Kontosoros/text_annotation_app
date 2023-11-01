@@ -22,7 +22,7 @@ function CardAnnotations({ fileGoldenData }) {
               <p>["{item.text}"]</p>
             </div>
             <div className="result-column">
-              <p>{item.tag}</p>
+              <p>{item.tagName}</p>
             </div>
           </div>
         ))}
