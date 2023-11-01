@@ -8,10 +8,9 @@ const TextAnnotation = ({
   labelsList,
   handleAnnotationUpdate,
 }) => {
-  const [valueByMsg, setValueByMsg] = useState({});
-  const [selectText, setSelectText] = useState(false);
+  const [annotationsByMsgDict, setMsgAnnotationList] = useState({});
+  const [selectText, setTextSelection] = useState(false);
   const [isPopupVisible, setPopupVisibility] = useState(false);
-  const [selectedLabelDict, setselectedLabel] = useState({});
   const [cursorPosition, setCursorPosition] = useState(null);
   const [wordOffsets, setWordOffsets] = useState({
     start: "",
@@ -19,10 +18,10 @@ const TextAnnotation = ({
     text: "",
   });
   const loadingData = [{ start: 0, end: 7, color: "#FF0000" }];
-  const updateValueForMsg = (filename, newValue) => {
-    setValueByMsg(prevValues => ({
-      ...prevValues,
-      [filename]: newValue,
+  const updateMsgAnnotations = (filename, newAnnotationList) => {
+    setMsgAnnotationList(prevAnnotationList => ({
+      ...prevAnnotationList,
+      [filename]: newAnnotationList,
     }));
   };
 
@@ -51,7 +50,7 @@ const TextAnnotation = ({
             text: selectedText,
           });
 
-          setSelectText(true);
+          setTextSelection(true);
           setCursorPosition({ x: e.clientX, y: e.clientY + yOffset });
           setPopupVisibility(true);
         }
@@ -74,32 +73,25 @@ const TextAnnotation = ({
   };
 
   const setSelectedLabelDictCallback = labelDict => {
-    setselectedLabel({
-      start: wordOffsets.start,
-      end: wordOffsets.end,
-      tag: labelDict.labelName,
-      color: labelDict.color,
-    });
-    const newDictionary = {
+    const newAnnotationDict = {
       start: wordOffsets.start,
       end: wordOffsets.end,
       //tag: labelDict.labelName,
       color: labelDict.color,
       text: wordOffsets.text,
     };
-
     // Update the state with the new dictionary
-    const updatedValue = deduplicateDictionaries([
-      ...(valueByMsg[filename] || []),
-      newDictionary,
+    const annotationList = deduplicateDictionaries([
+      ...(annotationsByMsgDict[filename] || []),
+      newAnnotationDict,
       ...loadingData,
     ]);
-    updateValueForMsg(filename, updatedValue);
+    updateMsgAnnotations(filename, annotationList);
     setPopupVisibility(false);
   };
 
   // Call the parent's callback function to send the update
-  handleAnnotationUpdate(valueByMsg);
+  handleAnnotationUpdate(annotationsByMsgDict);
   // Deduplicate dictionaries based on 'start' and 'end' properties
   const deduplicateDictionaries = dictionaries => {
     const uniqueDicts = [];
@@ -128,10 +120,8 @@ const TextAnnotation = ({
       {!isPopupVisible && (
         <TextSelectionHandler
           msgBody={msgBody}
-          value={valueByMsg[filename] || []}
-          //loadingData={loadingData}
-          updateValue={newValue => updateValueForMsg(filename, newValue)} // Pass the updateValueForMsg function
-          selectedLabelDict={selectedLabelDict}
+          value={annotationsByMsgDict[filename] || []}
+          updateValue={newValue => updateMsgAnnotations(filename, newValue)} // Pass the updateValueForMsg function
         />
       )}
     </div>

@@ -3,12 +3,10 @@ import { TextAnnotateBlend } from "react-text-annotate-blend";
 
 const TextSelectionHandler = ({ msgBody, value,  updateValue }) => {
   const handleChange = (values) => {
-    console.log("updated :",values)
     updateValue(values);
   };
 
-  
-  console.log("value :",value)
+
   return (
     <div>
       <TextAnnotateBlend
