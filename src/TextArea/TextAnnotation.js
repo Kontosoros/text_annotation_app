@@ -18,7 +18,7 @@ const TextAnnotation = ({
     end: "",
     text: "",
   });
-
+  const loadingData = [{ start: 0, end: 7, color: "#FF0000" }];
   const updateValueForMsg = (filename, newValue) => {
     setValueByMsg(prevValues => ({
       ...prevValues,
@@ -28,31 +28,29 @@ const TextAnnotation = ({
 
   const handleMouseUp = e => {
     const selection = window.getSelection();
-  
+
     if (selection.rangeCount > 0) {
       const range = selection.getRangeAt(0);
       const selectedText = range.toString().trim();
-      
-  
+
       if (selectedText) {
         const yOffset = 140; // Adjust this value to set the desired vertical offset
         const msgBodyElement = document.querySelector(".large-textarea");
-  
+
         if (msgBodyElement) {
           const rangeClone = range.cloneRange();
-          console.log('rangeClone',rangeClone)
           rangeClone.selectNodeContents(msgBodyElement);
           rangeClone.setEnd(range.startContainer, range.startOffset);
-          
+
           const startIndex = rangeClone.toString().length;
           const endIndex = startIndex + selectedText.length;
-  
+
           setWordOffsets({
             start: startIndex,
             end: endIndex,
             text: selectedText,
           });
-  
+
           setSelectText(true);
           setCursorPosition({ x: e.clientX, y: e.clientY + yOffset });
           setPopupVisibility(true);
@@ -89,16 +87,34 @@ const TextAnnotation = ({
       color: labelDict.color,
       text: wordOffsets.text,
     };
-    console.log("newDictionary", newDictionary);
+
     // Update the state with the new dictionary
-    const updatedValue = [...(valueByMsg[filename] || []), newDictionary];
+    const updatedValue = deduplicateDictionaries([
+      ...(valueByMsg[filename] || []),
+      newDictionary,
+      ...loadingData,
+    ]);
     updateValueForMsg(filename, updatedValue);
     setPopupVisibility(false);
   };
 
   // Call the parent's callback function to send the update
   handleAnnotationUpdate(valueByMsg);
+  // Deduplicate dictionaries based on 'start' and 'end' properties
+  const deduplicateDictionaries = dictionaries => {
+    const uniqueDicts = [];
+    const seenDicts = new Set();
 
+    for (const dict of dictionaries) {
+      const key = `${dict.start}-${dict.end}`;
+      if (!seenDicts.has(key)) {
+        seenDicts.add(key);
+        uniqueDicts.push(dict);
+      }
+    }
+
+    return uniqueDicts;
+  };
   return (
     <div className="large-textarea">
       {labelsList && isPopupVisible && (
@@ -113,6 +129,7 @@ const TextAnnotation = ({
         <TextSelectionHandler
           msgBody={msgBody}
           value={valueByMsg[filename] || []}
+          //loadingData={loadingData}
           updateValue={newValue => updateValueForMsg(filename, newValue)} // Pass the updateValueForMsg function
           selectedLabelDict={selectedLabelDict}
         />

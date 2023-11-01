@@ -3,7 +3,7 @@ import TextArea from "../TextArea/TextArea";
 import "./FileList.css";
 const FileList = props => {
   const [selectedFile, setSelectedFile] = useState(null);
-
+  
   const handleFileClick = file => {
     setSelectedFile(file);
   };
