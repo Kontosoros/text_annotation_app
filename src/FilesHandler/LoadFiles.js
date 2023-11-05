@@ -18,7 +18,12 @@ const LoadFiles = ({ onFilesUpload }) => {
           const jsonData = JSON.parse(fileContent);
           // Extract the desired key text from the JSON data
           const keyText = jsonData.text; // Replace 'key' with the actual key name
-          jsonDataArray.push({ document_id: file.name, text: keyText });
+          const entities = jsonData.entities;
+          jsonDataArray.push({
+            document_id: file.name,
+            text: keyText,
+            entities: entities,
+          });
         } catch (error) {
           console.error("Error parsing JSON:");
         }

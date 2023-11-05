@@ -7,7 +7,7 @@ const FileList = props => {
   const handleFileClick = file => {
     setSelectedFile(file);
   };
-
+  
   return (
     <div className="file-list">
       <div className="file-list-scroll">
@@ -38,6 +38,7 @@ const FileList = props => {
                 filename={selectedFile.name}
                 text={selectedFile.content}
                 labelsList={props.labels}
+                entities = {selectedFile.entities}
               />
             </div>
           ) : (

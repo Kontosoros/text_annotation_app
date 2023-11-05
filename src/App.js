@@ -12,7 +12,7 @@ const App = () => {
   };
   const handleFilesUpload = files => {
     const fileDataPromises = Array.from(files).map(file => {
-      return { name: file.document_id, content: file.text };
+      return { name: file.document_id, content: file.text , entities:file.entities };
     });
 
     Promise.all(fileDataPromises)

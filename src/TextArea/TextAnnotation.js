@@ -6,6 +6,7 @@ const TextAnnotation = ({
   filename,
   msgBody,
   labelsList,
+  loadingData,
   handleAnnotationUpdate,
 }) => {
   const [annotationsByMsgDict, setMsgAnnotationList] = useState({});
@@ -17,7 +18,8 @@ const TextAnnotation = ({
     end: "",
     text: "",
   });
-  const loadingData = [{ start: 0, end: 7, color: "#FF0000" }];
+  
+  console.log("loading data",loadingData , filename)
   const updateMsgAnnotations = (filename, newAnnotationList) => {
     setMsgAnnotationList(prevAnnotationList => ({
       ...prevAnnotationList,
@@ -80,11 +82,13 @@ const TextAnnotation = ({
       color: labelDict.color,
       text: wordOffsets.text,
     };
+    const loadingDataArray = Array.isArray(loadingData) ? loadingData : [];
+    
     // Update the state with the new dictionary
     const annotationList = deduplicateDictionaries([
       ...(annotationsByMsgDict[filename] || []),
       newAnnotationDict,
-      ...loadingData,
+      ...loadingDataArray,
     ]);
     updateMsgAnnotations(filename, annotationList);
     setPopupVisibility(false);
