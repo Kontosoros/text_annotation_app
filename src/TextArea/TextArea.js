@@ -18,7 +18,11 @@ const TextArea = props => {
     const currentAnnotations = goldenAnnotations[props.filename] || [];
     console.log("goldenAnnotations", goldenAnnotations[props.filename]);
     console.log("currentAnnotations", currentAnnotations);
-    if (currentAnnotations.length === 0) {
+    if (currentAnnotations.length === 0 && goldenAnnotations[props.filename]?.length === 0){
+      console.log("dlkdk")
+      setLoadingData([])
+    }
+    else if (currentAnnotations.length === 0) {
       // On the initial load, set loadingData to loadData
       setLoadingData([{ start: 223, end: 230, color: "#e94242" }]);
     } else {
