@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextArea from "../TextArea/TextArea";
 import "./FileList.css";
 const FileList = props => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState({name:"",content:"",entities:[]});
   
   const handleFileClick = file => {
     setSelectedFile(file);
@@ -32,7 +32,7 @@ const FileList = props => {
       </div>
       <div className="text-area-container">
         {selectedFile &&
-          (props.labels.length > 0 ? (
+           (
             <div>
               <TextArea
                 filename={selectedFile.name}
@@ -41,12 +41,7 @@ const FileList = props => {
                 entities = {selectedFile.entities}
               />
             </div>
-          ) : (
-            <TextArea
-              filename={selectedFile.name}
-              text={selectedFile.content}
-            />
-          ))}
+          )}
       </div>
       <button className="button-remove" onClick={props.onRemoveFiles}>
         Remove Selected Files
