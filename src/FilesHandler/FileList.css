@@ -20,19 +20,17 @@
   font-weight: bold; /* You can also apply other styles */
 }
 .selected-file {
-  color: rgb(157, 70, 26); /* Change the color to the desired one */
   font-weight: bold; /* You can also apply other styles */
   font-size: 25px;
 }
 .clicked-file {
-  color: rgb(39, 114, 244); /* Change the color to the desired one */
   font-weight: bold; /* You can also apply other styles */
 }
 .button-remove {
-  display: flex;
-  height: 50px;
-  width: 100px;
-  left:10px; 
-  bottom:200px;
+  font-weight: bold;
+  height: 30px;
+  width: 120px;
+  left: 10px;
+  bottom: 200px;
   position: absolute;
 }

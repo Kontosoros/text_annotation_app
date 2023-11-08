@@ -1,0 +1,27 @@
+.file-upload {
+  
+  height: 30px;
+  width: 120px;
+  left: 10px;
+  bottom: 250px;
+  position: absolute;
+}
+
+input[type="file"] {
+  display: none; /* Hide the default file input */
+}
+
+.custom-file-input {
+  background-color: #636463; /* Button background color */
+  color: #fff; /* Button text color */
+  padding: 3px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Style for when the button is hovered over */
+.custom-file-input:hover {
+  background-color: #b5b7b8; /* Change color on hover */
+}

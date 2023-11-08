@@ -3,7 +3,7 @@ Create a React component that allows users to
 upload multiple files. 
 You can use the input element with the multiple attribute to enable multiple file selection
 */
-
+import "./LoadFiles.css";
 const LoadFiles = ({ onFilesUpload }) => {
   const handleFileChange = e => {
     const selectedFiles = e.target.files;
@@ -42,7 +42,10 @@ const LoadFiles = ({ onFilesUpload }) => {
 
   return (
     <div className="file-upload">
-      <input type="file" multiple onChange={handleFileChange} />
+      <label className="custom-file-input">
+        Load Files
+        <input type="file" multiple onChange={handleFileChange} />
+      </label>
     </div>
   );
 };

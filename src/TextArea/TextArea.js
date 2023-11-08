@@ -33,7 +33,7 @@ const TextArea = props => {
   }, [props.filename, goldenAnnotations]);
 
   return (
-    <>
+    <div>
       <TextAnnotation
         filename={props.filename}
         msgBody={props.text}
@@ -45,7 +45,7 @@ const TextArea = props => {
         filename={props.filename}
         goldenData={goldenAnnotations}
       />
-    </>
+    </div>
   );
 };
 

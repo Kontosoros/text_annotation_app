@@ -4,15 +4,12 @@
   right: 80px;
   width: 100px;
   height: 50px;
-  
   color: #121010; /* Text color (change to your preferred color) */
   text-align: center; /* Center text horizontally */
   line-height: 50px; /* Center text vertically */
-  
   border-radius: 5px; /* Rounded corners */
   cursor: pointer; /* Show hand cursor on hover */
   transition: background-color 0.3s, color 0.3s; /* Smooth color transition on hover */
-
 }
 .button-cancel {
   background-color: #ff6b6b; /* Background color of the button */
@@ -36,13 +33,11 @@
   font-size: 14px; /* Adjust the font size */
   opacity: 0.6; /* Set the opacity to make it slightly transparent */
   letter-spacing: 1px; /* Adjust letter spacing for style */
-  
 }
 
 .label-list {
   list-style-type: none; /* Remove bullet points from the list */
   padding: 0; /* Remove default padding */
-  
 }
 
 .label-list li {
@@ -58,5 +53,4 @@
 .label-list li label {
   font-size: 16px; /* Adjust the font size for labels */
   font-weight: bold; /* Make the label text bold */
-  
 }

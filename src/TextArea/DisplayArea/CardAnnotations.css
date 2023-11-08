@@ -9,7 +9,6 @@
   padding: 20px;
   margin-left: 300px;
   align-items: center;
-  resize: none;
   overflow-y: auto; /* Add a vertical scrollbar when content overflows */
   max-height: 300px; /* Set the maximum height for the scrollable area */
 }
