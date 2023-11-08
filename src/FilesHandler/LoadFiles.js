@@ -46,7 +46,6 @@ const LoadFiles = ({ onFilesUpload }) => {
         Load Files
         <input type="file" multiple onChange={handleFileChange} />
       </label>
-      
     </div>
   );
 };

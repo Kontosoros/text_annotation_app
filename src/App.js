@@ -7,12 +7,18 @@ const App = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [labeList, setLabelList] = useState([]);
+
   const updateLabelList = newList => {
     setLabelList(newList);
   };
+
   const handleFilesUpload = files => {
     const fileDataPromises = Array.from(files).map(file => {
-      return { name: file.document_id, content: file.text , entities:file.entities };
+      return {
+        name: file.document_id,
+        content: file.text,
+        entities: file.entities,
+      };
     });
 
     Promise.all(fileDataPromises)

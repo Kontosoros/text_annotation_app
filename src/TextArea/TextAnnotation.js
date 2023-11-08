@@ -18,8 +18,8 @@ const TextAnnotation = ({
     end: "",
     text: "",
   });
-  
-  console.log("loading data",loadingData , filename)
+
+  // console.log("loading data", loadingData, filename);
   const updateMsgAnnotations = (filename, newAnnotationList) => {
     setMsgAnnotationList(prevAnnotationList => ({
       ...prevAnnotationList,
@@ -78,12 +78,12 @@ const TextAnnotation = ({
     const newAnnotationDict = {
       start: wordOffsets.start,
       end: wordOffsets.end,
-      //tag: labelDict.labelName,
+      tagName: labelDict.labelName,
       color: labelDict.color,
       text: wordOffsets.text,
     };
     const loadingDataArray = Array.isArray(loadingData) ? loadingData : [];
-    
+
     // Update the state with the new dictionary
     const annotationList = deduplicateDictionaries([
       ...(annotationsByMsgDict[filename] || []),

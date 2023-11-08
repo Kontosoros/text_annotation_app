@@ -7,7 +7,7 @@ const FileList = props => {
     content: "",
     entities: [],
   });
-
+  
   const handleFileClick = file => {
     setSelectedFile(file);
   };

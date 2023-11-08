@@ -3,6 +3,7 @@ import "./AddLabels.css";
 import ColorLabels from "./ColorLabels";
 
 export default function SetLabels({ onUpdateLabelList }) {
+  
   const [label, setLabel] = useState("");
   const [labelList, setLabelList] = useState([]); // State to store the list of labels
   const [selectedColor, setSelectedColor] = useState(""); // State to store the selected color

@@ -2,8 +2,9 @@ import "./TextArea.css";
 import React, { useState, useEffect } from "react";
 import TextAnnotation from "./TextAnnotation";
 import AnnotationsDisplayArea from "./DisplayArea/AnnotationsDisplayArea";
-
+import PrepareLoadingData from "./LoadingData/PrepareLoadingData";
 const TextArea = props => {
+  
   // Initialize loadingData with a default value
   const [loadingData, setLoadingData] = useState([]);
   // Maintain a dictionary of annotations for each file
@@ -12,12 +13,15 @@ const TextArea = props => {
   const handleAnnotationUpdate = annotation => {
     setGoldenAnnotations(annotation);
   };
-
+  // Call PrepareLoadingData and store the result in loadingData
+  const preparedLoadingData = PrepareLoadingData({ entities: props.entities });
+  // console.log("loadingData",loadingData)
+  // console.log("goldenAnnotations",goldenAnnotations)
   // Use useEffect to watch for changes in props.filename and goldenAnnotations
   useEffect(() => {
     const currentAnnotations = goldenAnnotations[props.filename] || [];
     console.log("goldenAnnotations", goldenAnnotations[props.filename]);
-    console.log("currentAnnotations", currentAnnotations);
+    // console.log("currentAnnotations", currentAnnotations);
     if (
       currentAnnotations.length === 0 &&
       goldenAnnotations[props.filename]?.length === 0
@@ -25,7 +29,7 @@ const TextArea = props => {
       setLoadingData([]);
     } else if (currentAnnotations.length === 0) {
       // On the initial load, set loadingData to loadData
-      setLoadingData([{ start: 223, end: 230, color: "#e94242" }]);
+      setLoadingData(preparedLoadingData);
     } else {
       // On subsequent interactions, set loadingData to currentAnnotations
       setLoadingData(currentAnnotations);
