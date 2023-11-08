@@ -14,11 +14,12 @@ input[type="file"] {
 .custom-file-input {
   background-color: #636463; /* Button background color */
   color: #fff; /* Button text color */
-  padding: 3px 14px;
+  padding: 4px 21px;
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  font-weight: bold;
+  font-size: 15px;
+  
 }
 
 /* Style for when the button is hovered over */

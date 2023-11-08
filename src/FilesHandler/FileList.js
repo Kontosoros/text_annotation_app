@@ -47,7 +47,9 @@ const FileList = props => {
         )}
       </div>
       <button className="button-remove" onClick={props.onRemoveFiles}>
-        Close Files
+      <label className="label-button-remove">
+      Close Files
+      </label>
       </button>
     </div>
   );

@@ -1,10 +1,13 @@
 .file-list {
   display: flex;
+  
+  padding: 4px 20px;
 }
 .text-area-container {
   flex: 1; /* Make the text area container fill the remaining space */
   height: 100%; /* Set a fixed height for the container */
   overflow-y: auto; /* Add a vertical scrollbar if the content exceeds the height */
+  
 }
 .file-list-scroll {
   height: 600px; /* Set a fixed height for the file list container */
@@ -27,10 +30,14 @@
   font-weight: bold; /* You can also apply other styles */
 }
 .button-remove {
-  font-weight: bold;
-  height: 30px;
-  width: 120px;
+  
+  padding: 4px 20px;
   left: 10px;
   bottom: 200px;
   position: absolute;
+  
+}
+.label-button-remove{
+  
+  font-size: 15px;
 }
