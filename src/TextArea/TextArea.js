@@ -33,8 +33,11 @@ const TextArea = props => {
 
   useEffect(() => {
     const updatedLoadingData = RefreshDataColor({ props, loadingData });
+
     setLoadingData(updatedLoadingData);
   }, [props.labelsList]);
+
+  props.updateLoadingData(goldenAnnotations);
   return (
     <div>
       <TextAnnotation

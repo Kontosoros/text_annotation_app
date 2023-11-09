@@ -7,11 +7,17 @@ const FileList = props => {
     content: "",
     entities: [],
   });
-  
+
   const handleFileClick = file => {
     setSelectedFile(file);
   };
-  
+  // Define a function to update the loadingData in the parent component
+  const updateLoadingData = goldenAnnotations => {
+    // Update the state in the parent component with the received loadingData
+    // You can perform additional logic here if needed
+
+    props.mergeGoldenAndLoadedData(goldenAnnotations);
+  };
   return (
     <div className="file-list">
       <div className="file-list-scroll">
@@ -42,14 +48,13 @@ const FileList = props => {
               text={selectedFile.content}
               labelsList={props.labels}
               entities={selectedFile.entities}
+              updateLoadingData={updateLoadingData}
             />
           </div>
         )}
       </div>
       <button className="button-remove" onClick={props.onRemoveFiles}>
-      <label className="label-button-remove">
-      Close Files
-      </label>
+        <label className="label-button-remove">Close Files</label>
       </button>
     </div>
   );

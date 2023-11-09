@@ -49,10 +49,16 @@ const App = () => {
   const { transformedList, loadingLabels } = PrepareLoadingData({
     uploadedFiles,
   });
-  // console.log("uploadedFiles", uploadedFiles);
+  
   // console.log("labeList", labeList);
   // console.log("preparedLoadingData", transformedList);
   //console.log("loadingLabels", loadingLabels);
+  const mergeData = (goldenAnnotations) => {
+    console.log("labeList", labeList);
+    console.log("transformedList", transformedList);
+    console.log("goldenAnnotations",goldenAnnotations)
+
+  };
   return (
     <>
       <div className="app">
@@ -67,6 +73,7 @@ const App = () => {
           onFileSelect={handleFileSelect}
           onRemoveFiles={handleCloseSelectedFiles}
           labels={labeList}
+          mergeGoldenAndLoadedData={mergeData}
         />
       </div>
     </>
