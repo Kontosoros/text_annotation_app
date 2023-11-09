@@ -24,7 +24,7 @@ const PrepareLoadingData = ({ uploadedFiles }) => {
               uniqueLabels[entityName] = true;
 
               // Add the tag name to loadingLabels with a default color
-              loadingLabels.push({ labelName: entityName, color: "#929190" });
+              loadingLabels.push({ labelName: entityName, color: "#E74638" });
             }
           });
         }
@@ -35,7 +35,7 @@ const PrepareLoadingData = ({ uploadedFiles }) => {
         entities: entities,
       };
     });
-    console.log("kkk",loadingLabels);
+    
     return { transformedList, loadingLabels };
   }
 

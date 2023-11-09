@@ -9,13 +9,13 @@ export default function SetLabels({ onUpdateLabelList , loadingEntityLabels  }) 
   const [selectedColor, setSelectedColor] = useState(""); // State to store the selected color
   const [selectedLabelIndex, setSelectedLabelIndex] = useState(null); // State to store the index of the selected label
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
-
+  console.log("labelList",labelList)
   const handleLabel = e => {
     setLabel(e.target.value);
   };
   const addLabel = () => {
     if (label.trim() !== "") {
-      setLabelList([...labelList, { labelName: label, color: selectedColor }]); // Add the label to the list
+      setLabelList([...labelList,...loadingEntityLabels, { labelName: label, color: selectedColor }]); // Add the label to the list
       setLabel(""); // Clear the input field
     }
   };

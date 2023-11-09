@@ -49,14 +49,17 @@ const App = () => {
   const { transformedList, loadingLabels } = PrepareLoadingData({
     uploadedFiles,
   });
-  console.log("uploadedFiles", uploadedFiles);
-  console.log("labeList", labeList);
-  console.log("preparedLoadingData", transformedList);
-  console.log("loadingLabels",loadingLabels)
+  // console.log("uploadedFiles", uploadedFiles);
+  // console.log("labeList", labeList);
+  // console.log("preparedLoadingData", transformedList);
+  //console.log("loadingLabels", loadingLabels);
   return (
     <>
       <div className="app">
-        <SetLabels onUpdateLabelList={updateLabelList} loadingEntityLabels = {loadingLabels} />
+        <SetLabels
+          onUpdateLabelList={updateLabelList}
+          loadingEntityLabels={loadingLabels}
+        />
         <LoadFiles onFilesUpload={handleFilesUpload} />
         <FileList
           files={transformedList}

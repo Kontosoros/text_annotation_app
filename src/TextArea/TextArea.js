@@ -2,7 +2,7 @@ import "./TextArea.css";
 import React, { useState, useEffect } from "react";
 import TextAnnotation from "./TextAnnotation";
 import AnnotationsDisplayArea from "./DisplayArea/AnnotationsDisplayArea";
-
+import RefreshDataColor from "./LoadingData/RefreshDataColor";
 const TextArea = props => {
   // Initialize loadingData with a default value
   const [loadingData, setLoadingData] = useState([]);
@@ -30,8 +30,15 @@ const TextArea = props => {
       setLoadingData(currentAnnotations);
     }
   }, [props.filename, goldenAnnotations]);
-  // console.log("loadingData", loadingData);
-  // console.log("goldenAnnotations for msg", goldenAnnotations);
+  console.log("labelsList", props.labelsList);
+  console.log("loadingData", loadingData);
+  useEffect(() => {
+    console.log(true)
+    
+    const updatedLoadingData = RefreshDataColor({ props , loadingData});
+    console.log("ddd",updatedLoadingData)
+    setLoadingData(updatedLoadingData)
+  }, [props.labelsList]);
   return (
     <div>
       <TextAnnotation
