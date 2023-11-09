@@ -30,8 +30,8 @@ const TextArea = props => {
       setLoadingData(currentAnnotations);
     }
   }, [props.filename, goldenAnnotations]);
-  console.log("loadingData", loadingData);
-  console.log("goldenAnnotations for msg", goldenAnnotations);
+  // console.log("loadingData", loadingData);
+  // console.log("goldenAnnotations for msg", goldenAnnotations);
   return (
     <div>
       <TextAnnotation

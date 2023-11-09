@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./AddLabels.css";
 import ColorLabels from "./ColorLabels";
 
-export default function SetLabels({ onUpdateLabelList }) {
+export default function SetLabels({ onUpdateLabelList , loadingEntityLabels  }) {
   
   const [label, setLabel] = useState("");
   const [labelList, setLabelList] = useState([]); // State to store the list of labels

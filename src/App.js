@@ -5,7 +5,9 @@ import FileList from "./FilesHandler/FileList";
 import SetLabels from "./Labels/SetLabels";
 import PrepareLoadingData from "./TextArea/LoadingData/PrepareLoadingData";
 const App = () => {
-  const [uploadedFiles, setUploadedFiles] = useState([{name:'',content:"",entities:[]}]);
+  const [uploadedFiles, setUploadedFiles] = useState([
+    { name: "", content: "", entities: [] },
+  ]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [labeList, setLabelList] = useState([]);
 
@@ -42,18 +44,22 @@ const App = () => {
     setUploadedFiles(updatedFiles);
     setSelectedFiles([]);
   };
+
+  // Call PrepareLoadingData and store the result in loadingData
+  const { transformedList, loadingLabels } = PrepareLoadingData({
+    uploadedFiles,
+  });
   console.log("uploadedFiles", uploadedFiles);
   console.log("labeList", labeList);
-  // Call PrepareLoadingData and store the result in loadingData
-  const preparedLoadingData = PrepareLoadingData({ uploadedFiles });
-  console.log("preparedLoadingData",preparedLoadingData)
+  console.log("preparedLoadingData", transformedList);
+  console.log("loadingLabels",loadingLabels)
   return (
     <>
       <div className="app">
-        <SetLabels onUpdateLabelList={updateLabelList} />
+        <SetLabels onUpdateLabelList={updateLabelList} loadingEntityLabels = {loadingLabels} />
         <LoadFiles onFilesUpload={handleFilesUpload} />
         <FileList
-          files={preparedLoadingData}
+          files={transformedList}
           selectedFiles={selectedFiles}
           onFileSelect={handleFileSelect}
           onRemoveFiles={handleCloseSelectedFiles}
