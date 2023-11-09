@@ -30,14 +30,10 @@ const TextArea = props => {
       setLoadingData(currentAnnotations);
     }
   }, [props.filename, goldenAnnotations]);
-  console.log("labelsList", props.labelsList);
-  console.log("loadingData", loadingData);
+
   useEffect(() => {
-    console.log(true)
-    
-    const updatedLoadingData = RefreshDataColor({ props , loadingData});
-    console.log("ddd",updatedLoadingData)
-    setLoadingData(updatedLoadingData)
+    const updatedLoadingData = RefreshDataColor({ props, loadingData });
+    setLoadingData(updatedLoadingData);
   }, [props.labelsList]);
   return (
     <div>

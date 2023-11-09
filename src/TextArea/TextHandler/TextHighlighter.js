@@ -21,20 +21,6 @@ const TextHighlighter = ({ msgBody, value,  updateValue }) => {
   );
 };
 
-// // Deduplicate dictionaries based on 'start' and 'end' properties
-// const deduplicateDictionaries = (dictionaries) => {
-//   const uniqueDicts = [];
-//   const seenDicts = new Set();
 
-//   for (const dict of dictionaries) {
-//     const key = `${dict.start}-${dict.end}`;
-//     if (!seenDicts.has(key)) {
-//       seenDicts.add(key);
-//       uniqueDicts.push(dict);
-//     }
-//   }
-
-//   return uniqueDicts;
-// };
 
 export default TextHighlighter;

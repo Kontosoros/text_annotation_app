@@ -9,7 +9,7 @@ export default function SetLabels({ onUpdateLabelList , loadingEntityLabels  }) 
   const [selectedColor, setSelectedColor] = useState(""); // State to store the selected color
   const [selectedLabelIndex, setSelectedLabelIndex] = useState(null); // State to store the index of the selected label
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
-  console.log("labelList",labelList)
+  
   const handleLabel = e => {
     setLabel(e.target.value);
   };
