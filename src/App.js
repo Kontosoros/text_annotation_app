@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import LoadFiles from "./FilesHandler/LoadFiles";
 import FileList from "./FilesHandler/FileList";
 import SetLabels from "./Labels/SetLabels";
+import PrepareLoadingData from "./TextArea/LoadingData/PrepareLoadingData";
 const App = () => {
-  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [uploadedFiles, setUploadedFiles] = useState([{name:'',content:"",entities:[]}]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [labeList, setLabelList] = useState([]);
 
@@ -41,14 +42,18 @@ const App = () => {
     setUploadedFiles(updatedFiles);
     setSelectedFiles([]);
   };
-  
+  console.log("uploadedFiles", uploadedFiles);
+  console.log("labeList", labeList);
+  // Call PrepareLoadingData and store the result in loadingData
+  const preparedLoadingData = PrepareLoadingData({ uploadedFiles });
+  console.log("preparedLoadingData",preparedLoadingData)
   return (
     <>
       <div className="app">
         <SetLabels onUpdateLabelList={updateLabelList} />
         <LoadFiles onFilesUpload={handleFilesUpload} />
         <FileList
-          files={uploadedFiles}
+          files={preparedLoadingData}
           selectedFiles={selectedFiles}
           onFileSelect={handleFileSelect}
           onRemoveFiles={handleCloseSelectedFiles}

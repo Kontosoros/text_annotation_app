@@ -11,7 +11,7 @@ const FileList = props => {
   const handleFileClick = file => {
     setSelectedFile(file);
   };
-
+  
   return (
     <div className="file-list">
       <div className="file-list-scroll">

@@ -1,31 +1,36 @@
 import React from "react";
 
-const PrepareLoadingData = (props) => {
-  const prepareData = (entities) => {
-    const loadingData = [];
-
-    for (const tagName in entities) {
-      if (entities.hasOwnProperty(tagName)) {
-        entities[tagName].forEach((tag) => {
-          loadingData.push({
-            start: tag.indices[0],
-            end: tag.indices[1],
-            color: "#e74e4e",
-            tagName: tagName,
-            text: tag.string,
-          });
-        });
-      }
-    }
-
-    return loadingData;
-  };
-
-  const loadingData = prepareData(props.entities);
+const PrepareLoadingData = ({ uploadedFiles }) => {
   
-  // You can return the loadingData here if needed, or just use it within your TextArea component.
+  // Check if uploadedFiles is defined
+  if (uploadedFiles && uploadedFiles.length > 0) {
+    const transformedList = uploadedFiles.map((item) => {
+      const entities = [];
+      for (const tagName in item.entities) {
+        if (item.entities.hasOwnProperty(tagName)) {
+          item.entities[tagName].forEach((tag) => {
+            entities.push({
+              start: tag.indices[0],
+              end: tag.indices[1],
+              color: "#C24444",
+              tagName: tagName,
+              text: tag.string,
+            });
+          });
+        }
+      }
+      return {
+        name: item.name,
+        content: item.content,
+        entities: entities,
+      };
+    });
 
-  return loadingData;
+    return transformedList;
+  }
+
+  // If uploadedFiles is undefined or empty, you can return a default value or null
+  return null;
 };
 
 export default PrepareLoadingData;
