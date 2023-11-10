@@ -52,13 +52,17 @@ const App = () => {
   const { transformedList, loadingLabels } = PrepareLoadingData({
     uploadedFiles,
   });
-
-  SendData({ labeList, transformedList, goldenAnnotations });
+  
+  const updatedTransformedList = SendData({
+    labeList,
+    transformedList,
+    goldenAnnotations,
+  });
 
   const mergeData = goldenAnnotations => {
     setGoldenAnnotations(goldenAnnotations);
   };
-
+  
   return (
     <>
       <div className="app">

@@ -1,21 +1,43 @@
-import React, { useEffect } from "react";
-import axios from "axios";
-function SendData({ labeList, transformedList, goldenAnnotations }) {
+import React, { useEffect, useState } from "react";
+
+const SendData = ({ labeList, transformedList, goldenAnnotations }) => {
+  const [updatedTransformedList, setUpdatedTransformedList] = useState([]);
+
   useEffect(() => {
-    axios
-      .post("http://127.0.0.1:5001/receive-data", {
-        labeList,
-        transformedList,
-        goldenAnnotations,
-      })
-      .then(response => {
-        const updatedLoadingData = response.data;
-        return updatedLoadingData;
-      })
-      .catch(error => {
-        console.error("Error sending data:", error);
+    const labelMap = {};
+    labeList.forEach(labelDict => {
+      const entityName = labelDict.labelName || "";
+      const color = labelDict.color || "";
+      labelMap[entityName] = color;
+    });
+
+    Object.keys(goldenAnnotations).forEach(fileName => {
+      goldenAnnotations[fileName].forEach(annotationDict => {
+        const goldenEntity = annotationDict.tagName || "";
+        if (goldenEntity in labelMap) {
+          const updateColor = labelMap[goldenEntity];
+          annotationDict.color = updateColor;
+        }
       });
+    });
+    transformedList.forEach(file => {
+      const fileName = file.name || "";
+      const annotationList = goldenAnnotations[fileName] || [];
+
+      file.entities = annotationList.map(annotationDict => {
+        const goldenEntity = annotationDict.tagName || "";
+        if (goldenEntity in labelMap) {
+          const updateColor = labelMap[goldenEntity];
+          return { ...annotationDict, color: updateColor };
+        }
+        return annotationDict;
+      });
+    });
+
+    setUpdatedTransformedList(transformedList);
   }, [labeList, goldenAnnotations]);
-}
+
+  return updatedTransformedList;
+};
 
 export default SendData;

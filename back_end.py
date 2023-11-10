@@ -11,10 +11,12 @@ CORS(app, resources={r"/receive-data": {"origins": "*"}})
 @app.route("/receive-data", methods=["POST"])
 def receive_data():
     data = request.json
+    
     labelist = data.get("labeList")
     goldenAnnotations = data.get("goldenAnnotations")
     transformedList = data.get("transformedList")
     updated_loading_data = update_data(labelist, goldenAnnotations, transformedList)
+    
     return (
         updated_loading_data
         if updated_loading_data
