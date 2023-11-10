@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import LoadFiles from "./FilesHandler/LoadFiles";
 import FileList from "./FilesHandler/FileList";
 import SetLabels from "./Labels/SetLabels";
@@ -10,7 +10,8 @@ const App = () => {
   ]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [labeList, setLabelList] = useState([]);
-
+  const [goldenAnnotations, setGoldenAnnotations] = useState({});
+  const isInitialRender = useRef(true);
   const updateLabelList = newList => {
     setLabelList(newList);
   };
@@ -49,15 +50,24 @@ const App = () => {
   const { transformedList, loadingLabels } = PrepareLoadingData({
     uploadedFiles,
   });
-  
-  // console.log("labeList", labeList);
-  // console.log("preparedLoadingData", transformedList);
-  //console.log("loadingLabels", loadingLabels);
-  const mergeData = (goldenAnnotations) => {
-    console.log("labeList", labeList);
-    console.log("transformedList", transformedList);
-    console.log("goldenAnnotations",goldenAnnotations)
+  useEffect(() => {
+    // Skip the effect on initial render
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+      return;
+    }
+    console.log("mesaa")
+      console.log("labelList", labeList);
+      console.log("preparedLoadingData", transformedList);
+    console.log("loadingLabels", loadingLabels);
+    console.log("goldenAnnotations", goldenAnnotations);
+  }, [labeList]); // Only log when labelList changes
 
+  const mergeData = goldenAnnotations => {
+    setGoldenAnnotations(goldenAnnotations);
+    // console.log("labeList", labeList);
+    // console.log("transformedList", transformedList);
+    // console.log("goldenAnnotations",goldenAnnotations)
   };
   return (
     <>
