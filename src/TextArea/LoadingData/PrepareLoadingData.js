@@ -35,7 +35,7 @@ const PrepareLoadingData = ({ uploadedFiles }) => {
         entities: entities,
       };
     });
-    
+
     return { transformedList, loadingLabels };
   }
 

@@ -49,20 +49,24 @@ const App = () => {
   };
 
   // Call PrepareLoadingData and store the result in loadingData
-  const { transformedList, loadingLabels } = PrepareLoadingData({
+  let { transformedList, loadingLabels } = PrepareLoadingData({
     uploadedFiles,
   });
-  
-  const updatedTransformedList = SendData({
-    labeList,
-    transformedList,
-    goldenAnnotations,
-  });
+  console.log("INNNNNNNNN", transformedList);
+  if (Object.keys(goldenAnnotations).length && Object.keys(labeList).length) {
+    transformedList = SendData({
+      labeList,
+      transformedList,
+      goldenAnnotations,
+    });
+    console.log("updatedTransformedList", transformedList);
+    console.log("goldenAnnotations", goldenAnnotations);
+  }
 
   const mergeData = goldenAnnotations => {
     setGoldenAnnotations(goldenAnnotations);
   };
-  
+
   return (
     <>
       <div className="app">

@@ -1,36 +1,27 @@
 import React, { useEffect, useState } from "react";
 
-const SendData = ({ labelList, transformedList, goldenAnnotations }) => {
-  const [updatedTransformedList, setUpdatedTransformedList] = useState([]);
-
-  useEffect(() => {
-    if (!goldenAnnotations) {
-      // If goldenAnnotations is not available, return transformedList directly
-      setUpdatedTransformedList(transformedList);
-      return;
-    }
-
-    const labelMap = {};
-    labelList.forEach(labelDict => {
-      const entityName = labelDict.labelName || "";
-      const color = labelDict.color || "";
-      labelMap[entityName] = color;
+const SendData = ({ labeList, transformedList, goldenAnnotations }) => {
+  const labelMap = {};
+  labeList.forEach(labelDict => {
+    const entityName = labelDict.labelName || "";
+    const color = labelDict.color || "";
+    labelMap[entityName] = color;
+  });
+  console.log("mesaaaaaaaaaaaaaaaa");
+  Object.keys(goldenAnnotations).forEach(fileName => {
+    goldenAnnotations[fileName].forEach(annotationDict => {
+      const goldenEntity = annotationDict.tagName || "";
+      if (goldenEntity in labelMap) {
+        const updateColor = labelMap[goldenEntity];
+        annotationDict.color = updateColor;
+      }
     });
+  });
 
-    Object.keys(goldenAnnotations).forEach(fileName => {
-      goldenAnnotations[fileName].forEach(annotationDict => {
-        const goldenEntity = annotationDict.tagName || "";
-        if (goldenEntity in labelMap) {
-          const updateColor = labelMap[goldenEntity];
-          annotationDict.color = updateColor;
-        }
-      });
-    });
-
-    transformedList.forEach(file => {
-      const fileName = file.name || "";
-      const annotationList = goldenAnnotations[fileName] || [];
-
+  transformedList.forEach(file => {
+    const fileName = file.name || "";
+    const annotationList = goldenAnnotations[fileName] || [];
+    if (annotationList.length > 0) {
       file.entities = annotationList.map(annotationDict => {
         const goldenEntity = annotationDict.tagName || "";
         if (goldenEntity in labelMap) {
@@ -39,12 +30,10 @@ const SendData = ({ labelList, transformedList, goldenAnnotations }) => {
         }
         return annotationDict;
       });
-    });
+    }
+  });
 
-    setUpdatedTransformedList(transformedList);
-  }, [labelList, goldenAnnotations, transformedList]);
-
-  return updatedTransformedList;
+  return transformedList;
 };
 
 export default SendData;
