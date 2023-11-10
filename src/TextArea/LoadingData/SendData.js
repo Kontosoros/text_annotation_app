@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-const SendData = ({ labeList, transformedList, goldenAnnotations }) => {
+const SendData = ({ labelList, transformedList, goldenAnnotations }) => {
   const [updatedTransformedList, setUpdatedTransformedList] = useState([]);
 
   useEffect(() => {
+    if (!goldenAnnotations) {
+      // If goldenAnnotations is not available, return transformedList directly
+      setUpdatedTransformedList(transformedList);
+      return;
+    }
+
     const labelMap = {};
-    labeList.forEach(labelDict => {
+    labelList.forEach(labelDict => {
       const entityName = labelDict.labelName || "";
       const color = labelDict.color || "";
       labelMap[entityName] = color;
@@ -20,6 +26,7 @@ const SendData = ({ labeList, transformedList, goldenAnnotations }) => {
         }
       });
     });
+
     transformedList.forEach(file => {
       const fileName = file.name || "";
       const annotationList = goldenAnnotations[fileName] || [];
@@ -35,7 +42,7 @@ const SendData = ({ labeList, transformedList, goldenAnnotations }) => {
     });
 
     setUpdatedTransformedList(transformedList);
-  }, [labeList, goldenAnnotations]);
+  }, [labelList, goldenAnnotations, transformedList]);
 
   return updatedTransformedList;
 };
