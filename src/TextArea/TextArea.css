@@ -11,6 +11,15 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 }
+.app {
+  display: flex;
+}
+
+.text-area-container {
+  flex: 1; /* Grow to take up remaining space */
+  overflow-y: auto; /* Add a vertical scrollbar if needed */
+  padding: 10px; /* Add padding as needed */
+}
 
 .clickable-word {
   cursor: pointer;

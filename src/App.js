@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import LoadFiles from "./FilesHandler/LoadFiles";
 import FileList from "./FilesHandler/FileList";
 import SetLabels from "./Labels/SetLabels";
+import TextArea from "./TextArea/TextArea";
+import  "./TextArea/TextArea.css";
 import PrepareLoadingData from "./TextArea/LoadingData/PrepareLoadingData";
 import SendData from "./TextArea/LoadingData/SendData";
 const App = () => {
@@ -13,7 +15,7 @@ const App = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [labeList, setLabelList] = useState([]);
   const [goldenAnnotations, setGoldenAnnotations] = useState({});
-
+  const [selectedFile, setSelectedFile] = useState("");
   const updateLabelList = newList => {
     setLabelList(newList);
   };
@@ -52,7 +54,7 @@ const App = () => {
   let { transformedList, loadingLabels } = PrepareLoadingData({
     uploadedFiles,
   });
-  
+
   if (Object.keys(goldenAnnotations).length && Object.keys(labeList).length) {
     transformedList = SendData({
       labeList,
@@ -63,10 +65,12 @@ const App = () => {
     console.log("goldenAnnotations", goldenAnnotations);
   }
 
-  const mergeData = goldenAnnotations => {
+  const updateLoadingData = goldenAnnotations => {
     setGoldenAnnotations(goldenAnnotations);
   };
-
+  const updateSelectedFile = file => {
+    setSelectedFile(file);
+  };
   return (
     <>
       <div className="app">
@@ -81,8 +85,21 @@ const App = () => {
           onFileSelect={handleFileSelect}
           onRemoveFiles={handleCloseSelectedFiles}
           labels={labeList}
-          mergeGoldenAndLoadedData={mergeData}
+          selectedFile={updateSelectedFile}
         />
+        <div className="text-area-container">
+          {selectedFile && (
+            <div>
+              <TextArea
+                filename={selectedFile.name}
+                text={selectedFile.content}
+                labelsList={labeList}
+                entities={selectedFile.entities}
+                updateLoadingData={updateLoadingData}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

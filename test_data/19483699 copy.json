@@ -1,0 +1,19 @@
+{
+  "text": "12345678 ref : 00127496 2021 05 31 08.58 fm burkmar shipping - genoa s+p nb dept . : + 39010 - 9914479 . : + 39393 9562074 : < > u r g e n t p e - gen cgo vsl - 10 12.000 dwt - 6 7 m draft - need hv 25 ts cranes - age irrelevant - dely med pls propose together with price ideas . thank you and ",
+  "entities": {
+    "COB": [],
+    "DWT": [{ "indices": [161, 174], "string": "10 12.000 dwt" }],
+    "NO_COB": [],
+    "SIZE": [],
+    "TYPE": [],
+    "YOB": [],
+    "YOB_INDI": [],
+    "SEGMENTS_IN": [
+      { "indices": [147, 150], "string": "gen" },
+      {
+        "indices": [161, 293],
+        "string": "10 12.000 dwt - 6 7 m draft - need hv 25 ts cranes - age irrelevant - dely med pls propose together with price ideas . thank you and"
+      }
+    ]
+  }
+}
