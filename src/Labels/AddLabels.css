@@ -1,5 +1,5 @@
 .add-label {
-  position: absolute;
+  position: fixed;
   top: 100px;
   right: 80px;
   width: 100px;
