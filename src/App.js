@@ -52,7 +52,7 @@ const App = () => {
   let { transformedList, loadingLabels } = PrepareLoadingData({
     uploadedFiles,
   });
-  console.log("INNNNNNNNN", transformedList);
+  
   if (Object.keys(goldenAnnotations).length && Object.keys(labeList).length) {
     transformedList = SendData({
       labeList,

@@ -7,7 +7,7 @@ const SendData = ({ labeList, transformedList, goldenAnnotations }) => {
     const color = labelDict.color || "";
     labelMap[entityName] = color;
   });
-  console.log("mesaaaaaaaaaaaaaaaa");
+  
   Object.keys(goldenAnnotations).forEach(fileName => {
     goldenAnnotations[fileName].forEach(annotationDict => {
       const goldenEntity = annotationDict.tagName || "";
