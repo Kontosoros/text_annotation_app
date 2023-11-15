@@ -11,6 +11,7 @@
   align-items: center;
   overflow-y: auto; /* Add a vertical scrollbar when content overflows */
   max-height: 300px; /* Set the maximum height for the scrollable area */
+  
 }
 
 .result-content {

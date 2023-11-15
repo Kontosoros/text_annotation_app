@@ -1,73 +1,60 @@
-import React, { useState } from "react";
-import "./AddLabels.css";
+import React, { useState, useEffect } from "react";
+import "./LoadExistingLabels.css";
 import ColorMap from "./ColorMap";
 
-export default function SetLabels({ onUpdateLabelList, loadingEntityLabels }) {
-  const [label, setLabel] = useState("");
+export default function LoadExistingLabels(props) {
+  console.log(props.newloadingL);
   const [labelList, setLabelList] = useState([]); // State to store the list of labels
-  const [selectedColor, setSelectedColor] = useState(""); // State to store the selected color
+
   const [selectedLabelIndex, setSelectedLabelIndex] = useState(null); // State to store the index of the selected label
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
 
-  const handleLabel = e => {
-    setLabel(e.target.value);
-  };
-  const addLabel = () => {
-    if (label.trim() !== "") {
-      setLabelList([
-        ...labelList,
-        ...loadingEntityLabels,
-        { labelName: label, color: selectedColor },
-      ]); // Add the label to the list
-      setLabel(""); // Clear the input field
+  useEffect(() => {
+    // Check if loadingEntityLabels prop is defined and not empty
+    if (props.newloadingL && props.newloadingL.length > 0) {
+      setLabelList(props.newloadingL);
     }
-  };
+  }, [props.newloadingL]);
 
   const handleLabelCheckboxChange = index => {
     setSelectedLabelIndex(index);
     setIsColorPickerOpen(true);
   };
   const handleSetLabelColor = color => {
+    console.log("color", color);
     if (selectedLabelIndex !== null) {
       const updatedLabels = [...labelList];
       updatedLabels[selectedLabelIndex].color = color;
       setLabelList(updatedLabels);
       setSelectedLabelIndex(null); // Reset the selected label index
       setIsColorPickerOpen(false);
+      console.log("labelList", labelList);
       // Call the function to update labelList in the App component
-      onUpdateLabelList(updatedLabels);
+      props.loadingEntityLabels(labelList);
     }
   };
   const handleRemoveLabel = index => {
-    console.log("button cliked", index);
     const updatedLabelList = [...labelList];
     // Use splice to remove the item at the specified index
     updatedLabelList.splice(index, 1);
     // Update the labelList state with the modified array
     setLabelList(updatedLabelList);
   };
+
   return (
     <div>
-      <div className="add-label-container">
-        <input
-          className="add-label-placeholder"
-          onChange={handleLabel}
-          value={label}
-          type="text"
-          placeholder="Labels..."
-        ></input>
-        <ul className="label-list">
+      <div className="loading-container">
+        <ul className="loading-label-list">
           {labelList.map((item, index) => (
             <li key={index}>
               <button
-                className="label-button"
+                className="add-loading-label-button"
                 style={{ backgroundColor: item.color, color: "white" }}
                 onClick={() => handleLabelCheckboxChange(index)}
               >
                 {item.labelName}
               </button>
               <button
-                className="button-cancel"
                 style={{ color: "white" }}
                 onClick={() => handleRemoveLabel(index)}
               >
@@ -82,9 +69,6 @@ export default function SetLabels({ onUpdateLabelList, loadingEntityLabels }) {
             initialColor={labelList[selectedLabelIndex].color}
           />
         )}
-      </div>
-      <div className="add-label-button">
-        <button onClick={addLabel}>Add Labels</button>
       </div>
     </div>
   );

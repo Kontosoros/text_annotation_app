@@ -1,0 +1,23 @@
+.loading-container {
+  position: fixed;
+  top: 500px;
+  width: 200px;
+  height: 300px;
+  margin: 20px auto;
+  right: 80px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+.loading-label-list {
+  list-style-type: none;
+  padding: 0; /* Remove default padding */
+}
+
+.loading-label-button {
+  right: 145px;
+  position: relative;
+  top: 600px;
+}

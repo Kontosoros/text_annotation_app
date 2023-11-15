@@ -1,11 +1,11 @@
 import "./App.css";
-
 import React, { useState, useEffect, useRef } from "react";
 import LoadFiles from "./FilesHandler/LoadFiles";
 import FileList from "./FilesHandler/FileList";
-import SetLabels from "./Labels/SetLabels";
+import AddNewLabels from "./Labels/AddNewLabels";
+import LoadExistingLabels from "./Labels/LoadExistingLabels";
 import TextArea from "./TextArea/TextArea";
-import  "./TextArea/TextArea.css";
+import "./TextArea/TextArea.css";
 import PrepareLoadingData from "./TextArea/LoadingData/PrepareLoadingData";
 import SendData from "./TextArea/LoadingData/SendData";
 const App = () => {
@@ -16,8 +16,9 @@ const App = () => {
   const [labeList, setLabelList] = useState([]);
   const [goldenAnnotations, setGoldenAnnotations] = useState({});
   const [selectedFile, setSelectedFile] = useState("");
+  
   const updateLabelList = newList => {
-    setLabelList(newList);
+    setLabelList(prevLabelList => [...prevLabelList, ...newList]);
   };
 
   const handleFilesUpload = files => {
@@ -71,13 +72,19 @@ const App = () => {
   const updateSelectedFile = file => {
     setSelectedFile(file);
   };
+  // const handleLoadingLabels = newloadingLabels => {
+  //   setloadingLabels(newloadingLabels);
+  // };
   return (
     <>
       <div className="app">
-        <SetLabels
-          onUpdateLabelList={updateLabelList}
-          loadingEntityLabels={loadingLabels}
+        <AddNewLabels onUpdateLabelList={updateLabelList} />
+
+        <LoadExistingLabels
+          newloadingL={loadingLabels}
+          loadingEntityLabels={updateLabelList}
         />
+
         <LoadFiles onFilesUpload={handleFilesUpload} />
         <FileList
           files={transformedList}
