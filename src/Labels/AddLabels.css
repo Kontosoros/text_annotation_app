@@ -1,6 +1,6 @@
 .add-label-container {
   position: fixed;
-  top: -10px;
+  top: -8px;
   width: 200px;
   height: 300px;
   margin: 20px auto;
@@ -9,15 +9,16 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Add a vertical scrollbar if needed */
 }
 .add-label-placeholder {
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .add-label-button {
-  right: 239px;
+  right: 145px;
   position: fixed;
-  top: 410px;
+  top: 360px;
 }
 
 .button-cancel {

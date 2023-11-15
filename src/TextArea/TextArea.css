@@ -11,7 +11,6 @@
 }
 
 .text-area-container {
-  flex: 1; /* Grow to take up remaining space */
   overflow-y: auto; /* Add a vertical scrollbar if needed */
   padding: 10px; /* Add padding as needed */
 }
