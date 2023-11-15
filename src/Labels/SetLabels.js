@@ -47,17 +47,15 @@ export default function SetLabels({ onUpdateLabelList, loadingEntityLabels }) {
     setLabelList(updatedLabelList);
   };
   return (
-    <>
-      <div className="add-label-input">
+    <div>
+      <div className="add-label-container">
         <input
+          className="add-label-placeholder"
           onChange={handleLabel}
           value={label}
           type="text"
           placeholder="Labels..."
         ></input>
-      </div>
-
-      <div className="add-label-container">
         <ul className="label-list">
           {labelList.map((item, index) => (
             <li key={index}>
@@ -88,9 +86,6 @@ export default function SetLabels({ onUpdateLabelList, loadingEntityLabels }) {
       <div className="add-label-button">
         <button onClick={addLabel}>Add Labels</button>
       </div>
-      
-        
-      
-    </>
+    </div>
   );
 }

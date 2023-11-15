@@ -1,15 +1,18 @@
-.add-label-input {
+.add-label-container {
   position: fixed;
-  top: 10px;
-  right: 239px;
-  width: 100px;
-  height: 50px;
-  color: #121010; /* Text color (change to your preferred color) */
-  text-align: center; /* Center text horizontally */
-  line-height: 50px; /* Center text vertically */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Show hand cursor on hover */
-  transition: background-color 0.3s, color 0.3s; /* Smooth color transition on hover */
+  top: -10px;
+  width: 200px;
+  height: 300px;
+  margin: 20px auto;
+  right: 80px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.add-label-placeholder {
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .add-label-button {
   right: 239px;
@@ -17,18 +20,6 @@
   top: 410px;
 }
 
-.add-label-container {
-  top: 40px;
-  position: fixed;
-  width: 200px;
-  height: 300px;
-  margin: 20px auto;
-  right: 100px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 .button-cancel {
   background-color: #ff6b6b; /* Background color of the button */
   color: #ec3030; /* Text color of the button */
