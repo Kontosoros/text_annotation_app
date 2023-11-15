@@ -1,0 +1,12 @@
+.color-picker-map {
+  top: 40px;
+  position: fixed;
+}
+.color-picker-buttons {
+  margin-top: 9px;
+  display: flex;
+  justify-content: center; /* Add space between buttons */
+}
+.color-picker-buttons button:hover {
+  background-color: #919292;
+}
