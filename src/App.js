@@ -19,20 +19,10 @@ const App = () => {
   const [selectedFile, setSelectedFile] = useState("");
 
   const handleFilesUpload = files => {
-    const fileDataPromises = Array.from(files).map(file => {
-      return {
-        name: file.document_id,
-        content: file.text,
-        entities: file.entities,
-      };
-    });
-
-    Promise.all(fileDataPromises)
-      .then(fileData => {
-        setUploadedFiles(fileData);
-      })
-      .catch(error => console.error(error));
+    
+    setUploadedFiles(files);
   };
+  console.log("files", uploadedFiles);
   const handleFileSelect = fileId => {
     if (selectedFiles.includes(fileId)) {
       setSelectedFiles(selectedFiles.filter(id => id !== fileId));
@@ -47,20 +37,18 @@ const App = () => {
     setUploadedFiles(updatedFiles);
     setSelectedFiles([]);
   };
-
+  console.log("mesa", uploadedFiles);
   // Call PrepareLoadingData and store the result in loadingData
   let { transformedList, loadingLabels } = PrepareLoadingData({
     uploadedFiles,
   });
-
+  console.log("transformedList", transformedList);
   if (Object.keys(goldenAnnotations).length && Object.keys(labeList).length) {
     transformedList = SendData({
       labeList,
       transformedList,
       goldenAnnotations,
     });
-    console.log("updatedTransformedList", transformedList);
-    console.log("goldenAnnotations", goldenAnnotations);
   }
 
   const updateLoadingData = goldenAnnotations => {

@@ -1,6 +1,7 @@
 import React from "react";
 
 const PrepareLoadingData = ({ uploadedFiles }) => {
+  console.log("uploadedFiles", uploadedFiles);
   // Check if uploadedFiles is defined
   if (uploadedFiles && uploadedFiles.length > 0) {
     const loadingLabels = [];
