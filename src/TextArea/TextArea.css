@@ -8,7 +8,7 @@
   border: 1px solid #efeaea;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .text-area-container {
@@ -25,6 +25,3 @@
   text-decoration: underline;
 }
 
-.hidden-textarea {
-  display: none;
-}

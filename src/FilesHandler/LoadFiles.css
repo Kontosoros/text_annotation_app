@@ -11,9 +11,7 @@ input[type="file"] {
   border: none;
   cursor: pointer;
   font-size: 15px;
-  
-  
-  left: 19px;
+  left: 70px;
   bottom: 250px;
   position: fixed;
 }

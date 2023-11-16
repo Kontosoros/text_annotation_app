@@ -75,7 +75,7 @@ const App = () => {
   };
   return (
     <>
-      <div className="app">
+      <div className="body">
         <AddNewLabels onUpdateLabelList={updateLabelList} />
         <LoadExistingLabels
           newloadingL={loadingLabels}
