@@ -29,11 +29,9 @@ const TextArea = props => {
       // On subsequent interactions, set loadingData to currentAnnotations
       setLoadingData(currentAnnotations);
     }
+    props.updateLoadingData(goldenAnnotations);
   }, [props.filename, goldenAnnotations]);
 
-  
-
-  props.updateLoadingData(goldenAnnotations);
   return (
     <div>
       <TextAnnotation

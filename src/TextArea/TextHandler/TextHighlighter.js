@@ -1,11 +1,11 @@
 import React from "react";
 import { TextAnnotateBlend } from "react-text-annotate-blend";
 
-const TextHighlighter = ({ msgBody, value,  updateValue }) => {
-  const handleChange = (values) => {
+const TextHighlighter = ({ msgBody, value, updateValue }) => {
+  const handleChange = values => {
     updateValue(values);
   };
-
+  console.log("TextHighlighter", value);
 
   return (
     <div>
@@ -20,7 +20,5 @@ const TextHighlighter = ({ msgBody, value,  updateValue }) => {
     </div>
   );
 };
-
-
 
 export default TextHighlighter;

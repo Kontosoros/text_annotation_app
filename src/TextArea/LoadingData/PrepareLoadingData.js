@@ -15,8 +15,8 @@ const PrepareLoadingData = ({ uploadedFiles }) => {
             entities.push({
               start: tag.indices[0],
               end: tag.indices[1],
-              color: "#C24444",
               tagName: entityName,
+              color: "#C24444",
               text: tag.string,
             });
 

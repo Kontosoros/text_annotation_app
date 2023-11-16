@@ -7,7 +7,7 @@ import LoadExistingLabels from "./Labels/LoadExistingLabels";
 import TextArea from "./TextArea/TextArea";
 import "./TextArea/TextArea.css";
 import PrepareLoadingData from "./TextArea/LoadingData/PrepareLoadingData";
-import SendData from "./TextArea/LoadingData/SendData";
+import MergedGoldenLoading from "./TextArea/LoadingData/MergedGoldenLoading";
 
 const App = () => {
   const [uploadedFiles, setUploadedFiles] = useState([
@@ -22,7 +22,6 @@ const App = () => {
     setUploadedFiles(files);
   };
 
-  console.log("selectedFiles", selectedFiles);
   const handleCloseSelectedFiles = () => {
     const updatedFiles = uploadedFiles.filter(
       fileName => !selectedFiles.includes(fileName)
@@ -37,11 +36,12 @@ const App = () => {
   });
 
   if (Object.keys(goldenAnnotations).length && Object.keys(labeList).length) {
-    transformedList = SendData({
+    transformedList = MergedGoldenLoading({
       labeList,
       transformedList,
       goldenAnnotations,
     });
+    console.log("transformedList", transformedList);
   }
 
   const updateLoadingData = goldenAnnotations => {

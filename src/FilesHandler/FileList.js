@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./FileList.css";
 const FileList = props => {
@@ -12,8 +12,9 @@ const FileList = props => {
     setSelectedFile(file);
   };
 
-  props.selectedFile(selectedFile);
-
+  useEffect(() => {
+    props.selectedFile(selectedFile);
+  }, [selectedFile, props]);
   return (
     <div className="file-list-container">
       <div className=" file-list">

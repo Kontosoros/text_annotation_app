@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const SendData = ({ labeList, transformedList, goldenAnnotations }) => {
+const MergedGoldenLoading = ({ labeList, transformedList, goldenAnnotations }) => {
   const labelMap = {};
   labeList.forEach(labelDict => {
     const entityName = labelDict.labelName || "";
@@ -36,4 +36,4 @@ const SendData = ({ labeList, transformedList, goldenAnnotations }) => {
   return transformedList;
 };
 
-export default SendData;
+export default MergedGoldenLoading;

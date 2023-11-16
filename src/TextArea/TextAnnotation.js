@@ -82,6 +82,7 @@ const TextAnnotation = ({
       color: labelDict.color,
       text: wordOffsets.text,
     };
+
     const loadingDataArray = Array.isArray(loadingData) ? loadingData : [];
 
     // Update the state with the new dictionary
@@ -96,6 +97,7 @@ const TextAnnotation = ({
 
   // Call the parent's callback function to send the update
   handleAnnotationUpdate(annotationsByMsgDict);
+
   // Deduplicate dictionaries based on 'start' and 'end' properties
   const deduplicateDictionaries = dictionaries => {
     const uniqueDicts = [];
@@ -103,9 +105,12 @@ const TextAnnotation = ({
 
     for (const dict of dictionaries) {
       const key = `${dict.start}-${dict.end}`;
+      console.log("key", key);
       if (!seenDicts.has(key)) {
         seenDicts.add(key);
         uniqueDicts.push(dict);
+      } else {
+        console.log("vrika");
       }
     }
 
