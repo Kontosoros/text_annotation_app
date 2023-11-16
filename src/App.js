@@ -8,6 +8,7 @@ import TextArea from "./TextArea/TextArea";
 import "./TextArea/TextArea.css";
 import PrepareLoadingData from "./TextArea/LoadingData/PrepareLoadingData";
 import SendData from "./TextArea/LoadingData/SendData";
+
 const App = () => {
   const [uploadedFiles, setUploadedFiles] = useState([
     { name: "", content: "", entities: [] },
@@ -16,10 +17,6 @@ const App = () => {
   const [labeList, setLabelList] = useState([]);
   const [goldenAnnotations, setGoldenAnnotations] = useState({});
   const [selectedFile, setSelectedFile] = useState("");
-  
-  const updateLabelList = newList => {
-    setLabelList(prevLabelList => [...prevLabelList, ...newList]);
-  };
 
   const handleFilesUpload = files => {
     const fileDataPromises = Array.from(files).map(file => {
@@ -72,18 +69,37 @@ const App = () => {
   const updateSelectedFile = file => {
     setSelectedFile(file);
   };
-  
-
+  const updateLabelList = newList => {
+    /* the function first updates the color of existing labels and then filters out the labels that are already present in prevLabelList 
+    from newList. Finally, it combines the updated prevLabelList with the new labels, resulting in an updated labelList without duplicates.*/
+    setLabelList(prevLabelList => {
+      const updatedLabelList = prevLabelList.map(prevLabelDict => {
+        const matchingNewLabel = newList.find(
+          newLabelDict => newLabelDict.labelName === prevLabelDict.labelName
+        );
+        return matchingNewLabel
+          ? { ...prevLabelDict, color: matchingNewLabel.color }
+          : prevLabelDict;
+      });
+      // Filter out labels that are not in the newList
+      const newLabels = newList.filter(
+        newLabelDict =>
+          !prevLabelList.some(
+            prevLabel => prevLabel.labelName === newLabelDict.labelName
+          )
+      );
+      // Combine the updatedLabelList with the newLabels
+      return [...updatedLabelList, ...newLabels];
+    });
+  };
   return (
     <>
       <div className="app">
         <AddNewLabels onUpdateLabelList={updateLabelList} />
-
         <LoadExistingLabels
           newloadingL={loadingLabels}
           loadingEntityLabels={updateLabelList}
         />
-
         <LoadFiles onFilesUpload={handleFilesUpload} />
         <FileList
           files={transformedList}
