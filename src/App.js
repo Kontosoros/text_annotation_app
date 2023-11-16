@@ -72,9 +72,8 @@ const App = () => {
   const updateSelectedFile = file => {
     setSelectedFile(file);
   };
-  // const handleLoadingLabels = newloadingLabels => {
-  //   setloadingLabels(newloadingLabels);
-  // };
+  
+
   return (
     <>
       <div className="app">
