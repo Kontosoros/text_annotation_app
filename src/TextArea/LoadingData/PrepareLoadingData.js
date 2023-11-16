@@ -1,7 +1,6 @@
 import React from "react";
 
 const PrepareLoadingData = ({ uploadedFiles }) => {
-  console.log("uploadedFiles", uploadedFiles);
   // Check if uploadedFiles is defined
   if (uploadedFiles && uploadedFiles.length > 0) {
     const loadingLabels = [];
@@ -16,7 +15,7 @@ const PrepareLoadingData = ({ uploadedFiles }) => {
               start: tag.indices[0],
               end: tag.indices[1],
               tagName: entityName,
-              color: "#C24444",
+              color: "#808080",
               text: tag.string,
             });
 
@@ -25,7 +24,7 @@ const PrepareLoadingData = ({ uploadedFiles }) => {
               uniqueLabels[entityName] = true;
 
               // Add the tag name to loadingLabels with a default color
-              loadingLabels.push({ labelName: entityName, color: "#E74638" });
+              loadingLabels.push({ labelName: entityName, color: "#808080" });
             }
           });
         }

@@ -52,6 +52,7 @@ export default function LoadExistingLabels(props) {
                 {item.labelName}
               </button>
               <button
+                className="remove-button"
                 style={{ color: "white" }}
                 onClick={() => handleRemoveLabel(index)}
               >
