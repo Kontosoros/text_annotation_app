@@ -17,7 +17,7 @@ const FileList = props => {
   }, [selectedFile, props]);
   return (
     <div className="file-list-container">
-      <div className=" file-list">
+      <div className="file-list">
         <div className="file-list-scroll">
           <ul>
             {props.files.map((file, index) => (

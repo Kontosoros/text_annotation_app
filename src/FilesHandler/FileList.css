@@ -5,8 +5,9 @@
 }
 .file-list-container {
   position: fixed;
+  top:-10px;
   width: 200px;
-  height: 600px;
+  height: 700px;
   margin: 20px auto;
   left: 20px;
   padding: 20px;

@@ -7,7 +7,6 @@ import "./LoadFiles.css";
 import React, { useState, useEffect } from "react";
 
 const LoadFiles = ({ onFilesUpload }) => {
-  
   const handleFileChange = e => {
     const selectedFiles = e.target.files;
     // Convert the FileList to an array for easier iteration
@@ -50,14 +49,12 @@ const LoadFiles = ({ onFilesUpload }) => {
     // Read and parse each selected file
     filesArray.forEach(readAndParseFile);
   };
-  
+
   return (
-    <div className="file-upload">
-      <label className="custom-file-input">
-        Load Files
-        <input type="file" multiple onChange={handleFileChange} />
-      </label>
-    </div>
+    <label className="custom-file-input">
+      Load Files
+      <input type="file" multiple onChange={handleFileChange} />
+    </label>
   );
 };
 
