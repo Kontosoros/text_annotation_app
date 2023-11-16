@@ -19,17 +19,10 @@ const App = () => {
   const [selectedFile, setSelectedFile] = useState("");
 
   const handleFilesUpload = files => {
-    
     setUploadedFiles(files);
   };
-  console.log("files", uploadedFiles);
-  const handleFileSelect = fileId => {
-    if (selectedFiles.includes(fileId)) {
-      setSelectedFiles(selectedFiles.filter(id => id !== fileId));
-    } else {
-      setSelectedFiles([...selectedFiles, fileId]);
-    }
-  };
+
+  console.log("selectedFiles", selectedFiles);
   const handleCloseSelectedFiles = () => {
     const updatedFiles = uploadedFiles.filter(
       fileName => !selectedFiles.includes(fileName)
@@ -37,12 +30,12 @@ const App = () => {
     setUploadedFiles(updatedFiles);
     setSelectedFiles([]);
   };
-  console.log("mesa", uploadedFiles);
+
   // Call PrepareLoadingData and store the result in loadingData
   let { transformedList, loadingLabels } = PrepareLoadingData({
     uploadedFiles,
   });
-  console.log("transformedList", transformedList);
+
   if (Object.keys(goldenAnnotations).length && Object.keys(labeList).length) {
     transformedList = SendData({
       labeList,
@@ -92,7 +85,6 @@ const App = () => {
         <FileList
           files={transformedList}
           selectedFiles={selectedFiles}
-          onFileSelect={handleFileSelect}
           onRemoveFiles={handleCloseSelectedFiles}
           labels={labeList}
           selectedFile={updateSelectedFile}
