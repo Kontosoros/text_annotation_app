@@ -2,6 +2,9 @@ import React from "react";
 import { TextAnnotateBlend } from "react-text-annotate-blend";
 
 const TextHighlighter = ({ msgBody, value, updateValue }) => {
+  if (!msgBody) {
+    return null;
+  }
   const handleChange = values => {
     updateValue(values);
   };

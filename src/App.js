@@ -6,8 +6,8 @@ import AddNewLabels from "./Labels/AddNewLabels";
 import LoadExistingLabels from "./Labels/LoadExistingLabels";
 import TextArea from "./TextArea/TextArea";
 import "./TextArea/TextArea.css";
-import PrepareLoadingData from "./TextArea/LoadingData/PrepareLoadingData";
-import MergedGoldenLoading from "./TextArea/LoadingData/MergedGoldenLoading";
+import PrepareLoadingData from "./LoadingDataUtils/PrepareLoadingData";
+import MergedGoldenLoading from "./LoadingDataUtils/MergedGoldenLoading";
 
 const App = () => {
   const [uploadedFiles, setUploadedFiles] = useState([
@@ -41,7 +41,6 @@ const App = () => {
       transformedList,
       goldenAnnotations,
     });
-    console.log("transformedList", transformedList);
   }
 
   const updateLoadingData = goldenAnnotations => {
@@ -73,6 +72,7 @@ const App = () => {
       return [...updatedLabelList, ...newLabels];
     });
   };
+
   return (
     <>
       <div className="body">

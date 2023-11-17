@@ -109,9 +109,7 @@ const TextAnnotation = ({
       if (!seenDicts.has(key)) {
         seenDicts.add(key);
         uniqueDicts.push(dict);
-      } else {
-        console.log("vrika");
-      }
+      } 
     }
 
     return uniqueDicts;

@@ -5,7 +5,6 @@ import ColorMap from "./ColorMap";
 export default function AddNewLabels({ onUpdateLabelList }) {
   const [label, setLabel] = useState("");
   const [labelList, setLabelList] = useState([]); // State to store the list of labels
-
   const [selectedLabelIndex, setSelectedLabelIndex] = useState(null); // State to store the index of the selected label
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
 
