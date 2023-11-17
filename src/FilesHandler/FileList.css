@@ -1,11 +1,11 @@
 .file-list {
   display: flex;
-  
+
   padding: 4px 20px;
 }
 .file-list-container {
   position: fixed;
-  top:-10px;
+  top: -10px;
   width: 200px;
   height: 700px;
   margin: 20px auto;
@@ -19,7 +19,6 @@
   flex: 1; /* Make the text area container fill the remaining space */
   height: 100%; /* Set a fixed height for the container */
   overflow-y: auto; /* Add a vertical scrollbar if the content exceeds the height */
-  
 }
 .file-list-scroll {
   height: 600px; /* Set a fixed height for the file list container */
@@ -29,6 +28,19 @@
 .file-content {
   /* Optionally, add padding or other styles for the content area */
   padding: 10px;
+}
+.file-button {
+  /* Add your default button styles here */
+  padding: 7px 30px;
+  
+  /* Add any other default styles */
+}
+
+.clicked-button {
+  /* Add styles for the clicked button */
+  background-color: #791b1b; /* Change this to the desired background color */
+
+  /* Add any other styles for clicked button */
 }
 .file-name {
   font-size: 25px; /* Set the desired font size for the file names */
@@ -42,14 +54,11 @@
   font-weight: bold; /* You can also apply other styles */
 }
 .button-remove {
-  
   padding: 4px 20px;
   left: 10px;
   bottom: 200px;
   position: absolute;
-  
 }
-.label-button-remove{
-  
+.label-button-remove {
   font-size: 15px;
 }

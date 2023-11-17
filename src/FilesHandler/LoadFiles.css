@@ -18,5 +18,5 @@ input[type="file"] {
 
 /* Style for when the button is hovered over */
 .custom-file-input:hover {
-  background-color: #b5b7b8; /* Change color on hover */
+  background-color: #3f8db4; /* Change color on hover */
 }
