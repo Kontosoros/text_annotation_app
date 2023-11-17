@@ -7,7 +7,7 @@ import LoadExistingLabels from "./Labels/LoadExistingLabels";
 import TextArea from "./TextArea/TextArea";
 import "./TextArea/TextArea.css";
 import PrepareLoadingData from "./LoadingDataUtils/PrepareLoadingData";
-import MergedGoldenLoading from "./LoadingDataUtils/MergedGoldenLoading";
+import UpdateColorInData from "./LoadingDataUtils/UpdateColorInData";
 
 const App = () => {
   const [uploadedFiles, setUploadedFiles] = useState([
@@ -36,13 +36,13 @@ const App = () => {
   });
 
   if (Object.keys(goldenAnnotations).length && Object.keys(labeList).length) {
-    transformedList = MergedGoldenLoading({
+    transformedList = UpdateColorInData({
       labeList,
       transformedList,
       goldenAnnotations,
     });
   }
-
+  
   const updateLoadingData = goldenAnnotations => {
     setGoldenAnnotations(goldenAnnotations);
   };
