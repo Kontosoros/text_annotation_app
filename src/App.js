@@ -10,9 +10,7 @@ import ConvertLoadingDataFormat from "./LoadingDataUtils/ConvertLoadingDataForma
 import UpdateDataColor from "./LoadingDataUtils/UpdateDataColor";
 
 const App = () => {
-  const [uploadedFiles, setUploadedFiles] = useState([
-    { name: "", content: "", entities: [] },
-  ]);
+  const [uploadedFiles, setUploadedFiles] = useState([{ name: "", content: "", entities: [] }]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [labeList, setLabelList] = useState([]);
   const [goldenAnnotations, setGoldenAnnotations] = useState({});

@@ -31,7 +31,7 @@ const TextArea = props => {
     }
     props.updateLoadingData(goldenAnnotations);
   }, [props.filename, goldenAnnotations]);
-
+  
   return (
     <div>
       <TextAnnotation

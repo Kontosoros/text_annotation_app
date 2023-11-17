@@ -20,12 +20,12 @@ const ConvertLoadingDataFormat = ({ uploadedFiles }) => {
               { name:"222222.json" , content:"text ... " , "entities": [{"start": 0,"end": 8,"tagName": "TYPE","color": "#813b3b","text": "19483508"},......]}
                                     ]
    */
-
+  
   if (uploadedFiles && uploadedFiles.length > 0) {
     // Check if uploadedFiles is defined
     const loadingLabels = [];
     const uniqueLabels = {}; // Dictionary to track unique labels
-    console.log("uploadedFiles ", uploadedFiles);
+
     const transformedList = uploadedFiles.map(item => {
       const entities = [];
       for (const entityName in item.entities) {

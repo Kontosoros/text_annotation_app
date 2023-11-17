@@ -8,7 +8,7 @@ const TextHighlighter = ({ msgBody, value, updateValue }) => {
   const handleChange = values => {
     updateValue(values);
   };
-  console.log("TextHighlighter", value);
+
 
   return (
     <div>

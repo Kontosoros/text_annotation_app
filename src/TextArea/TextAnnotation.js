@@ -19,7 +19,7 @@ const TextAnnotation = ({
     text: "",
   });
 
-  // console.log("loading data", loadingData, filename);
+  
   const updateMsgAnnotations = (filename, newAnnotationList) => {
     setMsgAnnotationList(prevAnnotationList => ({
       ...prevAnnotationList,
@@ -105,7 +105,6 @@ const TextAnnotation = ({
 
     for (const dict of dictionaries) {
       const key = `${dict.start}-${dict.end}`;
-      console.log("key", key);
       if (!seenDicts.has(key)) {
         seenDicts.add(key);
         uniqueDicts.push(dict);

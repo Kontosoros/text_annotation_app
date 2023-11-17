@@ -15,9 +15,9 @@ const FileList = props => {
   useEffect(() => {
     props.selectedFile(selectedFile);
   }, [selectedFile, props]);
-
+  console.log("dkkd", props.files);
   // Check if there are files before rendering the list
-  if (props.files.length === 0) {
+  if (!props.files) {
     return null;
   }
   return (
@@ -31,7 +31,6 @@ const FileList = props => {
                   className={`file-button ${
                     selectedFile.name === file.name ? "clicked-button" : ""
                   }`}
-                  
                   onClick={() => handleFileClick(file)}
                 >
                   {file.name}
