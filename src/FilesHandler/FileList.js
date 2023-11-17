@@ -15,16 +15,10 @@ const FileList = props => {
   useEffect(() => {
     props.selectedFile(selectedFile);
   }, [selectedFile, props]);
-  
+
   // Check if there are files before rendering the list
   if (props.files.length === 0) {
-    return (
-      <div className="file-list-container">
-        <div className="file-list">
-          <p>No files available.</p>
-        </div>
-      </div>
-    );
+    return null;
   }
   return (
     <div className="file-list-container">
@@ -32,12 +26,12 @@ const FileList = props => {
         <div className="file-list-scroll">
           <ul>
             {props.files.map((file, index) => (
-              <li onClick={() => handleFileClick(file)}>
+              <li key={index} onClick={() => handleFileClick(file)}>
                 <button
                   className={`file-button ${
                     selectedFile.name === file.name ? "clicked-button" : ""
                   }`}
-                  key={index}
+                  
                   onClick={() => handleFileClick(file)}
                 >
                   {file.name}
