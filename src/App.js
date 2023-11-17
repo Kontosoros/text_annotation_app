@@ -6,8 +6,8 @@ import AddNewLabels from "./Labels/AddNewLabels";
 import LoadExistingLabels from "./Labels/LoadExistingLabels";
 import TextArea from "./TextArea/TextArea";
 import "./TextArea/TextArea.css";
-import PrepareLoadingData from "./LoadingDataUtils/PrepareLoadingData";
-import UpdateColorInData from "./LoadingDataUtils/UpdateColorInData";
+import ConvertLoadingDataFormat from "./LoadingDataUtils/ConvertLoadingDataFormat";
+import UpdateDataColor from "./LoadingDataUtils/UpdateDataColor";
 
 const App = () => {
   const [uploadedFiles, setUploadedFiles] = useState([
@@ -31,18 +31,18 @@ const App = () => {
   };
 
   // Call PrepareLoadingData and store the result in loadingData
-  let { transformedList, loadingLabels } = PrepareLoadingData({
+  let { transformedList, loadingLabels } = ConvertLoadingDataFormat({
     uploadedFiles,
   });
 
   if (Object.keys(goldenAnnotations).length && Object.keys(labeList).length) {
-    transformedList = UpdateColorInData({
+    transformedList = UpdateDataColor({
       labeList,
       transformedList,
       goldenAnnotations,
     });
   }
-  
+
   const updateLoadingData = goldenAnnotations => {
     setGoldenAnnotations(goldenAnnotations);
   };

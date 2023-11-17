@@ -1,4 +1,4 @@
-const UpdateColorInData = ({
+const UpdateDataColor = ({
   labeList,
   transformedList,
   goldenAnnotations,
@@ -52,4 +52,4 @@ const UpdateColorInData = ({
   return transformedList;
 };
 
-export default UpdateColorInData;
+export default UpdateDataColor;

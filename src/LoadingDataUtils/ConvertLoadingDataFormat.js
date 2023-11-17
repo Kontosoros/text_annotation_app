@@ -1,11 +1,31 @@
-import React from "react";
+const ConvertLoadingDataFormat = ({ uploadedFiles }) => {
+  /* 
+  This module converts the format of loading data to a specific format.
+  Input :
+          [
+                {
+                "name": "19483625.json",
+                "content": "19483508 have a close client ..... ",
+                "entities": {
+                    "COB": [..],
+                    "DWT": [..],
+                    "NO_COB": [..],
+                    "SIZE": [..],
+                    "TYPE": [{"indices": [68,73],"string": "ferry"},{},...]
+                  },.....more msgs.....
+              ]
+    Output :
+            [
+              { name:"19483625.json" , content:"text ... " , "entities": [{"start": 0,"end": 8,"tagName": "TYPE","color": "#813b3b","text": "19483508"},......]}
+              { name:"222222.json" , content:"text ... " , "entities": [{"start": 0,"end": 8,"tagName": "TYPE","color": "#813b3b","text": "19483508"},......]}
+                                    ]
+   */
 
-const PrepareLoadingData = ({ uploadedFiles }) => {
-  // Check if uploadedFiles is defined
   if (uploadedFiles && uploadedFiles.length > 0) {
+    // Check if uploadedFiles is defined
     const loadingLabels = [];
     const uniqueLabels = {}; // Dictionary to track unique labels
-
+    console.log("uploadedFiles ", uploadedFiles);
     const transformedList = uploadedFiles.map(item => {
       const entities = [];
       for (const entityName in item.entities) {
@@ -43,4 +63,4 @@ const PrepareLoadingData = ({ uploadedFiles }) => {
   return null;
 };
 
-export default PrepareLoadingData;
+export default ConvertLoadingDataFormat;
