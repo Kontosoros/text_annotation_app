@@ -16,7 +16,7 @@ const TextArea = props => {
   // Use useEffect to watch for changes in props.filename and goldenAnnotations
   useEffect(() => {
     const currentAnnotations = goldenAnnotations[props.filename] || [];
-    // console.log("currentAnnotations", currentAnnotations);
+    
     if (
       currentAnnotations.length === 0 &&
       goldenAnnotations[props.filename]?.length === 0

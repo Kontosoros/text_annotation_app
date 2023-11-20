@@ -10,11 +10,17 @@ import ConvertLoadingDataFormat from "./LoadingDataUtils/ConvertLoadingDataForma
 import UpdateDataColor from "./LoadingDataUtils/UpdateDataColor";
 
 const App = () => {
-  const [uploadedFiles, setUploadedFiles] = useState([{ name: "", content: "", entities: [] }]);
+  const [uploadedFiles, setUploadedFiles] = useState([
+    { name: "", content: "", entities: [] },
+  ]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [labeList, setLabelList] = useState([]);
   const [goldenAnnotations, setGoldenAnnotations] = useState({});
   const [selectedFile, setSelectedFile] = useState("");
+  // Call PrepareLoadingData and store the result in loadingData
+  let { transformedList, loadingLabels } = ConvertLoadingDataFormat({
+    uploadedFiles,
+  });
 
   const handleFilesUpload = files => {
     setUploadedFiles(files);
@@ -27,12 +33,7 @@ const App = () => {
     setUploadedFiles(updatedFiles);
     setSelectedFiles([]);
   };
-
-  // Call PrepareLoadingData and store the result in loadingData
-  let { transformedList, loadingLabels } = ConvertLoadingDataFormat({
-    uploadedFiles,
-  });
-
+  
   if (Object.keys(goldenAnnotations).length && Object.keys(labeList).length) {
     transformedList = UpdateDataColor({
       labeList,
@@ -70,7 +71,7 @@ const App = () => {
       return [...updatedLabelList, ...newLabels];
     });
   };
-
+  console.log("transformedList ", transformedList);
   return (
     <>
       <div className="body">

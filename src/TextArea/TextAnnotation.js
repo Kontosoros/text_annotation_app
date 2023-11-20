@@ -9,7 +9,7 @@ const TextAnnotation = ({
   loadingData,
   handleAnnotationUpdate,
 }) => {
-  const [annotationsByMsgDict, setMsgAnnotationList] = useState({});
+  const [annotationsByMsgDict, setMsgAnnotationList] = useState(loadingData);
   const [selectText, setTextSelection] = useState(false);
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const [cursorPosition, setCursorPosition] = useState(null);
@@ -18,7 +18,6 @@ const TextAnnotation = ({
     end: "",
     text: "",
   });
-
   
   const updateMsgAnnotations = (filename, newAnnotationList) => {
     setMsgAnnotationList(prevAnnotationList => ({
@@ -108,11 +107,30 @@ const TextAnnotation = ({
       if (!seenDicts.has(key)) {
         seenDicts.add(key);
         uniqueDicts.push(dict);
-      } 
+      }
     }
-
     return uniqueDicts;
   };
+  let useHighlighter = [];
+  if (!isPopupVisible && annotationsByMsgDict.length > 0) {
+    useHighlighter = (
+      <TextHighlighter
+        msgBody={msgBody}
+        value={annotationsByMsgDict[filename] || []}
+        updateValue={newValue => updateMsgAnnotations(filename, newValue)} // Pass the updateValueForMsg function
+      />
+    );
+  } else if (!isPopupVisible) {
+    useHighlighter = (
+      <TextHighlighter
+        msgBody={msgBody}
+        value={loadingData}
+        updateValue={newValue => updateMsgAnnotations(filename, newValue)} // Pass the updateValueForMsg function
+      />
+    );
+  }
+  console.log("labelsList ", labelsList);
+  
   return (
     <div className="large-textarea">
       {labelsList && isPopupVisible && (
@@ -123,13 +141,7 @@ const TextAnnotation = ({
           cursorPosition={cursorPosition}
         />
       )}
-      {!isPopupVisible && (
-        <TextHighlighter
-          msgBody={msgBody}
-          value={annotationsByMsgDict[filename] || []}
-          updateValue={newValue => updateMsgAnnotations(filename, newValue)} // Pass the updateValueForMsg function
-        />
-      )}
+      {useHighlighter}
     </div>
   );
 };
