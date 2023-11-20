@@ -18,7 +18,7 @@ const TextAnnotation = ({
     end: "",
     text: "",
   });
-  
+
   const updateMsgAnnotations = (filename, newAnnotationList) => {
     setMsgAnnotationList(prevAnnotationList => ({
       ...prevAnnotationList,
@@ -129,8 +129,7 @@ const TextAnnotation = ({
       />
     );
   }
-  console.log("labelsList ", labelsList);
-  
+
   return (
     <div className="large-textarea">
       {labelsList && isPopupVisible && (

@@ -1,12 +1,12 @@
 const labelist = [
-  { labelName: "TYPE", color: "#E74638" },
+  { labelName: "TYPE", color: "#ddd" },
   { labelName: "YOB", color: "#E74638" },
   { labelName: "YOB_INDI", color: "#E74638" },
   { labelName: "SEGMENTS_IN", color: "#E74638" },
   { labelName: "DWT", color: "#E74638" },
   { labelName: "d", color: "#e55f5f" },
 ];
-const trans = [
+const transformedList = [
   {
     name: "19483625.json",
     content:
@@ -84,7 +84,7 @@ const trans = [
     ],
   },
 ];
-const goldenannot = {
+const goldenAnnotations = {
   "19483625.json": [
     {
       start: 68,
@@ -93,28 +93,6 @@ const goldenannot = {
       tagName: "TYPE",
       text: "ferry",
     },
-    {
-      start: 131,
-      end: 140,
-      color: "#E74638",
-      tagName: "TYPE",
-      text: "catamaran",
-    },
-    {
-      start: 246,
-      end: 250,
-      color: "#E74638",
-      tagName: "YOB",
-      text: "2011",
-    },
-    {
-      start: 251,
-      end: 258,
-      color: "#E74638",
-      tagName: "YOB_INDI",
-      text: "onwards",
-    },
-    { start: 685, end: 689, tagName: "d", color: "#e55f5f", text: "3251" },
   ],
 };
 
@@ -125,8 +103,8 @@ labelist.forEach(labelDict => {
   labelMap[entityName] = color;
 });
 
-Object.keys(goldenannot).forEach(fileName => {
-  goldenannot[fileName].forEach(annotationDict => {
+Object.keys(goldenAnnotations).forEach(fileName => {
+  goldenAnnotations[fileName].forEach(annotationDict => {
     const goldenEntity = annotationDict.tagName || "";
     if (goldenEntity in labelMap) {
       const updateColor = labelMap[goldenEntity];
@@ -134,19 +112,22 @@ Object.keys(goldenannot).forEach(fileName => {
     }
   });
 });
-trans.forEach(file => {
-  const updatedEntities = file.entities.map(entity => {
-    const goldenEntity = entity.tagName || "";
-    if (goldenEntity in labelMap) {
-      const updateColor = labelMap[goldenEntity];
-      return { ...entity, color: updateColor };
+// Modify the loading data's color whenever there is a change in the color code within the label map.
+for (let fileDict of transformedList) {
+  let entitiesFile = fileDict.entities;
+  if (entitiesFile.length > 0) {
+    for (let entitiesDict of entitiesFile) {
+      if (entitiesDict.tagName in labelMap) {
+        const updateColor = labelMap[entitiesDict.tagName];
+        entitiesDict.color = updateColor;
+      }
     }
-    return entity;
-  });
-
-  file.entities = updatedEntities;
-});
-
-console.log(trans);
-console.log(labelMap);
-console.log(goldenannot);
+  }
+}
+for (let loadingFileDict of transformedList) {
+  const loadingFileName = loadingFileDict.name;
+  const goldenAnnotationList = goldenAnnotations[loadingFileName] || [];
+  if (goldenAnnotationList.length > 0) {
+    loadingFileDict.entities = goldenAnnotationList
+  }
+}

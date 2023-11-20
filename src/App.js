@@ -17,6 +17,7 @@ const App = () => {
   const [labeList, setLabelList] = useState([]);
   const [goldenAnnotations, setGoldenAnnotations] = useState({});
   const [selectedFile, setSelectedFile] = useState("");
+
   // Call PrepareLoadingData and store the result in loadingData
   let { transformedList, loadingLabels } = ConvertLoadingDataFormat({
     uploadedFiles,
@@ -33,8 +34,8 @@ const App = () => {
     setUploadedFiles(updatedFiles);
     setSelectedFiles([]);
   };
-  
-  if (Object.keys(goldenAnnotations).length && Object.keys(labeList).length) {
+
+  if (Object.keys(labeList).length) {
     transformedList = UpdateDataColor({
       labeList,
       transformedList,
