@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import LoadFiles from "./FilesHandler/LoadFiles";
 import FileList from "./FilesHandler/FileList";
 import AddNewLabels from "./Labels/AddNewLabels";
-import LoadExistingLabels from "./Labels/LoadExistingLabels";
 import TextArea from "./TextArea/TextArea";
 import "./TextArea/TextArea.css";
 import ConvertLoadingDataFormat from "./LoadingDataUtils/ConvertLoadingDataFormat";
@@ -49,38 +48,55 @@ const App = () => {
   const updateSelectedFile = file => {
     setSelectedFile(file);
   };
-  const updateLabelList = newList => {
-    /* the function first updates the color of existing labels and then filters out the labels that are already present in prevLabelList 
-    from newList. Finally, it combines the updated prevLabelList with the new labels, resulting in an updated labelList without duplicates.*/
+  const updateLabelList = (newList, labelToRemove = "") => {
     setLabelList(prevLabelList => {
-      const updatedLabelList = prevLabelList.map(prevLabelDict => {
-        const matchingNewLabel = newList.find(
-          newLabelDict => newLabelDict.labelName === prevLabelDict.labelName
+      // Extract label names from both existing and new labels
+      const existingLabelNames = prevLabelList.map(label => label.labelName);
+      const newLabelNames = newList.map(label => label.labelName);
+      // Combine label names into a set to ensure uniqueness
+      const mergedLabelNames = new Set([
+        ...existingLabelNames,
+        ...newLabelNames,
+      ]);
+      // Create an array of labels from the merged set
+      const mergedList = Array.from(mergedLabelNames).map(labelName => {
+        // Find the existing label with the same name
+        const existingLabel = prevLabelList.find(
+          label => label.labelName === labelName
         );
-        return matchingNewLabel
-          ? { ...prevLabelDict, color: matchingNewLabel.color }
-          : prevLabelDict;
+        // Find the new label with the same name
+        const newLabel = newList.find(label => label.labelName === labelName);
+        // If both existing and new labels exist, return a merged label with the color from the new label
+        if (existingLabel && newLabel) {
+          return { labelName, color: newLabel.color };
+        }
+        // If only the existing label exists, return it
+        if (existingLabel) {
+          return existingLabel;
+        }
+        // If only the new label exists, return it
+        if (newLabel) {
+          return newLabel;
+        }
+        // This case should not occur, but return a default label with an empty color
+        return { labelName, color: "" };
       });
-      // Filter out labels that are not in the newList
-      const newLabels = newList.filter(
-        newLabelDict =>
-          !prevLabelList.some(
-            prevLabel => prevLabel.labelName === newLabelDict.labelName
-          )
+      // Filter out the label to remove
+      const updatedList = mergedList.filter(
+        label => label.labelName !== labelToRemove
       );
-      // Combine the updatedLabelList with the newLabels
-      return [...updatedLabelList, ...newLabels];
+      return updatedList;
     });
   };
-  console.log("transformedList ", transformedList);
+
   return (
     <>
       <div className="body">
-        <AddNewLabels onUpdateLabelList={updateLabelList} />
-        <LoadExistingLabels
-          newloadingL={loadingLabels}
-          loadingEntityLabels={updateLabelList}
+        <AddNewLabels
+          loadingLabels={loadingLabels}
+          onUpdateLabelList={updateLabelList}
         />
+
         <LoadFiles onFilesUpload={handleFilesUpload} />
         <FileList
           files={transformedList}

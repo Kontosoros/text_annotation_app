@@ -12,11 +12,11 @@ const TextArea = props => {
   const handleAnnotationUpdate = annotation => {
     setGoldenAnnotations(annotation);
   };
-  
+
   // Use useEffect to watch for changes in props.filename and goldenAnnotations
   useEffect(() => {
     const currentAnnotations = goldenAnnotations[props.filename] || [];
-    
+
     if (
       currentAnnotations.length === 0 &&
       goldenAnnotations[props.filename]?.length === 0
@@ -31,7 +31,7 @@ const TextArea = props => {
     }
     props.updateLoadingData(goldenAnnotations);
   }, [props.filename, goldenAnnotations]);
-  
+
   return (
     <div>
       <TextAnnotation
