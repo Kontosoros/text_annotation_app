@@ -32,7 +32,7 @@ const LoadFiles = ({ onFilesUpload }) => {
 
         // Check if all files have been processed
         if (jsonDataArray.length === filesArray.length) {
-          console.log(jsonDataArray);
+         
           const fileDataPromises = Array.from(jsonDataArray).map(file => {
             return {
               name: file.document_id,

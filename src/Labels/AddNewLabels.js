@@ -77,7 +77,7 @@ export default function AddNewLabels({ loadingLabels, onUpdateLabelList }) {
     setIsColorPickerOpen(true);
   };
 
-  console.log("loadingLabels", loadingLabelListRef.current);
+  
 
   return (
     <div>

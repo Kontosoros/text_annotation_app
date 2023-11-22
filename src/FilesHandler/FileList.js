@@ -15,7 +15,7 @@ const FileList = props => {
   useEffect(() => {
     props.selectedFile(selectedFile);
   }, [selectedFile, props]);
-  console.log("dkkd", props.files);
+  
   // Check if there are files before rendering the list
   if (!props.files) {
     return null;

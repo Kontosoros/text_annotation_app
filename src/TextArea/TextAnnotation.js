@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import WindowPopUpLabels from "../Labels/WindowPopUpLabels";
 import TextHighlighter from "./TextHandler/TextHighlighter";
-
+import OverlappingDetector from "./TextHandler/OverlappingDetector";
 const TextAnnotation = ({
   filename,
   msgBody,
@@ -18,6 +18,8 @@ const TextAnnotation = ({
     end: "",
     text: "",
   });
+  const [multipleOverlappingEntities, setmultipleOverlappingEntities] =
+    useState(false);
 
   const updateMsgAnnotations = (filename, newAnnotationList) => {
     setMsgAnnotationList(prevAnnotationList => ({
@@ -90,6 +92,16 @@ const TextAnnotation = ({
       newAnnotationDict,
       ...loadingDataArray,
     ]);
+
+    const entitiesWithMultipleOverlaps = OverlappingDetector({
+      annotationList,
+      newAnnotationDict,
+    });
+    
+    if (entitiesWithMultipleOverlaps.length >= 2) {
+      setmultipleOverlappingEntities(true);
+    }
+
     updateMsgAnnotations(filename, annotationList);
     setPopupVisibility(false);
   };
@@ -112,7 +124,8 @@ const TextAnnotation = ({
     return uniqueDicts;
   };
   let useHighlighter = [];
-  if (!isPopupVisible && annotationsByMsgDict.length > 0) {
+  
+  if (!isPopupVisible && annotationsByMsgDict[filename] ) {
     useHighlighter = (
       <TextHighlighter
         msgBody={msgBody}
@@ -130,6 +143,10 @@ const TextAnnotation = ({
     );
   }
 
+  const resetGoldenData = () => {
+    updateMsgAnnotations(filename, []);
+    setmultipleOverlappingEntities(false);
+  };
   return (
     <div className="large-textarea">
       {labelsList && isPopupVisible && (
@@ -140,7 +157,13 @@ const TextAnnotation = ({
           cursorPosition={cursorPosition}
         />
       )}
-      {useHighlighter}
+      {multipleOverlappingEntities && (
+        <div>
+          Error
+          <button onClick={resetGoldenData}>OK</button>
+        </div>
+      )}
+      {!multipleOverlappingEntities && useHighlighter}
     </div>
   );
 };

@@ -1,133 +1,74 @@
-const labelist = [
-  { labelName: "TYPE", color: "#ddd" },
-  { labelName: "YOB", color: "#E74638" },
-  { labelName: "YOB_INDI", color: "#E74638" },
-  { labelName: "SEGMENTS_IN", color: "#E74638" },
-  { labelName: "DWT", color: "#E74638" },
-  { labelName: "d", color: "#e55f5f" },
-];
-const transformedList = [
-  {
-    name: "19483625.json",
-    content:
-      "19483508 have a close client , who is willing to buy fast passenger ferry as follows : + type : al . fast passenger ship ( hsc ) - catamaran , not monohull type . + pax . cap . : abt . 450 ~ 600 pax . + speed : abt . 35 ~ 40 kts . + built year : 2011 onwards ~ ( imperative ! ! ) + main engines : mtu engines prefer . + inspection : worldwide , immediate inspection . . pc candis will be treated as such in the range of above requirements . sincerely , james han any maritime co ltd . cid : image 005 . jpg @ 01 d 12 c 60 . f 1 ef 4 f 10 11 f , ( yoido - dong , hanseo riverpark ) yoiseo - ro 43 gil , youngdeoungpo - gu , seoul , 07239 , korea . : + 82 2 6092 - 8147 ~ 9 070 - 7663 - 3251 : + 82 2 6092 - 8150 : + 82 10 5173 - 8823 : < mailto : < > > < > url : < http : ",
-    entities: [
-      {
-        start: 68,
-        end: 73,
-        color: "#C24444",
-        tagName: "TYPE",
-        text: "ferry",
-      },
-      {
-        start: 131,
-        end: 140,
-        color: "#C24444",
-        tagName: "TYPE",
-        text: "catamaran",
-      },
-      {
-        start: 246,
-        end: 250,
-        color: "#C24444",
-        tagName: "YOB",
-        text: "2011",
-      },
-      {
-        start: 251,
-        end: 258,
-        color: "#C24444",
-        tagName: "YOB_INDI",
-        text: "onwards",
-      },
-      {
-        start: 58,
-        end: 770,
-        color: "#C24444",
-        tagName: "SEGMENTS_IN",
-        text: "passenger ferry as follows : + type : al . fast passenger ship ( hsc ) - catamaran , not monohull type . + pax . cap . : abt . 450 ~ 600 pax . + speed : abt . 35 ~ 40 kts . + built year : 2011 onwards ~ ( imperative ! ! ) + main engines : mtu engines prefer . + inspection : worldwide , immediate inspection . . pc candis will be treated as such in the range of above requirements . sincerely , james han any maritime co ltd . cid : image 005 . jpg @ 01 d 12 c 60 . f 1 ef 4 f 10 11 f , ( yoido - dong , hanseo riverpark ) yoiseo - ro 43 gil , youngdeoungpo - gu , seoul , 07239 , korea . : + 82 2 6092 - 8147 ~ 9 070 - 7663 - 3251 : + 82 2 6092 - 8150 : + 82 10 5173 - 8823 : < mailto : < > > < > url : < http :",
-      },
-    ],
-  },
-  {
-    name: "19484255.json",
-    content:
-      "19484255 dear sirs , our principals are looking for vintage * lpg * tanker for lpg temporary storage with flwg terms : - need cargo tank capacity : * over 88.000 cbm * ( can consider min 70.000 cbm ) - age : * 1990 - 1999 * can accept bit older bit younger - delivery & inspection : * ww * - budget : * usd 20 million - negotiable * - commission : * 2.0 % - 1.5 % * subject to snp sum agreed looking forward to receive your candis . please inform vsls detail , price idea , and time of delivery . ",
-    entities: [],
-  },
-  {
-    name: "19483699.json",
-    content:
-      "12345678 ref : 00127496 2021 05 31 08.58 fm burkmar shipping - genoa s+p nb dept . : + 39010 - 9914479 . : + 39393 9562074 : < > u r g e n t p e - gen cgo vsl - 10 12.000 dwt - 6 7 m draft - need hv 25 ts cranes - age irrelevant - dely med pls propose together with price ideas . thank you and ",
-    entities: [
-      {
-        start: 161,
-        end: 174,
-        color: "#C24444",
-        tagName: "DWT",
-        text: "10 12.000 dwt",
-      },
-      {
-        start: 147,
-        end: 150,
-        color: "#C24444",
-        tagName: "SEGMENTS_IN",
-        text: "gen",
-      },
-      {
-        start: 161,
-        end: 293,
-        color: "#C24444",
-        tagName: "SEGMENTS_IN",
-        text: "10 12.000 dwt - 6 7 m draft - need hv 25 ts cranes - age irrelevant - dely med pls propose together with price ideas . thank you and",
-      },
-    ],
-  },
-];
-const goldenAnnotations = {
-  "19483625.json": [
-    {
-      start: 68,
-      end: 73,
-      color: "#E74638",
-      tagName: "TYPE",
-      text: "ferry",
-    },
-  ],
-};
-
-const labelMap = {};
-labelist.forEach(labelDict => {
-  const entityName = labelDict.labelName || "";
-  const color = labelDict.color || "";
-  labelMap[entityName] = color;
-});
-
-Object.keys(goldenAnnotations).forEach(fileName => {
-  goldenAnnotations[fileName].forEach(annotationDict => {
-    const goldenEntity = annotationDict.tagName || "";
-    if (goldenEntity in labelMap) {
-      const updateColor = labelMap[goldenEntity];
-      annotationDict.color = updateColor;
-    }
-  });
-});
-// Modify the loading data's color whenever there is a change in the color code within the label map.
-for (let fileDict of transformedList) {
-  let entitiesFile = fileDict.entities;
-  if (entitiesFile.length > 0) {
-    for (let entitiesDict of entitiesFile) {
-      if (entitiesDict.tagName in labelMap) {
-        const updateColor = labelMap[entitiesDict.tagName];
-        entitiesDict.color = updateColor;
+function findEntitiesWithMultipleOverlaps(value, newAnnotationDict ) {
+  value = Object.values(value);
+  
+  // Iterate through each dictionary and check for overlaps with the newAnnotationDict
+  const overlappingEntities = annotationList
+    .filter(dict => {
+      // Check if the ranges overlap
+      return (
+        (dict.start <= newAnnotationDict.start &&
+          dict.end >= newAnnotationDict.start) ||
+        (newAnnotationDict.start <= dict.start &&
+          newAnnotationDict.end >= dict.start)
+      );
+    })
+    .map(dict => {
+      // Exclude the newAnnotationDict from the overlappingEntities array
+      if (dict !== newAnnotationDict) {
+        return dict.tagName;
       }
-    }
+      return null; // Return null for the newAnnotationDict
+    })
+    .filter(tagName => tagName !== null); // Remove null values from the array
+
+  console.log('overlappingEntities ', overlappingEntities);
+  if (newAnnotationDict.tagName === "SEGMENTS_IN" && overlappingEntities.includes("SEGMENTS_IN")){
+    return overlappingEntities
   }
-}
-for (let loadingFileDict of transformedList) {
-  const loadingFileName = loadingFileDict.name;
-  const goldenAnnotationList = goldenAnnotations[loadingFileName] || [];
-  if (goldenAnnotationList.length > 0) {
-    loadingFileDict.entities = goldenAnnotationList
+  else{
+    console.log(true)
+    return []
   }
+    
+  
 }
+
+// Example usage
+const annotationList = [
+  {
+      "start": 38,
+      "end": 45,
+      "tagName": "d",
+      "color": "#e84e4e",
+      "text": "willing"
+  },
+  {
+      "start": 68,
+      "end": 73,
+      "tagName": "TYPE",
+      "color": "#29c7da",
+      "text": "ferry"
+  },
+  {
+      "start": 131,
+      "end": 140,
+      "tagName": "TYPE",
+      "color": "#29c7da",
+      "text": "catamaran"
+  },{
+    "start": 140,
+    "end": 170,
+    "tagName": "SEGMENTS_IN",
+    "color": "#29c7da",
+    "text": "catamaran"
+}
+  
+  
+]
+const newAnnotationDict = {"start": 20,
+"end": 160,
+"tagName": "SEGMENTS_IN",
+"color": "#29c7da",
+"text": "close client , who is willing to buy fast"}
+const entitiesWithMultipleOverlaps = findEntitiesWithMultipleOverlaps(annotationList,newAnnotationDict);
+console.log("Entities with Multiple Overlaps:", entitiesWithMultipleOverlaps);
