@@ -1,6 +1,6 @@
 import "./OverlapsErrorWindow.css";
 
-const ErrorWindow = ({ resetGoldenData }) => {
+const OverlapsErrorWindow = ({ resetGoldenData }) => {
   const handleErrorClick = () => {
     resetGoldenData();
   };
@@ -18,4 +18,4 @@ const ErrorWindow = ({ resetGoldenData }) => {
   );
 };
 
-export default ErrorWindow;
+export default OverlapsErrorWindow;

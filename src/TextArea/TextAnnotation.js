@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import WindowPopUpLabels from "../Labels/WindowPopUpLabels";
 import TextHighlighter from "./TextHandler/TextHighlighter";
 import OverlappingDetector from "./TextHandler/OverlappingDetector";
-import ErrorWindow from "./ErrorWindows/OverlapsErrorWindow";
+import OverlapsErrorWindow from "./ErrorWindows/OverlapsErrorWindow";
 import "./TextAnnotation.css";
 const TextAnnotation = ({
   filename,
@@ -159,7 +159,7 @@ const TextAnnotation = ({
         />
       )}
       {multipleOverlappingEntities && (
-        <ErrorWindow resetGoldenData={resetGoldenData} />
+        <OverlapsErrorWindow resetGoldenData={resetGoldenData} />
       )}
       {!multipleOverlappingEntities && useHighlighter}
     </div>
