@@ -1,4 +1,3 @@
-import "./TextArea.css";
 import React, { useState, useEffect } from "react";
 import TextAnnotation from "./TextAnnotation";
 import AnnotationsDisplayArea from "./DisplayArea/AnnotationsDisplayArea";

@@ -1,27 +1,4 @@
-.large-textarea {
-  
-  width: 1294px; /* Set the width to 100% of its container */
-  height: 700px; /* Set the initial height to 300 pixels */
-  padding: 20px; /* Add some padding for spacing */
-  font-size: 16px; /* Set the font size */
-  margin-left: 300px;
-  border: 1px solid #efeaea;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 255, 255, 0.7);
-}
-
 .text-area-container {
   overflow-y: auto; /* Add a vertical scrollbar if needed */
   padding: 10px; /* Add padding as needed */
 }
-
-.clickable-word {
-  cursor: pointer;
-  color: blue;
-}
-
-.clickable-word:hover {
-  text-decoration: underline;
-}
-

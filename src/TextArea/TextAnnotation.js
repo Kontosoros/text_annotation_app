@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import WindowPopUpLabels from "../Labels/WindowPopUpLabels";
 import TextHighlighter from "./TextHandler/TextHighlighter";
 import OverlappingDetector from "./TextHandler/OverlappingDetector";
+import ErrorWindow from "./ErrorWindows/OverlapsErrorWindow";
+import "./TextAnnotation.css";
 const TextAnnotation = ({
   filename,
   msgBody,
@@ -97,7 +99,7 @@ const TextAnnotation = ({
       annotationList,
       newAnnotationDict,
     });
-    
+
     if (entitiesWithMultipleOverlaps.length >= 2) {
       setmultipleOverlappingEntities(true);
     }
@@ -105,9 +107,6 @@ const TextAnnotation = ({
     updateMsgAnnotations(filename, annotationList);
     setPopupVisibility(false);
   };
-
-  // Call the parent's callback function to send the update
-  handleAnnotationUpdate(annotationsByMsgDict);
 
   // Deduplicate dictionaries based on 'start' and 'end' properties
   const deduplicateDictionaries = dictionaries => {
@@ -124,8 +123,8 @@ const TextAnnotation = ({
     return uniqueDicts;
   };
   let useHighlighter = [];
-  
-  if (!isPopupVisible && annotationsByMsgDict[filename] ) {
+
+  if (!isPopupVisible && annotationsByMsgDict[filename]) {
     useHighlighter = (
       <TextHighlighter
         msgBody={msgBody}
@@ -147,6 +146,8 @@ const TextAnnotation = ({
     updateMsgAnnotations(filename, []);
     setmultipleOverlappingEntities(false);
   };
+  // Call the parent's callback function to send the update
+  handleAnnotationUpdate(annotationsByMsgDict);
   return (
     <div className="large-textarea">
       {labelsList && isPopupVisible && (
@@ -158,10 +159,7 @@ const TextAnnotation = ({
         />
       )}
       {multipleOverlappingEntities && (
-        <div>
-          Error
-          <button onClick={resetGoldenData}>OK</button>
-        </div>
+        <ErrorWindow resetGoldenData={resetGoldenData} />
       )}
       {!multipleOverlappingEntities && useHighlighter}
     </div>

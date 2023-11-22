@@ -1,0 +1,22 @@
+.overlapping-error-window {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background-color: rgba(230, 226, 226, 0.7);
+  border-radius: 5px;
+  padding: 20px;
+  z-index: 1000;
+  height: auto; /* Set a fixed height for the file list container */
+  overflow-y: auto;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    z-index: 999; /* Ensure the overlay is on top of other elements */
+  }
