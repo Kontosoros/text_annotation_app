@@ -151,13 +151,16 @@ const TextAnnotation = ({
   return (
     <div className="large-textarea">
       {labelsList && isPopupVisible && (
-        <WindowPopUpLabels
-          labelsList={labelsList}
-          closePopup={closePopup}
-          setSelectedLabelDict={setSelectedLabelDictCallback}
-          cursorPosition={cursorPosition}
-        />
+        <div className="large-textarea-overlay">
+          <WindowPopUpLabels
+            labelsList={labelsList}
+            closePopup={closePopup}
+            setSelectedLabelDict={setSelectedLabelDictCallback}
+            cursorPosition={cursorPosition}
+          />
+        </div>
       )}
+
       {multipleOverlappingEntities && (
         <OverlapsErrorWindow resetGoldenData={resetGoldenData} />
       )}

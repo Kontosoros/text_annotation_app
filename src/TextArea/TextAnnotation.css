@@ -1,12 +1,20 @@
 .large-textarea {
-    width: 1294px; /* Set the width to 100% of its container */
-    height: 700px; /* Set the initial height to 300 pixels */
-    padding: 20px; /* Add some padding for spacing */
-    font-size: 16px; /* Set the font size */
-    margin-left: 300px;
-    border: 1px solid #efeaea;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.7);
-  }
-  
+  width: 1294px; /* Set the width to 100% of its container */
+  height: 700px; /* Set the initial height to 300 pixels */
+  padding: 20px; /* Add some padding for spacing */
+  font-size: 16px; /* Set the font size */
+  margin-left: 300px;
+  border: 1px solid #efeaea;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.large-textarea-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  z-index: 999; /* Ensure the overlay is on top of other elements */
+}
