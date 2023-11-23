@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import WindowPopUpLabels from "../Labels/WindowPopUpLabels";
+import WindowPopUpLabels from "../PopUpWindows/WindowPopUpLabels";
 import TextHighlighter from "./TextHandler/TextHighlighter";
 import OverlappingDetector from "./TextHandler/OverlappingDetector";
 import OverlapsErrorWindow from "./ErrorWindows/OverlapsErrorWindow";

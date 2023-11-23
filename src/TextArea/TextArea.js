@@ -7,15 +7,14 @@ const TextArea = props => {
   const [loadingData, setLoadingData] = useState([]);
   // Maintain a dictionary of annotations for each file
   const [goldenAnnotations, setGoldenAnnotations] = useState({});
-  // Define a function to receive the annotation data from the child
-  const handleAnnotationUpdate = annotation => {
-    setGoldenAnnotations(annotation);
-  };
+  
+
   useEffect(() => {
+    // Check if labelsList is defined and not empty before updating the color of loadingData
     if (props.labelsList && props.labelsList.length > 0 && loadingData) {
-      const r = UpdateColorVersion({ props, loadingData });
-      setLoadingData(r);
-      props.updateLoadingData({[props.filename] : r})
+      const updatedLoadData = UpdateColorVersion({ props, loadingData });
+      setLoadingData(updatedLoadData);
+      props.updateLoadingData({ [props.filename]: updatedLoadData });
     }
   }, [props.labelsList]);
   // Use useEffect to watch for changes in props.filename and goldenAnnotations
@@ -34,8 +33,12 @@ const TextArea = props => {
       setLoadingData(currentAnnotations);
     }
     props.updateLoadingData(goldenAnnotations);
-  }, [ props.filename,goldenAnnotations]);
+  }, [props.filename, goldenAnnotations]);
 
+  const handleAnnotationUpdate = annotation => {
+    // Define a function to receive the annotation data from the child
+    setGoldenAnnotations(annotation);
+  };
   return (
     <div>
       <TextAnnotation

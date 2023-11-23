@@ -26,7 +26,7 @@ const ConvertLoadingDataFormat = ({ uploadedFiles }) => {
     const loadingLabels = [];
     const uniqueLabels = {}; // Dictionary to track unique labels
 
-    const transformedList = uploadedFiles.map(item => {
+    const formattedData = uploadedFiles.map(item => {
       const entities = [];
       for (const entityName in item.entities) {
         if (item.entities.hasOwnProperty(entityName)) {
@@ -56,7 +56,7 @@ const ConvertLoadingDataFormat = ({ uploadedFiles }) => {
       };
     });
 
-    return { transformedList, loadingLabels };
+    return { formattedData, loadingLabels };
   }
 
   // If uploadedFiles is undefined or empty, you can return a default value or null

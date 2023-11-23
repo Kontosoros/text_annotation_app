@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import LoadFiles from "./FilesHandler/LoadFiles";
 import FileList from "./FilesHandler/FileList";
 import AddNewLabels from "./Labels/AddNewLabels";
@@ -15,8 +15,8 @@ const App = () => {
   const [goldenAnnotations, setGoldenAnnotations] = useState({});
   const [selectedFile, setSelectedFile] = useState("");
 
-  // Call PrepareLoadingData and store the result in loadingData
-  let { transformedList, loadingLabels } = ConvertLoadingDataFormat({
+  // Call the function to convert the format of the loaded data
+  let { formattedData, loadingLabels } = ConvertLoadingDataFormat({
     uploadedFiles,
   });
 
@@ -33,9 +33,9 @@ const App = () => {
   };
 
   if (Object.keys(labeList).length) {
-    transformedList = UpdateDataColor({
+    formattedData = UpdateDataColor({
       labeList,
-      transformedList,
+      formattedData,
       goldenAnnotations,
     });
   }
@@ -86,8 +86,7 @@ const App = () => {
       return updatedList;
     });
   };
-  
-  
+
   return (
     <>
       <div className="body">
@@ -97,7 +96,7 @@ const App = () => {
         />
         <LoadFiles onFilesUpload={handleFilesUpload} />
         <FileList
-          files={transformedList}
+          files={formattedData}
           selectedFiles={selectedFiles}
           onRemoveFiles={handleCloseSelectedFiles}
           labels={labeList}

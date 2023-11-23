@@ -1,4 +1,4 @@
-const UpdateDataColor = ({ labeList, transformedList, goldenAnnotations }) => {
+const UpdateDataColor = ({ labeList, formattedData, goldenAnnotations }) => {
   // i.e. make a deduplicated dictionary label map = {"TYPE":color , ....}
   const labelMap = {};
   labeList.forEach(labelDict => {
@@ -25,7 +25,7 @@ const UpdateDataColor = ({ labeList, transformedList, goldenAnnotations }) => {
     });
   });
   // Modify the loading data's color whenever there is a change in the color code within the label map.
-  for (let fileDict of transformedList) {
+  for (let fileDict of formattedData) {
     let entitiesFile = fileDict.entities;
     if (entitiesFile.length > 0) {
       for (let entitiesDict of entitiesFile) {
@@ -36,11 +36,11 @@ const UpdateDataColor = ({ labeList, transformedList, goldenAnnotations }) => {
       }
     }
   }
-  /* i.e. ====> transformedList =  [{ name:"19483625.json" , content:"text ... " , "entities": [{"start": 0,"end": 8,"tagName": "TYPE","color": "#813b3b","text": "19483508"},......]}
+  /* i.e. ====> formattedData =  [{ name:"19483625.json" , content:"text ... " , "entities": [{"start": 0,"end": 8,"tagName": "TYPE","color": "#813b3b","text": "19483508"},......]}
                                     { name:"222222.json" , content:"text ... " , "entities": [{"start": 0,"end": 8,"tagName": "TYPE","color": "#813b3b","text": "19483508"},......]}
                                     ]
   */
-  for (let loadingFileDict of transformedList) {
+  for (let loadingFileDict of formattedData) {
     const loadingFileName = loadingFileDict.name;
     const goldenAnnotationList = goldenAnnotations[loadingFileName] || [];
     if (goldenAnnotationList.length > 0) {
@@ -48,7 +48,7 @@ const UpdateDataColor = ({ labeList, transformedList, goldenAnnotations }) => {
     }
   }
 
-  return transformedList;
+  return formattedData;
 };
 
 export default UpdateDataColor;
