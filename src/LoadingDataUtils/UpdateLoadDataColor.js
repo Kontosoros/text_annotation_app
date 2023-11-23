@@ -1,6 +1,6 @@
 
 
-const UpdateColorVersion = ({props,loadingData}) => {
+const UpdateLoadDataColor = ({props,loadingData}) => {
   // i.e. make a deduplicated dictionary label map = {"TYPE":color , ....}
   const labelMap = {};
   props.labelsList.forEach(labelDict => {
@@ -21,4 +21,4 @@ const UpdateColorVersion = ({props,loadingData}) => {
   return loadingData
 };
 
-export default UpdateColorVersion;
+export default UpdateLoadDataColor;

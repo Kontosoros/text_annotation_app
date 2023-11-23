@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TextAnnotation from "./TextAnnotation";
 import AnnotationsDisplayArea from "./DisplayArea/AnnotationsDisplayArea";
-import UpdateColorVersion from "../LoadingDataUtils/UpdateColorVersion";
+import UpdateLoadDataColor from "../LoadingDataUtils/UpdateLoadDataColor";
 const TextArea = props => {
   // Initialize loadingData with a default value
   const [loadingData, setLoadingData] = useState([]);
@@ -12,7 +12,7 @@ const TextArea = props => {
   useEffect(() => {
     // Check if labelsList is defined and not empty before updating the color of loadingData
     if (props.labelsList && props.labelsList.length > 0 && loadingData) {
-      const updatedLoadData = UpdateColorVersion({ props, loadingData });
+      const updatedLoadData = UpdateLoadDataColor({ props, loadingData });
       setLoadingData(updatedLoadData);
       props.updateLoadingData({ [props.filename]: updatedLoadData });
     }
