@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import TextAnnotation from "./TextAnnotation";
 import AnnotationsDisplayArea from "./DisplayArea/AnnotationsDisplayArea";
-
+import UpdateColorVersion from "../LoadingDataUtils/UpdateColorVersion";
 const TextArea = props => {
-  
   // Initialize loadingData with a default value
   const [loadingData, setLoadingData] = useState([]);
   // Maintain a dictionary of annotations for each file
@@ -13,13 +12,15 @@ const TextArea = props => {
     setGoldenAnnotations(annotation);
   };
   useEffect(() => {
-    console.log("edwww",props.labelsList)
-    console.log('loadingData',loadingData)
-  },[props.labelsList])
+    if (props.labelsList && props.labelsList.length > 0 && loadingData) {
+      const r = UpdateColorVersion({ props, loadingData });
+      setLoadingData(r);
+      props.updateLoadingData({[props.filename] : r})
+    }
+  }, [props.labelsList]);
   // Use useEffect to watch for changes in props.filename and goldenAnnotations
   useEffect(() => {
     const currentAnnotations = goldenAnnotations[props.filename] || [];
-
     if (
       currentAnnotations.length === 0 &&
       goldenAnnotations[props.filename]?.length === 0
@@ -33,7 +34,7 @@ const TextArea = props => {
       setLoadingData(currentAnnotations);
     }
     props.updateLoadingData(goldenAnnotations);
-  }, [props.filename, goldenAnnotations]);
+  }, [ props.filename,goldenAnnotations]);
 
   return (
     <div>
