@@ -3,6 +3,7 @@ import TextAnnotation from "./TextAnnotation";
 import AnnotationsDisplayArea from "./DisplayArea/AnnotationsDisplayArea";
 
 const TextArea = props => {
+  
   // Initialize loadingData with a default value
   const [loadingData, setLoadingData] = useState([]);
   // Maintain a dictionary of annotations for each file
@@ -11,7 +12,10 @@ const TextArea = props => {
   const handleAnnotationUpdate = annotation => {
     setGoldenAnnotations(annotation);
   };
-
+  useEffect(() => {
+    console.log("edwww",props.labelsList)
+    console.log('loadingData',loadingData)
+  },[props.labelsList])
   // Use useEffect to watch for changes in props.filename and goldenAnnotations
   useEffect(() => {
     const currentAnnotations = goldenAnnotations[props.filename] || [];

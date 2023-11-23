@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import "./FileList.css";
 const FileList = props => {
-  const [selectedFile, setSelectedFile] = useState({
-    name: "",
-    content: "",
-    entities: [],
-  });
+  const [selectedFile, setSelectedFile] = useState({});
 
   const handleFileClick = file => {
     setSelectedFile(file);
@@ -15,7 +11,7 @@ const FileList = props => {
   useEffect(() => {
     props.selectedFile(selectedFile);
   }, [selectedFile, props]);
-  
+
   // Check if there are files before rendering the list
   if (!props.files) {
     return null;

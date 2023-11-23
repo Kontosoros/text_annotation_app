@@ -9,9 +9,7 @@ import ConvertLoadingDataFormat from "./LoadingDataUtils/ConvertLoadingDataForma
 import UpdateDataColor from "./LoadingDataUtils/UpdateDataColor";
 
 const App = () => {
-  const [uploadedFiles, setUploadedFiles] = useState([
-    { name: "", content: "", entities: [] },
-  ]);
+  const [uploadedFiles, setUploadedFiles] = useState([{}]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [labeList, setLabelList] = useState([]);
   const [goldenAnnotations, setGoldenAnnotations] = useState({});
@@ -88,7 +86,8 @@ const App = () => {
       return updatedList;
     });
   };
-
+  
+  
   return (
     <>
       <div className="body">
@@ -96,7 +95,6 @@ const App = () => {
           loadingLabels={loadingLabels}
           onUpdateLabelList={updateLabelList}
         />
-
         <LoadFiles onFilesUpload={handleFilesUpload} />
         <FileList
           files={transformedList}

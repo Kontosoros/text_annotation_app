@@ -20,10 +20,12 @@ const TextAnnotation = ({
     end: "",
     text: "",
   });
+  
   const [multipleOverlappingEntities, setmultipleOverlappingEntities] =
     useState(false);
 
   const updateMsgAnnotations = (filename, newAnnotationList) => {
+    
     setMsgAnnotationList(prevAnnotationList => ({
       ...prevAnnotationList,
       [filename]: newAnnotationList,
@@ -133,6 +135,7 @@ const TextAnnotation = ({
       />
     );
   } else if (!isPopupVisible) {
+    
     useHighlighter = (
       <TextHighlighter
         msgBody={msgBody}

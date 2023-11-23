@@ -1,7 +1,7 @@
 .loading-container {
   position: fixed;
   top: 500px;
-  width: 200px;
+  width: 210px;
   height: 300px;
   margin: 20px auto;
   right: 80px;
@@ -28,4 +28,8 @@
   border-radius: 15px; /* Rounded corners */
   cursor: pointer; /* Show a pointer cursor on hover */
   margin-left: 10px;
+}
+.hide-loading-labels-color {
+  margin-left: 20px;
+  color: #e6e1e1;
 }

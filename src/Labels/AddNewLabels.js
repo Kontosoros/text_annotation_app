@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./AddLabels.css";
 import ColorMap from "./ColorMap";
 import "./LoadExistingLabels.css";
-
+import { Checkbox } from "antd";
 export default function AddNewLabels({ loadingLabels, onUpdateLabelList }) {
   const [label, setLabel] = useState("");
   const [newlabels, setLabelList] = useState([]); // State to store the list of labels
@@ -51,11 +51,11 @@ export default function AddNewLabels({ loadingLabels, onUpdateLabelList }) {
 
   const handleRemoveNewLabel = index => {
     const updatedLabels = [...newlabels];
-    const labelToRemove = updatedLabels[index].labelName
+    const labelToRemove = updatedLabels[index].labelName;
     // Remove the label from the list
     updatedLabels.splice(index, 1);
     // Call the function to update labelList in the App component
-    onUpdateLabelList(updatedLabels , labelToRemove);
+    onUpdateLabelList(updatedLabels, labelToRemove);
     // Update the labelList state with the modified array
     setLabelList(updatedLabels);
   };
@@ -76,9 +76,9 @@ export default function AddNewLabels({ loadingLabels, onUpdateLabelList }) {
     setLoadingLabelIndex(index);
     setIsColorPickerOpen(true);
   };
-
-  
-
+  const handleHiddenColor = value => {
+    console.log(value);
+  };
   return (
     <div>
       <div className="add-label-container">
@@ -131,6 +131,13 @@ export default function AddNewLabels({ loadingLabels, onUpdateLabelList }) {
               >
                 {item.labelName}
               </button>
+
+              <Checkbox
+                className="hide-loading-labels-color"
+                onChange={() =>handleHiddenColor(index)}
+              >
+                Hide
+              </Checkbox>
             </li>
           ))}
         </ul>
