@@ -1,6 +1,6 @@
 
 
-const UpdateLoadDataColor = ({props,loadingData}) => {
+const UpdateLoadDataColor = ({props}) => {
   // i.e. make a deduplicated dictionary label map = {"TYPE":color , ....}
   const labelMap = {};
   props.labelsList.forEach(labelDict => {
@@ -9,7 +9,7 @@ const UpdateLoadDataColor = ({props,loadingData}) => {
     labelMap[entityName] = color;
   });
  // Modify the loading data's color whenever there is a change in the color code within the label map.
- for (let fileDict of loadingData) {
+ for (let fileDict of props.entities) {
         if (fileDict.tagName in labelMap) {
           const updateColor = labelMap[fileDict.tagName];
           fileDict.color = updateColor;
@@ -18,7 +18,7 @@ const UpdateLoadDataColor = ({props,loadingData}) => {
     
   }
   
-  return loadingData
+  return props.entities
 };
 
 export default UpdateLoadDataColor;
