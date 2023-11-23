@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TextAnnotation from "./TextAnnotation";
 import AnnotationsDisplayArea from "./DisplayArea/AnnotationsDisplayArea";
-import UpdateLoadDataColor from "../LoadingDataUtils/UpdateLoadDataColor";
+import UpdateLoadDataColor from "../Utils/UpdateLoadDataColor";
 const TextArea = props => {
   // Initialize loadingData with a default value
   const [loadingData, setLoadingData] = useState([]);

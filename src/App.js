@@ -5,8 +5,8 @@ import FileList from "./FilesHandler/FileList";
 import AddNewLabels from "./Labels/AddNewLabels";
 import TextArea from "./TextArea/TextArea";
 import "./TextArea/TextArea.css";
-import ConvertLoadingDataFormat from "./LoadingDataUtils/ConvertLoadingDataFormat";
-import UpdateDataColor from "./LoadingDataUtils/UpdateDataColor";
+import ConvertLoadingDataFormat from "./Utils/ConvertLoadingDataFormat";
+import UpdateDataColor from "./Utils/UpdateDataColor";
 
 const App = () => {
   const [uploadedFiles, setUploadedFiles] = useState([{}]);
