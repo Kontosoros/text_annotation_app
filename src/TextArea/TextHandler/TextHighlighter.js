@@ -5,7 +5,7 @@ const TextHighlighter = ({ msgBody, value, updateValue }) => {
   if (!msgBody) {
     return null;
   }
-  console.log('TextHighlighter',value)
+  
   const handleChange = values => {
     
     updateValue(values);

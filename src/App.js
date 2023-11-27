@@ -14,7 +14,7 @@ const App = () => {
   const [labeList, setLabelList] = useState([]);
   const [goldenAnnotations, setGoldenAnnotations] = useState({});
   const [selectedFile, setSelectedFile] = useState("");
-
+  const [hideLabelList , sethideLabelList]= useState([]);
   // Call the function to convert the format of the loaded data
   let { formattedData, loadingLabels } = ConvertLoadingDataFormat({
     uploadedFiles,
@@ -46,7 +46,7 @@ const App = () => {
   const updateSelectedFile = file => {
     setSelectedFile(file);
   };
-  const updateLabelList = (newList, labelToRemove = "") => {
+  const mergeExistingWithNewLabels = (newList, labelToRemove = "") => {
     setLabelList(prevLabelList => {
       // Extract label names from both existing and new labels
       const existingLabelNames = prevLabelList.map(label => label.labelName);
@@ -86,13 +86,18 @@ const App = () => {
       return updatedList;
     });
   };
+  const handleLabelsToHide=(labelList)=>{
+    sethideLabelList(labelList)
 
+  }
+  console.log('hideLabelList ',hideLabelList)
   return (
     <>
       <div className="body">
         <AddNewLabels
           loadingLabels={loadingLabels}
-          onUpdateLabelList={updateLabelList}
+          onUpdateLabelList={mergeExistingWithNewLabels}
+          labelsToHide  = {handleLabelsToHide}
         />
         <LoadFiles onFilesUpload={handleFilesUpload} />
         <FileList

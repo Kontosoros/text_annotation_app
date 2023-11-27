@@ -3,7 +3,12 @@ import "./AddLabels.css";
 import ColorMap from "./ColorMap";
 import "./LoadExistingLabels.css";
 import { Checkbox } from "antd";
-export default function AddNewLabels({ loadingLabels, onUpdateLabelList }) {
+
+export default function AddNewLabels({
+  loadingLabels,
+  onUpdateLabelList,
+  labelsToHide,
+}) {
   const [label, setLabel] = useState("");
   const [newlabels, setLabelList] = useState([]); // State to store the list of labels
   const [selectedNewLabelIndex, setNewLabelIndex] = useState(null); // State to store the index of the selected label
@@ -11,6 +16,7 @@ export default function AddNewLabels({ loadingLabels, onUpdateLabelList }) {
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const loadingLabelListRef = useRef([]); // Ref to store loadingLabelList
   const [runFirstTime, setTime] = useState(true);
+  const [hiddenLabels, setHiddenLabels] = useState([]);
 
   if (loadingLabels.length > 0 && runFirstTime === true) {
     loadingLabelListRef.current = loadingLabels;
@@ -43,6 +49,7 @@ export default function AddNewLabels({ loadingLabels, onUpdateLabelList }) {
     if (selectedLoadingLabelIndex !== null) {
       const updatedLoadingLabels = [...loadingLabelListRef.current];
       updatedLoadingLabels[selectedLoadingLabelIndex].color = color;
+
       onUpdateLabelList(updatedLoadingLabels);
       setLoadingLabelIndex(null);
       setIsColorPickerOpen(false);
@@ -76,9 +83,18 @@ export default function AddNewLabels({ loadingLabels, onUpdateLabelList }) {
     setLoadingLabelIndex(index);
     setIsColorPickerOpen(true);
   };
-  const handleHiddenColor = value => {
-    console.log(value);
+  const handleHiddenColor = labelNameIndex => {
+    const labelToRemove = loadingLabels[labelNameIndex].labelName;
+    if (hiddenLabels.includes(labelToRemove)) {
+      // Label is currently hidden, remove it
+      setHiddenLabels(hiddenLabels.filter(item => item !== labelToRemove));
+    } else {
+      // Label is currently visible, add it
+      setHiddenLabels([...hiddenLabels, labelToRemove]);
+    }
+    
   };
+  labelsToHide(hiddenLabels);
   return (
     <div>
       <div className="add-label-container">
@@ -134,7 +150,7 @@ export default function AddNewLabels({ loadingLabels, onUpdateLabelList }) {
 
               <Checkbox
                 className="hide-loading-labels-color"
-                onChange={() =>handleHiddenColor(index)}
+                onChange={() => handleHiddenColor(index)}
               >
                 Hide
               </Checkbox>
