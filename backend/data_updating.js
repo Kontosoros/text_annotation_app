@@ -1,74 +1,55 @@
-function findEntitiesWithMultipleOverlaps(value, newAnnotationDict ) {
-  value = Object.values(value);
-  
-  // Iterate through each dictionary and check for overlaps with the newAnnotationDict
-  const overlappingEntities = annotationList
-    .filter(dict => {
-      // Check if the ranges overlap
-      return (
-        (dict.start <= newAnnotationDict.start &&
-          dict.end >= newAnnotationDict.start) ||
-        (newAnnotationDict.start <= dict.start &&
-          newAnnotationDict.end >= dict.start)
-      );
-    })
-    .map(dict => {
-      // Exclude the newAnnotationDict from the overlappingEntities array
-      if (dict !== newAnnotationDict) {
-        return dict.tagName;
-      }
-      return null; // Return null for the newAnnotationDict
-    })
-    .filter(tagName => tagName !== null); // Remove null values from the array
-
-  console.log('overlappingEntities ', overlappingEntities);
-  if (newAnnotationDict.tagName === "SEGMENTS_IN" && overlappingEntities.includes("SEGMENTS_IN")){
-    return overlappingEntities
+function RemoveHiddenLabels({ value, hiddenLabelList }) {
+  const storeHiddenData = [];
+  for (const dataDict of value) {
+    if (hiddenLabelList.includes(dataDict.tagName)) {
+      storeHiddenData.push(dataDict); // store the data in a seperate list
+    }
   }
-  else{
-    console.log(true)
-    return []
-  }
-    
-  
+  let dataToShow = value.filter(
+    dataDict => !hiddenLabelList.includes(dataDict.tagName)
+  ); // Allow only the dict that their tagName is not in the list
+  return {dataToShow, storeHiddenData};
 }
 
-// Example usage
-const annotationList = [
+
+
+let value = [
   {
-      "start": 38,
-      "end": 45,
-      "tagName": "d",
-      "color": "#e84e4e",
-      "text": "willing"
+    start: 68,
+    end: 73,
+    tagName: "TYPE",
+    color: "#b53535",
+    text: "ferry",
   },
   {
-      "start": 68,
-      "end": 73,
-      "tagName": "TYPE",
-      "color": "#29c7da",
-      "text": "ferry"
+    start: 131,
+    end: 140,
+    tagName: "TYPE",
+    color: "#b53535",
+    text: "catamaran",
   },
   {
-      "start": 131,
-      "end": 140,
-      "tagName": "TYPE",
-      "color": "#29c7da",
-      "text": "catamaran"
-  },{
-    "start": 140,
-    "end": 170,
-    "tagName": "SEGMENTS_IN",
-    "color": "#29c7da",
-    "text": "catamaran"
-}
-  
-  
-]
-const newAnnotationDict = {"start": 20,
-"end": 160,
-"tagName": "SEGMENTS_IN",
-"color": "#29c7da",
-"text": "close client , who is willing to buy fast"}
-const entitiesWithMultipleOverlaps = findEntitiesWithMultipleOverlaps(annotationList,newAnnotationDict);
-console.log("Entities with Multiple Overlaps:", entitiesWithMultipleOverlaps);
+    start: 246,
+    end: 250,
+    tagName: "YOB",
+    color: "#808080",
+    text: "2011",
+  },
+  {
+    start: 251,
+    end: 258,
+    tagName: "YOB_INDI",
+    color: "#808080",
+    text: "onwards",
+  },
+  {
+    start: 58,
+    end: 770,
+    tagName: "SEGMENTS_IN",
+    color: "#808080",
+    text: "passenger ferry as follows : + type : al . fast passenger ship ( hsc ) - catamaran , not monohull type . + pax . cap . : abt . 450 ~ 600 pax . + speed : abt . 35 ~ 40 kts . + built year : 2011 onwards ~ ( imperative ! ! ) + main engines : mtu engines prefer . + inspection : worldwide , immediate inspection . . pc candis will be treated as such in the range of above requirements . sincerely , james han any maritime co ltd . cid : image 005 . jpg @ 01 d 12 c 60 . f 1 ef 4 f 10 11 f , ( yoido - dong , hanseo riverpark ) yoiseo - ro 43 gil , youngdeoungpo - gu , seoul , 07239 , korea . : + 82 2 6092 - 8147 ~ 9 070 - 7663 - 3251 : + 82 2 6092 - 8150 : + 82 10 5173 - 8823 : < mailto : < > > < > url : < http :",
+  },
+];
+const hiddenLabelList = ["TYPE"];
+let {dataToShow , storeHiddenData} = RemoveHiddenLabels({ value, hiddenLabelList });
+console.log(storeHiddenData);

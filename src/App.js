@@ -90,7 +90,7 @@ const App = () => {
     sethideLabelList(labelList)
 
   }
-  console.log('hideLabelList ',hideLabelList)
+ 
   return (
     <>
       <div className="body">
@@ -114,6 +114,7 @@ const App = () => {
                 filename={selectedFile.name}
                 text={selectedFile.content}
                 labelsList={labeList}
+                hideLabelList = {hideLabelList}
                 entities={selectedFile.entities}
                 updateLoadingData={updateLoadingData}
               />

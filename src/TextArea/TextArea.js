@@ -45,6 +45,7 @@ const TextArea = props => {
         filename={props.filename}
         msgBody={props.text}
         labelsList={props.labelsList}
+        hideLabelList = {props.hideLabelList}
         loadingData={loadingData}
         handleAnnotationUpdate={handleAnnotationUpdate}
       />

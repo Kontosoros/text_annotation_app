@@ -8,6 +8,7 @@ const TextAnnotation = ({
   filename,
   msgBody,
   labelsList,
+  hideLabelList,
   loadingData,
   handleAnnotationUpdate,
 }) => {
@@ -20,12 +21,11 @@ const TextAnnotation = ({
     end: "",
     text: "",
   });
-  
+
   const [multipleOverlappingEntities, setmultipleOverlappingEntities] =
     useState(false);
 
   const updateMsgAnnotations = (filename, newAnnotationList) => {
-    
     setMsgAnnotationList(prevAnnotationList => ({
       ...prevAnnotationList,
       [filename]: newAnnotationList,
@@ -130,16 +130,17 @@ const TextAnnotation = ({
     useHighlighter = (
       <TextHighlighter
         msgBody={msgBody}
-        value={annotationsByMsgDict[filename] || []}
+        msgAnnotations={annotationsByMsgDict[filename] || []}
+        HiddenEntitiesMap={hideLabelList}
         updateValue={newValue => updateMsgAnnotations(filename, newValue)} // Pass the updateValueForMsg function
       />
     );
   } else if (!isPopupVisible) {
-    
     useHighlighter = (
       <TextHighlighter
         msgBody={msgBody}
-        value={loadingData}
+        msgAnnotations={loadingData}
+        HiddenEntityTags={hideLabelList}
         updateValue={newValue => updateMsgAnnotations(filename, newValue)} // Pass the updateValueForMsg function
       />
     );
