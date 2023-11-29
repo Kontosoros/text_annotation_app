@@ -19,6 +19,7 @@ const TextArea = props => {
       setLoadingData(updatedLoadDataColor);
       props.updateLoadingData({ [props.filename]: updatedLoadDataColor });
     }
+    // eslint-disable-next-line
   }, [props.labelsList]);
 
   // Use useEffect to watch for changes in props.filename and goldenAnnotations
@@ -37,6 +38,7 @@ const TextArea = props => {
       setLoadingData(currentAnnotations);
     }
     props.updateLoadingData(goldenAnnotations);
+    // eslint-disable-next-line
   }, [props.filename, goldenAnnotations]);
 
   const handleAnnotationUpdate = annotation => {
