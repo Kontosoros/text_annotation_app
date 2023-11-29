@@ -1,3 +1,4 @@
+// Function to merge and convert golden data into a specific format
 function MergeAndConvertGoldenData({ goldenDataDict, uploadedFiles }) {
   const goldenConvertedFormat = {};
   for (const fileName in goldenDataDict) {
@@ -53,6 +54,7 @@ function MergeAndConvertGoldenData({ goldenDataDict, uploadedFiles }) {
         entitiesDict["string"] = annotationDict.text;
         SEGMENTS_IN_List.push(entitiesDict);
       }
+      // Assign lists to the newDict for each annotation type
       newDict["TYPE"] = TypeList;
       newDict["SIZE"] = SizeList;
       newDict["NO_COB"] = NO_COB_List;
@@ -62,14 +64,17 @@ function MergeAndConvertGoldenData({ goldenDataDict, uploadedFiles }) {
       newDict["YOB_INDI"] = YOB_INDI_List;
       newDict["SEGMENTS_IN"] = SEGMENTS_IN_List;
     }
+    // Add the newDict to goldenConvertedFormat with the filename as the key
     newDict["name"] = fileName;
     goldenConvertedFormat[fileName] = newDict;
   }
 
   const adviceData = [];
+  // Loop through each uploaded file
   for (const fileUploadedDict of uploadedFiles) {
     const msgDict = {};
     const entitiesDict = {};
+    // Check if the current uploaded file has a corresponding golden format
     if (goldenConvertedFormat.hasOwnProperty(fileUploadedDict.name)) {
       const goldenEntitiesDict = goldenConvertedFormat[fileUploadedDict.name];
       msgDict.document_id = fileUploadedDict.name;
@@ -86,7 +91,7 @@ function MergeAndConvertGoldenData({ goldenDataDict, uploadedFiles }) {
     } else {
       msgDict.document_id = fileUploadedDict.name;
       msgDict.text = fileUploadedDict.content;
-      msgDict.entities = fileUploadedDict.entities;
+      msgDict.entities = fileUploadedDict.entities || [];
     }
 
     adviceData.push(msgDict);
