@@ -11,6 +11,8 @@ const LoadFiles = ({ onFilesUpload }) => {
     const selectedFiles = e.target.files;
     // Convert the FileList to an array for easier iteration
     const filesArray = Array.from(selectedFiles);
+    // Extract file paths
+    
     const jsonDataArray = [];
     const readAndParseFile = file => {
       const reader = new FileReader();

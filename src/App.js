@@ -7,6 +7,7 @@ import TextArea from "./TextArea/TextArea";
 import "./TextArea/TextArea.css";
 import ConvertLoadingDataFormat from "./Utils/ConvertLoadingDataFormat";
 import UpdateDataColor from "./Utils/UpdateDataColor";
+import SaveButton from "./Save/SaveButton";
 
 const App = () => {
   const [uploadedFiles, setUploadedFiles] = useState([{}]);
@@ -14,7 +15,7 @@ const App = () => {
   const [labeList, setLabelList] = useState([]);
   const [goldenAnnotations, setGoldenAnnotations] = useState({});
   const [selectedFile, setSelectedFile] = useState("");
-  const [hideLabelList , sethideLabelList]= useState([]);
+  const [hideLabelList, sethideLabelList] = useState([]);
   // Call the function to convert the format of the loaded data
   let { formattedData, loadingLabels } = ConvertLoadingDataFormat({
     uploadedFiles,
@@ -86,20 +87,21 @@ const App = () => {
       return updatedList;
     });
   };
-  const handleLabelsToHide=(labelList)=>{
-    sethideLabelList(labelList)
-
-  }
- 
+  const handleLabelsToHide = labelList => {
+    sethideLabelList(labelList);
+  };
+  console.log("goldenAnnotations ", goldenAnnotations);
+  console.log("uploadedFiles ", uploadedFiles);
   return (
     <>
       <div className="body">
         <AddNewLabels
           loadingLabels={loadingLabels}
           onUpdateLabelList={mergeExistingWithNewLabels}
-          labelsToHide  = {handleLabelsToHide}
+          labelsToHide={handleLabelsToHide}
         />
         <LoadFiles onFilesUpload={handleFilesUpload} />
+        <SaveButton goldenDataDict = {goldenAnnotations} uploadedFiles = {uploadedFiles}/>
         <FileList
           files={formattedData}
           selectedFiles={selectedFiles}
@@ -114,7 +116,7 @@ const App = () => {
                 filename={selectedFile.name}
                 text={selectedFile.content}
                 labelsList={labeList}
-                hideLabelList = {hideLabelList}
+                hideLabelList={hideLabelList}
                 entities={selectedFile.entities}
                 updateLoadingData={updateLoadingData}
               />
@@ -122,6 +124,7 @@ const App = () => {
           )}
         </div>
       </div>
+      
     </>
   );
 };

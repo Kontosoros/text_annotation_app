@@ -1,0 +1,11 @@
+.notification-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background-color: rgba(230, 226, 226, 0.7);
+  border-radius: 5px;
+  padding: 20px;
+  z-index: 1000;
+}
