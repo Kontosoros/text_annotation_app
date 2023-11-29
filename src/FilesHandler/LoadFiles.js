@@ -4,7 +4,7 @@ upload multiple files.
 You can use the input element with the multiple attribute to enable multiple file selection
 */
 import "./LoadFiles.css";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const LoadFiles = ({ onFilesUpload }) => {
   const handleFileChange = e => {
@@ -12,7 +12,7 @@ const LoadFiles = ({ onFilesUpload }) => {
     // Convert the FileList to an array for easier iteration
     const filesArray = Array.from(selectedFiles);
     // Extract file paths
-    
+
     const jsonDataArray = [];
     const readAndParseFile = file => {
       const reader = new FileReader();
@@ -34,7 +34,6 @@ const LoadFiles = ({ onFilesUpload }) => {
 
         // Check if all files have been processed
         if (jsonDataArray.length === filesArray.length) {
-         
           const fileDataPromises = Array.from(jsonDataArray).map(file => {
             return {
               name: file.document_id,

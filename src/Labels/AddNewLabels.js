@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import "./AddLabels.css";
 import ColorMap from "./ColorMap";
 import "./LoadExistingLabels.css";
@@ -67,13 +67,6 @@ export default function AddNewLabels({
     setLabelList(updatedLabels);
   };
 
-  const handleRemoveLoadingLabel = index => {
-    const updatedLoadingLabelList = [...loadingLabelListRef.current];
-    updatedLoadingLabelList.splice(index, 1);
-    loadingLabelListRef.current = updatedLoadingLabelList;
-    onUpdateLabelList(updatedLoadingLabelList);
-  };
-
   const handleNewLabelChange = index => {
     setNewLabelIndex(index);
     setIsColorPickerOpen(true);
@@ -92,7 +85,6 @@ export default function AddNewLabels({
       // Label is currently visible, add it
       setHiddenLabels([...hiddenLabels, labelToRemove]);
     }
-    
   };
   labelsToHide(hiddenLabels);
   return (

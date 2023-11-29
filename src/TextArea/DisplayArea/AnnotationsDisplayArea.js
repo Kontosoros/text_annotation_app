@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React } from "react";
 import CardAnnotations from "./CardAnnotations";
 
 const AnnotationsDisplayArea = ({ filename, goldenData }) => {
