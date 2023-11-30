@@ -13,7 +13,7 @@ input[type="file"] {
   border: none;
   cursor: pointer;
   left: 5%; /* Adjust this value to set the desired distance from the right */
-  bottom: 25%;
+  bottom: 30%;
   
 }
 
