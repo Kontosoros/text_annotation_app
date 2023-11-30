@@ -1,14 +1,12 @@
 .result-card {
   position: fixed;
-  
   border: 1px solid #e5e5e5;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.7);
   width: 63vw; /* Set the width to 100% of its container */
-  height: 20vh; /* Set the initial height to 150 pixels */
+  height: 30vh; /* Set the initial height to 150 pixels */
   right: 19%;
-  
   top: 65%;
   align-items: center;
   overflow-y: auto; /* Add a vertical scrollbar when content overflows */

@@ -9,7 +9,7 @@
   border: 1px solid hsl(0, 0%, 49%);
   border-radius: 5px;
   box-shadow: 0 2px 100px rgba(0, 0, 0, 0.1);
-  background-color: rgba(248, 244, 244, 0.7);
+  background-color: rgba(218, 216, 216, 0.9);
 }
 .large-textarea-overlay {
   position: fixed;
