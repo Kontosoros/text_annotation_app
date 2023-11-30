@@ -14,6 +14,7 @@
   align-items: center;
 }
 .add-label-placeholder {
+  display:flex;
   height: 3vh;
   width: 10vw;
   border: 1px solid #ccc;
@@ -21,7 +22,7 @@
 }
 .add-label-button {
   position: fixed;
-  
+  display:flex;
   right: 6%; /* Adjust this value to set the desired distance from the right */
   top: 40%; /* Adjust this value to set the desired distance from the top */
 }

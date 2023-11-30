@@ -5,10 +5,10 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.7);
-  width: 60vw; /* Set the width to 100% of its container */
+  width: 63vw; /* Set the width to 100% of its container */
   height: 20vh; /* Set the initial height to 150 pixels */
   right: 19%;
-  padding: 20px;
+  
   top: 65%;
   align-items: center;
   overflow-y: auto; /* Add a vertical scrollbar when content overflows */
@@ -17,6 +17,7 @@
 
 .result-content {
   flex-direction: column;
+  margin-left:2%;
 }
 
 .result-row {
@@ -26,12 +27,14 @@
   width: 60vw;
   border: 1px solid #c1bebe;
   margin: 5px 0;
+  
   background-color: #f7f4f4;
   color: black; /* Set the text color to black */
 }
 
 .result-column {
   flex: 1;
+  
   padding: 10px;
   text-align: center;
   max-height: 60px; /* Set the maximum height for each column content */

@@ -123,11 +123,11 @@ export default function AddNewLabels({
             initialColor={newlabels[selectedNewLabelIndex]?.color || ""}
           />
         )}
+        
       </div>
       <div className="add-label-button">
-        <button onClick={addLabel}>Add Labels</button>
-      </div>
-
+          <button onClick={addLabel}>Add Labels</button>
+        </div>
       <div className="loading-container">
         <ul className=".loading-list">
           {loadingLabelListRef.current.map((item, index) => (
