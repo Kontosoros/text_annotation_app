@@ -13,6 +13,7 @@ const TextAnnotation = ({
   handleAnnotationUpdate,
 }) => {
   const [annotationsByMsgDict, setMsgAnnotationList] = useState(loadingData);
+  // eslint-disable-next-line
   const [selectText, setTextSelection] = useState(false);
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const [cursorPosition, setCursorPosition] = useState(null);
