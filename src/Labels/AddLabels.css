@@ -1,24 +1,30 @@
 .add-label-container {
   position: fixed;
-  top: -8px;
-  width: 210px;
-  height: 300px;
-  margin: 20px auto;
-  right: 80px;
-  padding: 20px;
+  display: flex;
+  width: 15vw;
+  height: 30vh;
+  right: 1%;
+  top: 4%;
+  padding: 1%;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Add a vertical scrollbar if needed */
+  overflow-y: auto;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  flex-direction: column;
+  align-items: center;
 }
 .add-label-placeholder {
+  height: 3vh;
+  width: 10vw;
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .add-label-button {
-  right: 145px;
+  display: flex;
   position: fixed;
-  top: 360px;
+  right: 6%; /* Adjust this value to set the desired distance from the right */
+  top: 40%; /* Adjust this value to set the desired distance from the top */
 }
 
 .button-cancel {
@@ -46,22 +52,10 @@
 }
 
 .label-list {
-  list-style-type: none; /* Remove bullet points from the list */
-  padding: 0; /* Remove default padding */
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Adjust the width as needed */
 }
-
-.label-list li {
-  margin: 5px 0; /* Add some vertical spacing between list items */
-  display: flex; /* Use flexbox to align checkbox and label horizontally */
-  align-items: center; /* Align items vertically in the center */
-}
-
-.label-list li input[type="checkbox"] {
-  margin-right: 8px; /* Add spacing between checkbox and label */
-}
-
-.label-list li label {
-  font-size: 16px; /* Adjust the font size for labels */
-  font-weight: bold; /* Make the label text bold */
-}
-

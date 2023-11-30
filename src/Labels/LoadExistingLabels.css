@@ -1,18 +1,21 @@
 .loading-container {
   position: fixed;
-  top: 500px;
-  width: 210px;
-  height: 300px;
+  display: flex;
+  top: 45%;
+  width: 15vw;
+  height: 30vh;
   margin: 20px auto;
-  right: 80px;
+  right: 1%;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
+  
 }
 .loading-list {
   padding: 0; /* Remove default padding */
+  
 }
 
 .loading-button {
@@ -31,5 +34,5 @@
 }
 .hide-loading-labels-color {
   margin-left: 20px;
-  color: #e6e1e1;
+  color: #b5b3b3;
 }

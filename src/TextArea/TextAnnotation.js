@@ -21,7 +21,7 @@ const TextAnnotation = ({
     end: "",
     text: "",
   });
-  console.log(selectText)
+  console.log(selectText);
   const [multipleOverlappingEntities, setmultipleOverlappingEntities] =
     useState(false);
 
@@ -155,20 +155,19 @@ const TextAnnotation = ({
   return (
     <div className="large-textarea">
       {labelsList && isPopupVisible && (
-        <div className="large-textarea-overlay">
-          <WindowPopUpLabels
-            labelsList={labelsList}
-            closePopup={closePopup}
-            setSelectedLabelDict={setSelectedLabelDictCallback}
-            cursorPosition={cursorPosition}
-          />
-        </div>
+        <WindowPopUpLabels
+          labelsList={labelsList}
+          closePopup={closePopup}
+          setSelectedLabelDict={setSelectedLabelDictCallback}
+          cursorPosition={cursorPosition}
+        />
       )}
-
-      {multipleOverlappingEntities && (
-        <OverlapsErrorWindow resetGoldenData={resetGoldenData} />
-      )}
-      {!multipleOverlappingEntities && useHighlighter}
+      <div>
+        {multipleOverlappingEntities && (
+          <OverlapsErrorWindow resetGoldenData={resetGoldenData} />
+        )}
+        {!multipleOverlappingEntities && useHighlighter}
+      </div>
     </div>
   );
 };

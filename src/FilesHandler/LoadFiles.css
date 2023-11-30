@@ -4,16 +4,17 @@ input[type="file"] {
 }
 
 .custom-file-input {
+  display: flex;
+  position: fixed;
   background-color: #636463; /* Button background color */
   color: #fff; /* Button text color */
   padding: 4px 21px;
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  font-size: 15px;
-  left: 70px;
-  bottom: 250px;
-  position: fixed;
+  left: 5%; /* Adjust this value to set the desired distance from the right */
+  top: 66%;
+  
 }
 
 /* Style for when the button is hovered over */

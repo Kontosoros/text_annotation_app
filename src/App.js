@@ -4,7 +4,7 @@ import LoadFiles from "./FilesHandler/LoadFiles";
 import FileList from "./FilesHandler/FileList";
 import AddNewLabels from "./Labels/AddNewLabels";
 import TextArea from "./TextArea/TextArea";
-import "./TextArea/TextArea.css";
+
 import ConvertLoadingDataFormat from "./Utils/ConvertLoadingDataFormat";
 import UpdateDataColor from "./Utils/UpdateDataColor";
 import SaveButton from "./Save/SaveButton";
@@ -101,7 +101,10 @@ const App = () => {
           labelsToHide={handleLabelsToHide}
         />
         <LoadFiles onFilesUpload={handleFilesUpload} />
-        <SaveButton goldenDataDict = {goldenAnnotations} uploadedFiles = {uploadedFiles}/>
+        <SaveButton
+          goldenDataDict={goldenAnnotations}
+          uploadedFiles={uploadedFiles}
+        />
         <FileList
           files={formattedData}
           selectedFiles={selectedFiles}
@@ -109,22 +112,18 @@ const App = () => {
           labels={labeList}
           selectedFile={updateSelectedFile}
         />
-        <div className="text-area-container">
-          {selectedFile && (
-            <div>
-              <TextArea
-                filename={selectedFile.name}
-                text={selectedFile.content}
-                labelsList={labeList}
-                hideLabelList={hideLabelList}
-                entities={selectedFile.entities}
-                updateLoadingData={updateLoadingData}
-              />
-            </div>
-          )}
-        </div>
+
+        {selectedFile && (
+          <TextArea
+            filename={selectedFile.name}
+            text={selectedFile.content}
+            labelsList={labeList}
+            hideLabelList={hideLabelList}
+            entities={selectedFile.entities}
+            updateLoadingData={updateLoadingData}
+          />
+        )}
       </div>
-      
     </>
   );
 };

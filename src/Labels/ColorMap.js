@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ChromePicker } from "react-color";
 import "./ColorMap.css";
+
 export default function ColorMap({ onColorSelected }) {
   const [color, setColor] = useState("#000"); // State to store the selected color
 
@@ -18,9 +19,11 @@ export default function ColorMap({ onColorSelected }) {
     <div>
       <div className="color-picker-map">
         <ChromePicker color={color} onChangeComplete={handleColorChange} />
-        <div className="color-picker-buttons">
-          <button onClick={handleConfirmColor}>Select Color</button>
-        </div>
+      </div>
+      <div className="color-picker-buttons">
+        <button  onClick={handleConfirmColor}>
+          Select Color
+        </button>
       </div>
     </div>
   );

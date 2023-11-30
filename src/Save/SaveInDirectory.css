@@ -1,5 +1,6 @@
 .save-button {
-  left: 90px;
-  bottom: 200px;
+  display: flex;
   position: fixed;
+  left: 6%; /* Adjust this value to set the desired distance from the right */
+  top: 71%;
 }
