@@ -93,38 +93,37 @@ const App = () => {
   console.log("goldenAnnotations ", goldenAnnotations);
   console.log("uploadedFiles ", uploadedFiles);
   return (
-    <>
-      <div className="body">
-        <AddNewLabels
-          loadingLabels={loadingLabels}
-          onUpdateLabelList={mergeExistingWithNewLabels}
-          labelsToHide={handleLabelsToHide}
-        />
-        <LoadFiles onFilesUpload={handleFilesUpload} />
-        <SaveButton
-          goldenDataDict={goldenAnnotations}
-          uploadedFiles={uploadedFiles}
-        />
-        <FileList
-          files={formattedData}
-          selectedFiles={selectedFiles}
-          onRemoveFiles={handleCloseSelectedFiles}
-          labels={labeList}
-          selectedFile={updateSelectedFile}
-        />
+    <div className="body-app">
+      <AddNewLabels
+        loadingLabels={loadingLabels}
+        onUpdateLabelList={mergeExistingWithNewLabels}
+        labelsToHide={handleLabelsToHide}
+      />
 
-        {selectedFile && (
-          <TextArea
-            filename={selectedFile.name}
-            text={selectedFile.content}
-            labelsList={labeList}
-            hideLabelList={hideLabelList}
-            entities={selectedFile.entities}
-            updateLoadingData={updateLoadingData}
-          />
-        )}
-      </div>
-    </>
+      <LoadFiles onFilesUpload={handleFilesUpload} />
+      <SaveButton
+        goldenDataDict={goldenAnnotations}
+        uploadedFiles={uploadedFiles}
+      />
+      <FileList
+        files={formattedData}
+        selectedFiles={selectedFiles}
+        onRemoveFiles={handleCloseSelectedFiles}
+        labels={labeList}
+        selectedFile={updateSelectedFile}
+      />
+
+      {selectedFile && (
+        <TextArea
+          filename={selectedFile.name}
+          text={selectedFile.content}
+          labelsList={labeList}
+          hideLabelList={hideLabelList}
+          entities={selectedFile.entities}
+          updateLoadingData={updateLoadingData}
+        />
+      )}
+    </div>
   );
 };
 

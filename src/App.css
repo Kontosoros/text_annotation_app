@@ -1,9 +1,10 @@
 .App {
   text-align: center;
 }
-.body {
-  
- 
+.body-app {
+  background-image: url("./background_img/221394.jpg");
+  background-size: cover;
+  height: 100vh; /* Adjust as needed */
 }
 
 @media (prefers-reduced-motion: no-preference) {
