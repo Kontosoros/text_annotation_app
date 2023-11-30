@@ -90,8 +90,7 @@ const App = () => {
   const handleLabelsToHide = labelList => {
     sethideLabelList(labelList);
   };
-  console.log("goldenAnnotations ", goldenAnnotations);
-  console.log("uploadedFiles ", uploadedFiles);
+  
   return (
     <div className="body-app">
       <AddNewLabels

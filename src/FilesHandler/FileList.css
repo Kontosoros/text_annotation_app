@@ -1,19 +1,17 @@
 .file-list {
-  display:flex;
+  display: flex;
   padding: 4px 20px;
   justify-content: center;
-  
 }
 .file-list-container {
-  position:fixed;
+  position: fixed;
   top: 4%;
   width: 14vw;
   height: 60vh;
-  left:2%;
+  left: 2%;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  
 }
 .text-area-container {
   flex: 1; /* Make the text area container fill the remaining space */
@@ -62,4 +60,11 @@
 }
 .label-button-remove {
   font-size: 15px;
+}
+.msg-counter {
+  color: rgb(241, 243, 245);
+  
+  display: flex;
+  justify-content: center;
+  padding:  20px;
 }

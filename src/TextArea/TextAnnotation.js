@@ -21,7 +21,7 @@ const TextAnnotation = ({
     end: "",
     text: "",
   });
-  console.log(selectText);
+  
   const [multipleOverlappingEntities, setmultipleOverlappingEntities] =
     useState(false);
 

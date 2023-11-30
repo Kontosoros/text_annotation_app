@@ -3,8 +3,10 @@ import React, { useState, useEffect } from "react";
 import "./FileList.css";
 const FileList = props => {
   const [selectedFile, setSelectedFile] = useState({});
+  const [msgcounter, setMsgCounter] = useState(0);
 
-  const handleFileClick = file => {
+  const handleFileClick = (file, index) => {
+    setMsgCounter(index + 1);
     setSelectedFile(file);
   };
 
@@ -22,7 +24,7 @@ const FileList = props => {
         <div className="file-list-scroll">
           <ul>
             {props.files.map((file, index) => (
-              <li key={index} onClick={() => handleFileClick(file)}>
+              <li key={index} onClick={() => handleFileClick(file, index)}>
                 <button
                   className={`file-button ${
                     selectedFile.name === file.name ? "clicked-button" : ""
@@ -36,6 +38,11 @@ const FileList = props => {
           </ul>
         </div>
       </div>
+      {msgcounter && (
+        <div className="msg-counter">
+          File {msgcounter} out of {props.files.length}
+        </div>
+      )}
     </div>
   );
 };
