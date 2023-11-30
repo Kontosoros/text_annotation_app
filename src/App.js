@@ -101,10 +101,7 @@ const App = () => {
       />
 
       <LoadFiles onFilesUpload={handleFilesUpload} />
-      <SaveButton
-        goldenDataDict={goldenAnnotations}
-        uploadedFiles={uploadedFiles}
-      />
+      
       <FileList
         files={formattedData}
         selectedFiles={selectedFiles}
@@ -123,6 +120,10 @@ const App = () => {
           updateLoadingData={updateLoadingData}
         />
       )}
+      <SaveButton
+        goldenDataDict={goldenAnnotations}
+        uploadedFiles={uploadedFiles}
+      />
     </div>
   );
 };

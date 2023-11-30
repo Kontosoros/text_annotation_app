@@ -4,7 +4,6 @@ input[type="file"] {
 }
 
 .custom-file-input {
-  
   position: fixed;
   background-color: #636463; /* Button background color */
   color: #fff; /* Button text color */
