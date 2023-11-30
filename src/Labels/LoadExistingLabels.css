@@ -1,21 +1,18 @@
 .loading-container {
   position: fixed;
-  display: flex;
-  top: 45%;
+  bottom: 11%;
   width: 15vw;
   height: 30vh;
-  margin: 20px auto;
   right: 1%;
-  padding: 20px;
+  padding: 1%;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
-  
+  overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 .loading-list {
   padding: 0; /* Remove default padding */
-  
 }
 
 .loading-button {

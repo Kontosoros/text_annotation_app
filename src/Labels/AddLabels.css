@@ -1,6 +1,5 @@
 .add-label-container {
   position: fixed;
-  display: flex;
   width: 15vw;
   height: 30vh;
   right: 1%;
@@ -21,8 +20,8 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .add-label-button {
-  display: flex;
   position: fixed;
+  
   right: 6%; /* Adjust this value to set the desired distance from the right */
   top: 40%; /* Adjust this value to set the desired distance from the top */
 }

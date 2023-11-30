@@ -4,7 +4,7 @@ input[type="file"] {
 }
 
 .custom-file-input {
-  display: flex;
+  
   position: fixed;
   background-color: #636463; /* Button background color */
   color: #fff; /* Button text color */
@@ -13,7 +13,7 @@ input[type="file"] {
   border: none;
   cursor: pointer;
   left: 5%; /* Adjust this value to set the desired distance from the right */
-  top: 66%;
+  bottom: 25%;
   
 }
 
