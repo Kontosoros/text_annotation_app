@@ -2,6 +2,7 @@
   display: flex;
   padding: 4px 20px;
   justify-content: center;
+  
 }
 .file-list-container {
   position: fixed;
@@ -19,12 +20,14 @@
   overflow-y: auto; /* Add a vertical scrollbar if the content exceeds the height */
 }
 .file-list-scroll {
+  padding: 10px;
   height: 50vh; /* Set a fixed height for the file list container */
   overflow-y: auto;
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
 .file-content {
+  
   /* Optionally, add padding or other styles for the content area */
   padding: 10px;
 }
