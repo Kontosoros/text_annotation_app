@@ -12,5 +12,5 @@ JSON files structure:
 
 {
   "text": "your text .... "
-  }
 }
+
