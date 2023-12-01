@@ -4,7 +4,6 @@ import LoadFiles from "./FilesHandler/LoadFiles";
 import FileList from "./FilesHandler/FileList";
 import AddNewLabels from "./Labels/AddNewLabels";
 import TextArea from "./TextArea/TextArea";
-
 import ConvertLoadingDataFormat from "./Utils/ConvertLoadingDataFormat";
 import UpdateDataColor from "./Utils/UpdateDataColor";
 import SaveButton from "./Save/SaveButton";
@@ -16,6 +15,7 @@ const App = () => {
   const [goldenAnnotations, setGoldenAnnotations] = useState({});
   const [selectedFile, setSelectedFile] = useState("");
   const [hideLabelList, sethideLabelList] = useState([]);
+  
   // Call the function to convert the format of the loaded data
   let { formattedData, loadingLabels } = ConvertLoadingDataFormat({
     uploadedFiles,
@@ -100,7 +100,6 @@ const App = () => {
       />
 
       <LoadFiles onFilesUpload={handleFilesUpload} />
-      
       <FileList
         files={formattedData}
         selectedFiles={selectedFiles}
@@ -108,6 +107,7 @@ const App = () => {
         labels={labeList}
         selectedFile={updateSelectedFile}
       />
+      
 
       {selectedFile && (
         <TextArea

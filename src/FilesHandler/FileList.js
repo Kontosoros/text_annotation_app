@@ -18,11 +18,12 @@ const FileList = props => {
   if (!props.files) {
     return null;
   }
+  
   return (
     <div className="file-list-container">
       <div className="file-list">
         <div className="file-list-scroll">
-          <ul>
+          {props.files[0].name !== undefined && (<ul>
             {props.files.map((file, index) => (
               <li key={index} onClick={() => handleFileClick(file, index)}>
                 <button
@@ -35,7 +36,8 @@ const FileList = props => {
                 </button>
               </li>
             ))}
-          </ul>
+          </ul>)}
+          
         </div>
       </div>
       {msgcounter && (
