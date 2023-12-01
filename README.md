@@ -14,3 +14,7 @@ JSON files structure:
   "text": "your text .... "
 }
 
+NOTE
+Optimal Performance - Please Run This App on Google Chrome Browser
+
+The site domain for the provided URL is https://compasstextannotator.netlify.app
